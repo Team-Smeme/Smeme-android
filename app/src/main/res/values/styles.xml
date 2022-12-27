@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BottomNavigationViewTextStyle" parent="Widget.Design.BottomNavigationView">
+        <!--        <item name="fontFamily">@font/apple_sd_gothic_neo</item>-->
+        <item name="android:textStyle">normal</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+</resources>
