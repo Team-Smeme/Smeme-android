@@ -15,5 +15,12 @@ abstract class ViewBoundActivity<Binding : ViewDataBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutRes)
+
+        listen()
+        observe()
     }
+
+    open fun constructLayout() {}
+    open fun listen() {}
+    open fun observe() {}
 }
