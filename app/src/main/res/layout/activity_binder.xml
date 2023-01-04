@@ -27,36 +27,106 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
+            android:orientation="vertical"
+            android:overScrollMode="never"
             app:layout_constraintTop_toBottomOf="@id/tv_title">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp">
+                android:layout_marginVertical="20dp"
+
+                android:orientation="vertical">
 
                 <Button
                     android:id="@+id/btn_login_activity"
 
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp"
 
-                    android:text="login"
+                    android:text="TEST"
 
-                    app:layout_constraintEnd_toStartOf="@id/btn_signup_activity"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/btn_signup_activity"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:text="signup"
+                    android:layout_marginHorizontal="30dp"
 
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/btn_login_activity"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:text="test"
 
+                    app:layout_constraintTop_toBottomOf="@id/btn_login_activity" />
+
+
+                <Button
+                    android:id="@+id/btn_test_activity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginHorizontal="30dp"
+
+                    android:text="test"
+
+                    app:layout_constraintTop_toBottomOf="@id/btn_signup_activity" />
+
+                <Button
+                    android:id="@+id/btn_test_activity_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginHorizontal="30dp"
+
+                    android:text="test"
+
+                    app:layout_constraintTop_toBottomOf="@id/btn_test_activity" />
+
+                <Button
+                    android:id="@+id/btn_test_activity_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginHorizontal="30dp"
+
+                    android:text="test"
+
+                    app:layout_constraintTop_toBottomOf="@id/btn_test_activity_2" />
+
+                <Button
+                    android:id="@+id/btn_test_activity_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginHorizontal="30dp"
+
+                    android:text="test"
+
+                    app:layout_constraintTop_toBottomOf="@id/btn_test_activity_3" />
+
+                <Button
+                    android:id="@+id/btn_test_activity_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginHorizontal="30dp"
+
+                    android:text="test"
+
+                    app:layout_constraintTop_toBottomOf="@id/btn_test_activity_4" />
+
+
+                <Button
+                    android:id="@+id/btn_test_activity_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginHorizontal="30dp"
+
+                    android:text="test"
+
+                    app:layout_constraintTop_toBottomOf="@id/btn_test_activity_5" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
