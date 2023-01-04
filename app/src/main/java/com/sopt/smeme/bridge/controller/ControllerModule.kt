@@ -7,14 +7,8 @@ import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Singleton
 
-@Module
-@InstallIn(ActivityComponent::class)
+// @Module
+// @InstallIn(ActivityComponent::class)
 class ControllerModule {
-    @Provides
-    @ActivityScoped
-    fun provideTempController()
-
-    @Provides
-    @Singleton
-
+    // TODO
 }
