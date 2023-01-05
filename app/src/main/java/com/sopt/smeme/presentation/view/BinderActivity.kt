@@ -9,9 +9,9 @@ class BinderActivity : ViewBoundActivity<ActivityBinderBinding>(R.layout.activit
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.btnLoginActivity.setOnClickListener {
-            val toTestPage = Intent(this, TestActivity::class.java)
-            startActivity(toTestPage)
+        binding.btnOnBoardingActivity.setOnClickListener {
+            val toOnBoardingPage = Intent(this, OnBoardingActivity::class.java)
+            startActivity(toOnBoardingPage)
         }
     }
 }
