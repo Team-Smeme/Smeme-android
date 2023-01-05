@@ -30,7 +30,7 @@
         </activity>
 
         <activity
-            android:name=".OnBoardingActivity"
+            android:name=".presentation.view.OnBoardingActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

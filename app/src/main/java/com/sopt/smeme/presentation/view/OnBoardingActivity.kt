@@ -1,12 +1,9 @@
 package com.sopt.smeme.presentation.view
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import com.sopt.smeme.R
+import com.sopt.smeme.databinding.ActivityOnBoardingBinding
 
-class OnBoardingActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_on_boarding)
-    }
+class OnBoardingActivity :
+    ViewBoundActivity<ActivityOnBoardingBinding>(R.layout.activity_on_boarding) {
+
 }
