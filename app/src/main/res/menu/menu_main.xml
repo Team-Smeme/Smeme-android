@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/ic_my_diary"
+        android:icon="@drawable/ic_my_diary"
+        android:checked="true"
+        android:title="내 일기" />
+    <item
+        android:id="@+id/ic_explore"
+        android:icon="@drawable/ic_explore"
+        android:title="둘러보기" />
+    <item
+        android:id="@+id/ic_save"
+        android:icon="@drawable/ic_save"
+        android:title="보관함" />
+</menu>
