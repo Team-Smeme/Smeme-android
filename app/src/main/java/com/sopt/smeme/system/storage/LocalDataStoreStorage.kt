@@ -1,20 +1,14 @@
 package com.sopt.smeme.system.storage
 
+import com.sopt.smeme.UserAccessType
+
 class LocalDataStoreStorage : LocalStorage {
-    //private val lds = LocalDataStore
 
     override fun save(data: LocalStorage.Data) {
-        if (data is UserData) {
-            // lds.run { cr ->  }
-        }
-    }
-
-    // TODO
-    override fun get() = LocalStorage.EMPTY
-
-    suspend fun save(accessToken: String?, refreshToken: String?) {
         // TODO
     }
+
+    override fun get(accessType: UserAccessType) = LocalStorage.EMPTY
 
     // TODO
     override fun isAuthenticated() = false
