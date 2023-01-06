@@ -73,6 +73,7 @@
             />
 
         <ImageButton
+            android:id="@+id/btn_on_boarding_kakao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/selc_kakao_login"
