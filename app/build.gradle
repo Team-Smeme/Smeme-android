@@ -20,6 +20,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String","KAKAO_API_KEY",properties['kakao_api_key']
         buildConfigField "String","ORIGIN_API_BASE_NAME",properties['origin_api_base']
         buildConfigField "String","ORIGIN_API_BASE_HOST",properties['origin_api_base_host']
         buildConfigField "int","ORIGIN_API_BASE_PORT",properties['origin_api_base_port']
@@ -98,6 +99,10 @@ dependencies {
     // Hilt
     implementation 'com.google.dagger:hilt-android:2.44.2'
     kapt 'com.google.dagger:hilt-compiler:2.44.2'
+
+    // kakao module
+    implementation "com.kakao.sdk:v2-all:2.12.0"
+    implementation "com.kakao.sdk:v2-user:2.12.0"
 
     // lottie
     implementation 'com.airbnb.android:lottie:5.2.0'
