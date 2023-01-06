@@ -1,4 +1,4 @@
-package com.sopt.smeme.presentation.view.splash
+package com.sopt.smeme.presentation.view.welcome
 
 import android.content.Intent
 import androidx.activity.viewModels
@@ -8,7 +8,6 @@ import com.sopt.smeme.R
 import com.sopt.smeme.business.viewmodel.SplashViewModel
 import com.sopt.smeme.databinding.ActivitySplashBinding
 import com.sopt.smeme.presentation.view.BinderActivity
-import com.sopt.smeme.presentation.view.TestActivity
 import com.sopt.smeme.presentation.view.ViewBoundActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -34,7 +33,7 @@ class SplashActivity : ViewBoundActivity<ActivitySplashBinding>(R.layout.activit
                 this@SplashActivity, if (isSigned) {
                     BinderActivity::class.java
                 } else {
-                    TestActivity::class.java
+                    BinderActivity::class.java
                 }
             )
         )

@@ -6,7 +6,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.view.splash.SplashActivity">
+        tools:context=".presentation.view.welcome.SplashActivity">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lt_temp"
