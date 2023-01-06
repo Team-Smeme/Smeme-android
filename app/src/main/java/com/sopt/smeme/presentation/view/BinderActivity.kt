@@ -13,5 +13,11 @@ class BinderActivity : ViewBoundActivity<ActivityBinderBinding>(R.layout.activit
             val toTestPage = Intent(this, TestActivity::class.java)
             startActivity(toTestPage)
         }
+
+        binding.btnHomeActivity.setOnClickListener {
+            val toHomeActivity = Intent(this, HomeActivity::class.java)
+            startActivity(toHomeActivity)
+        }
+
     }
 }
