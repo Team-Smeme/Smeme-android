@@ -15,6 +15,7 @@ abstract class ViewBoundActivity<Binding : ViewDataBinding>(
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutRes)
 
+        constructLayout()
         listen()
         observe()
     }

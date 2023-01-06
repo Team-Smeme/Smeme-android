@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
-        tools:context=".presentation.view.OnBoardingActivity">
+        tools:context=".presentation.view.welcome.OnBoardingActivity">
 
         <ImageView
             android:id="@+id/iv_on_boarding_logo"
