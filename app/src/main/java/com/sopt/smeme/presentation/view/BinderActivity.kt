@@ -19,5 +19,11 @@ class BinderActivity : ViewBoundActivity<ActivityBinderBinding>(R.layout.activit
         binding.btnLoginProfileActivity.setOnClickListener {
             startActivity(Intent(this, LoginProfileActivity::class.java))
         }
+
+        binding.btnHomeActivity.setOnClickListener {
+            val toHomeActivity = Intent(this, HomeActivity::class.java)
+            startActivity(toHomeActivity)
+        }
+
     }
 }
