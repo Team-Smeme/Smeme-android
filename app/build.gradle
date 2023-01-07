@@ -61,6 +61,9 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
     //retrofit2
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-jackson:2.9.0"
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
+
     // coil
     implementation 'io.coil-kt:coil:2.2.2'
     // fragment ktx
@@ -86,8 +89,11 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp'
     implementation 'com.squareup.okhttp3:logging-interceptor'
     //gson
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.4'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.google.code.gson:gson:2.8.9'
+
+    // Json
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0'
 
     // Hilt
     implementation 'com.google.dagger:hilt-android:2.44.2'

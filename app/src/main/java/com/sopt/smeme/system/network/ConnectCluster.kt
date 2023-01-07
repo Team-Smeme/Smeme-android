@@ -12,8 +12,8 @@ enum class Cluster(
     val nodes: Map<String, String>
 ) {
     ORIGIN(
-        domain(ORIGIN_API_BASE_ADDRESS, ORIGIN_API_BASE_PORT),
-        mapOf(Pair(ORIGIN_API_BASE_NAME, domain(ORIGIN_API_BASE_ADDRESS, ORIGIN_API_BASE_PORT)))
+        domain(ORIGIN_API_BASE_HOST, ORIGIN_API_BASE_PORT),
+        mapOf(Pair(ORIGIN_API_BASE_NAME, domain(ORIGIN_API_BASE_HOST, ORIGIN_API_BASE_PORT)))
     )
     ;
 
