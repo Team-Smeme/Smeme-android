@@ -106,4 +106,10 @@
         <item name="android:fontFamily">@font/pretendard_regular</item>
     </style>
 
+    <style name="TextAppearance.Caption2" parent="">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineHeight">14dp</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+    </style>
+
 </resources>
