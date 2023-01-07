@@ -7,6 +7,15 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="Style.ImageButton.Default" parent="">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="Style.TextView.Selected" parent="">
+        <item name="colorControlActivated">@color/primary</item>
+        <item name="android:textColorHighlight">#4DFE9870</item>
+    </style>
+
     <style name="Theme.ExtendedFloatingActionButton" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         ...
         <item name="extendedFloatingActionButtonStyle">@style/Widget.App.ExtendedFloatingActionButton</item>
