@@ -16,7 +16,7 @@ class SocialSignInAgent @Inject constructor(
     private val localStorage: LocalStorage
 ) : SignInAgent {
 
-    override fun call(type: SignInType.Type) {
+    override fun call(type: SignInType.Type, onCompleted: () -> Unit, onError: () -> Unit) {
         when (type) {
             is Own.OWN -> {}
             is Social.NAVER -> {}
@@ -26,6 +26,7 @@ class SocialSignInAgent @Inject constructor(
                     // TODO : control error detail
                     if (error != null) {
                         Timber.e(error, "로그인 실패")
+                        onError.invoke()
                     } else if (token != null) {
                         localStorage.save(
                             AccessData(
@@ -36,6 +37,7 @@ class SocialSignInAgent @Inject constructor(
                                 idToken = token.idToken
                             )
                         )
+                        onCompleted.invoke()
                     }
                 }
             }

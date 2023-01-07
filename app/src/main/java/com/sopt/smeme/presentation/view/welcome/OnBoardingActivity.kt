@@ -19,11 +19,13 @@ class OnBoardingActivity :
         binding.btnOnBoardingKakao.setOnClickListener {
             // ViewModel 로 인증 요청 처리 전담
             // -> KAKAO 외 소셜 혹은 자체 로그인 확장에 대비
-            receptionist.handle(Social.KAKAO)
-
-            // 인증 후 임시 페이지로 이동
-            startActivity(Intent(this, TestActivity::class.java))
+            receptionist.handle(
+                type = Social.KAKAO,
+                onCompleted = { startActivity(Intent(this, TestActivity::class.java)) }
+            )
+            
             finish()
         }
     }
+
 }
