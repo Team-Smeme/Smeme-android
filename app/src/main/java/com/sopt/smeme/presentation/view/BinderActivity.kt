@@ -6,6 +6,7 @@ import com.sopt.smeme.R
 import com.sopt.smeme.databinding.ActivityBinderBinding
 import com.sopt.smeme.presentation.view.welcome.LoginProfileActivity
 import com.sopt.smeme.presentation.view.welcome.OnBoardingActivity
+import com.sopt.smeme.presentation.view.odir.OdirDetailActivity
 
 class BinderActivity : ViewBoundActivity<ActivityBinderBinding>(R.layout.activity_binder) {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,5 +26,10 @@ class BinderActivity : ViewBoundActivity<ActivityBinderBinding>(R.layout.activit
             startActivity(toHomeActivity)
         }
 
+
+        binding.btnOdirDetailActivity.setOnClickListener {
+            val toDetailPage = Intent(this, OdirDetailActivity::class.java)
+            startActivity(toDetailPage)
+        }
     }
 }
