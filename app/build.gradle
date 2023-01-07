@@ -5,6 +5,8 @@ plugins {
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
 }
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
     namespace 'com.sopt.smeme'
@@ -18,6 +20,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String","ORIGIN_API_BASE_NAME",properties['origin_api_base']
+        buildConfigField "String","ORIGIN_API_BASE_HOST",properties['origin_api_base_host']
+        buildConfigField "int","ORIGIN_API_BASE_PORT",properties['origin_api_base_port']
+
     }
 
     buildTypes {
