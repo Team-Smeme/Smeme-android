@@ -60,6 +60,22 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/txt_random_topic"
+        android:layout_width="wrap_content"
+        android:layout_height="91dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/grey_100"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="12dp"
+        android:text="Q. 오늘부터 딱 일주일 후! 설레는 크리스마스네요. 일주일 전부터 세워보는 나의 크리스마스 계획은?"
+        android:textAppearance="@style/TextAppearance.Body4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_koran" />
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -67,7 +83,7 @@
         android:focusableInTouchMode="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_koran">
+        app:layout_constraintTop_toBottomOf="@id/txt_random_topic">
 
         <TextView
             android:id="@+id/txt_tip"
@@ -82,19 +98,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <EditText
             android:id="@+id/et_diary_korean"
+            android:inputType="textNoSuggestions|textMultiLine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.Body1"
-            android:background="@null"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="8dp"
+            android:background="@null"
+            android:textAppearance="@style/TextAppearance.Body1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_tip" />
 
-        <requestFocus/>
+        <requestFocus />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
