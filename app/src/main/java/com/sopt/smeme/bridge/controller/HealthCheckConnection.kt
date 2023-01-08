@@ -5,11 +5,11 @@ import retrofit2.http.GET
 
 interface HealthCheckConnection : Connection {
     @GET("/api/v1/test")
-    suspend fun run(): Response
+    suspend fun run(): Response<Any?>
 }
 
 @Serializable
-data class Response(
+data class Response<T>(
     val status: Int,
     val success: Boolean,
     val message: String
