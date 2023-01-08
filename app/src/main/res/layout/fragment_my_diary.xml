@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_my_diary_home"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -24,10 +26,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginRight="14dp"
+            android:layout_marginRight="22dp"
+            android:padding="8dp"
             android:src="@drawable/ic_profile"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,21 +66,72 @@
             android:layout_height="0dp"
             android:layout_marginTop="18dp"
             android:layout_marginEnd="15dp"
-            android:src="@drawable/ic_arrow_right_gray"
+            android:src="@drawable/ic_arrow_right_inactive"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ic_smeme_logo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/txt_no_diary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="88dp"
+        android:textAppearance="@style/TextAppearance.Body2"
+        android:textColor="@color/grey_700"
+        android:text="@string/no_diary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_my_diary"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="gone"
         android:paddingTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb_my_diary"
         tools:listitem="@layout/item_my_diary" />
+
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_foreign"
+        style="@style/Theme.ExtendedFloatingActionButton"
+        android:layout_width="179dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="8dp"
+        android:text="바로 외국어 일기 쓰기"
+        android:textAppearance="@style/TextAppearance.Body2"
+        android:visibility="invisible"
+        app:backgroundTint="@color/white"
+        app:icon="@drawable/ic_foreign"
+        app:iconPadding="6dp"
+        app:iconSize="20dp"
+        app:iconTint="@color/primary"
+        app:layout_constraintBottom_toTopOf="@id/fab_korean"
+        app:layout_constraintEnd_toEndOf="@id/fab_x" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_korean"
+        style="@style/Theme.ExtendedFloatingActionButton"
+        android:layout_width="179dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="8dp"
+        android:text="한국어 일기부터 쓰기"
+        android:textAppearance="@style/TextAppearance.Body2"
+        android:visibility="invisible"
+        app:backgroundTint="@color/white"
+        app:icon="@drawable/ic_korean"
+        app:iconPadding="6dp"
+        app:iconSize="20dp"
+        app:iconTint="@color/primary"
+        app:layout_constraintBottom_toTopOf="@id/fab_x"
+        app:layout_constraintEnd_toEndOf="@id/fab_x" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -87,12 +141,34 @@
         android:layout_marginRight="18dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/primary"
-        app:fabCustomSize="@dimen/fab_size"
         android:src="@drawable/ic_plus"
-        app:tint="@color/white"
         app:borderWidth="0dp"
+        app:fabCustomSize="@dimen/fab_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_x"
+        android:layout_width="@dimen/fab_size"
+        android:layout_height="@dimen/fab_size"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/ic_x"
+        android:visibility="invisible"
+        app:borderWidth="0dp"
+        app:fabCustomSize="@dimen/fab_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
