@@ -7,18 +7,19 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.smeme.R
-import com.sopt.smeme.databinding.ActivityWrteKoreanBinding
+import com.sopt.smeme.databinding.ActivityWriteStep1Binding
 
-class WriteDiaryKoreanActivity : AppCompatActivity() {
-    private var _binding: ActivityWrteKoreanBinding? = null
-    private val binding: ActivityWrteKoreanBinding
+class WriteDiaryStep1Activity : AppCompatActivity() {
+    private var _binding: ActivityWriteStep1Binding? = null
+    private val binding: ActivityWriteStep1Binding
         get() = requireNotNull(_binding) { "error in WriteDiaryKoreanActivity" }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityWrteKoreanBinding.inflate(layoutInflater)
+        _binding = ActivityWriteStep1Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setQuestionState()
@@ -54,8 +55,12 @@ class WriteDiaryKoreanActivity : AppCompatActivity() {
             cbRandom.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     txtRandom.setTextColor(Color.parseColor("#FE9870"))
+                    txtRandomTopic.visibility = View.GONE
+                    btnRefresh.visibility = View.GONE
                 } else {
                     txtRandom.setTextColor(Color.parseColor("#A6A6A6"))
+                    txtRandomTopic.visibility = View.VISIBLE
+                    btnRefresh.visibility = View.VISIBLE
                 }
             }
 
@@ -71,9 +76,13 @@ class WriteDiaryKoreanActivity : AppCompatActivity() {
                 if (cbRandom.isChecked) {
                     txtRandom.setTextColor(Color.parseColor("#A6A6A6"))
                     cbRandom.isChecked = false
+                    txtRandomTopic.visibility = View.GONE
+                    btnRefresh.visibility = View.GONE
                 } else {
                     txtRandom.setTextColor(Color.parseColor("#A6A6A6"))
                     cbRandom.isChecked = true
+                    txtRandomTopic.visibility = View.VISIBLE
+                    btnRefresh.visibility = View.VISIBLE
                 }
             }
 
@@ -90,11 +99,20 @@ class WriteDiaryKoreanActivity : AppCompatActivity() {
         }
     }
 
-    private fun toStep2(){
-        binding.txtComplete.setOnClickListener {
+    private fun toStep2() {
+        binding.txtNext.setOnClickListener {
             val toStep2 = Intent(this, WriteDiaryStep2Activity::class.java)
             startActivity(toStep2)
         }
 
+    }
+
+    private fun checkDiaryCondition() {
+        with(binding) {
+            if (etDiaryKorean.text.trim().toString().length >= 10) {
+                txtNext.isEnabled = true
+                txtNext.setTextColor(Color.parseColor("#171716"))
+            }
+        }
     }
 }
