@@ -1,5 +1,6 @@
 package com.sopt.smeme.presentation.view
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -8,22 +9,23 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.smeme.R
-import com.sopt.smeme.databinding.ActivityWrteDiaryKoreanBinding
+import com.sopt.smeme.databinding.ActivityWrteKoreanBinding
 
 class WriteDiaryKoreanActivity : AppCompatActivity() {
-    private var _binding: ActivityWrteDiaryKoreanBinding? = null
-    private val binding: ActivityWrteDiaryKoreanBinding
+    private var _binding: ActivityWrteKoreanBinding? = null
+    private val binding: ActivityWrteKoreanBinding
         get() = requireNotNull(_binding) { "error in WriteDiaryKoreanActivity" }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityWrteDiaryKoreanBinding.inflate(layoutInflater)
+        _binding = ActivityWrteKoreanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setQuestionState()
         setColorTip()
 
         setOnClickCheckbox()
+        toStep2()
 
     }
 
@@ -86,5 +88,13 @@ class WriteDiaryKoreanActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun toStep2(){
+        binding.txtComplete.setOnClickListener {
+            val toStep2 = Intent(this, WriteDiaryStep2Activity::class.java)
+            startActivity(toStep2)
+        }
+
     }
 }
