@@ -18,7 +18,7 @@
         <!-- top app bar -->
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/appbar_top_archive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/grey_1000w"
@@ -26,6 +26,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/tv_title_archive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="20dp"
@@ -37,6 +38,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
+                android:id="@+id/btn_profile_archive"
                 style="@style/Style.ImageButton.Default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,13 +53,15 @@
         <!-- tab -->
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_tab_bg_archive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_white_bottom_radius_30"
             android:elevation="18dp"
-            app:layout_constraintTop_toBottomOf="@id/constraintLayout">
+            app:layout_constraintTop_toBottomOf="@id/appbar_top_archive">
 
             <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_archive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
@@ -75,11 +79,13 @@
                 app:tabTextColor="@color/grey_400">
 
                 <com.google.android.material.tabs.TabItem
+                    android:id="@+id/tabitem_expression_archive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="스크랩한 표현" />
 
                 <com.google.android.material.tabs.TabItem
+                    android:id="@+id/tabitem_diary_archive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="추천한 일기" />
@@ -87,6 +93,21 @@
             </com.google.android.material.tabs.TabLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- context -->
+
+        <TextView
+            android:id="@+id/tv_empty_archive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="보관함이 비어있어요."
+            android:textAppearance="@style/TextAppearance.Body2"
+            android:textColor="@color/grey_700"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
