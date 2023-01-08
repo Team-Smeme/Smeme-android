@@ -1,10 +1,9 @@
 package com.sopt.smeme.bridge.agent
 
 import android.content.Context
-import com.sopt.smeme.bridge.agent.user.MockSignInAgent
-import com.sopt.smeme.bridge.agent.user.SignInAgent
-import com.sopt.smeme.bridge.agent.user.SocialSignInAgent
+import com.sopt.smeme.bridge.agent.user.*
 import com.sopt.smeme.system.storage.LocalStorage
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

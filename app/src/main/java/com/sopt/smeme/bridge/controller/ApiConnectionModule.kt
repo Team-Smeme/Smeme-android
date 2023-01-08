@@ -21,7 +21,13 @@ object ApiConnectionModule {
 
     }
 
+    @Module
+    @InstallIn(ViewModelComponent::class)
     object User {
+        @Provides
+        @ViewModelScoped
+        fun provideProfileInitializer(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit): ProfileConnection =
+            retrofit.create(ProfileConnection::class.java)
 
     }
 
