@@ -42,11 +42,7 @@
         </activity>
         <activity
             android:name=".presentation.view.HomeActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".presentation.view.WriteDiaryKoreanActivity"
             android:exported="false"
@@ -77,6 +73,10 @@
                     android:scheme="kakao${kakao_api_key}" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.view.WriteDiaryStep2Activity"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"
+            android:exported="false"
+            />
     </application>
 
 </manifest>
