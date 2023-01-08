@@ -9,6 +9,10 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.sopt.smeme.R
 import com.sopt.smeme.databinding.ActivityWriteStep1Binding
 
@@ -17,16 +21,34 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
     private val binding: ActivityWriteStep1Binding
         get() = requireNotNull(_binding) { "error in WriteDiaryKoreanActivity" }
 
+//    private val _signUpResult = MutableLiveData<String>()
+//    val signUpResult: LiveData<String>
+//        get() = _signUpResult
+
+//    private val _errorMessage = MutableLiveData<String>()
+//    val errorMessage: LiveData<String>
+//        get() = _errorMessage
+
+    val diary: MutableLiveData<String> = MutableLiveData("")
+    val isDiarySuit: LiveData<Boolean> = Transformations.map(diary) { isValidDiaryFormat(it) }
+
+    private var _isNextActive = MutableLiveData(false)
+    val isNextActive get() = _isNextActive
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityWriteStep1Binding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        _binding = DataBindingUtil.setContentView(this, R.layout.activity_write_step1)
+        binding.step1 = this
 
         setQuestionState()
         setColorTip()
 
         setOnClickCheckbox()
         toStep2()
+        observeDiary()
 
     }
 
@@ -100,19 +122,30 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
     }
 
     private fun toStep2() {
-        binding.txtNext.setOnClickListener {
+        binding.btnNext.setOnClickListener {
             val toStep2 = Intent(this, WriteDiaryStep2Activity::class.java)
             startActivity(toStep2)
         }
 
     }
 
-    private fun checkDiaryCondition() {
-        with(binding) {
-            if (etDiaryKorean.text.trim().toString().length >= 10) {
-                txtNext.isEnabled = true
-                txtNext.setTextColor(Color.parseColor("#171716"))
-            }
+    private fun isValidDiaryFormat(diary: String) = diary.trim().length >= 10
+
+    private fun setNextState() {
+        if(isDiarySuit.value == true){
+            _isNextActive.value = true
+            binding.btnNext.isEnabled = true
+            binding.btnNext.setTextColor(Color.parseColor("#171716"))
+        }
+        else{
+            binding.btnNext.isEnabled = false
+            binding.btnNext.setTextColor(Color.parseColor("#BBBBBB"))
+        }
+    }
+
+    private fun observeDiary() {
+        isDiarySuit.observe(this) {
+            setNextState()
         }
     }
 }
