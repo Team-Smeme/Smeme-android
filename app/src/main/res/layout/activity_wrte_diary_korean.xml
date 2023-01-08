@@ -67,7 +67,6 @@
         android:layout_marginTop="16dp"
         android:background="@color/grey_100"
         android:paddingHorizontal="24dp"
-        android:visibility="gone"
         android:height="91dp"
         android:paddingTop="14dp"
         android:paddingBottom="12dp"
@@ -76,6 +75,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_koran" />
+
+    <ImageButton
+        android:id="@+id/btn_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_refresh"
+        android:background="@color/grey_100"
+        android:layout_marginRight="26dp"
+        android:layout_marginBottom="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_random_topic"
+        app:layout_constraintEnd_toEndOf="@+id/txt_random_topic" />
+
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
