@@ -1,5 +1,6 @@
 package com.sopt.smeme.presentation.view
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -46,6 +47,10 @@ class HomeActivity : AppCompatActivity() {
             .replace(R.id.home_container, fragment)
             .commit()
 
+    }
+
+    fun changeBackgroundColor(color:String){
+        binding.bnvMain.setBackgroundColor(Color.parseColor(color))
     }
 
 }
