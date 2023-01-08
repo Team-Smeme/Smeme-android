@@ -1,17 +1,23 @@
 package com.sopt.smeme.presentation.view
 
+import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import com.sopt.smeme.bridge.model.MyDiary
 import com.sopt.smeme.business.adaptor.MyDiaryAdaptor
 import com.sopt.smeme.databinding.FragmentMyDiaryBinding
 
-class MyDiaryHomeFragment : Fragment(){
+class MyDiaryHomeFragment : Fragment() {
     private var _binding: FragmentMyDiaryBinding? = null
-    private val binding get() = requireNotNull(_binding) {"Error exist on MyDiaryHomeFragment"}
+    private val binding get() = requireNotNull(_binding) { "Error exist on MyDiaryHomeFragment" }
+
+    private var isFabOpen = false
+
 
     private val mockDiaryList = listOf<MyDiary>(
         MyDiary(
@@ -44,16 +50,61 @@ class MyDiaryHomeFragment : Fragment(){
         val adapter = MyDiaryAdaptor(requireContext())
         binding.rvMyDiary.adapter = adapter
         adapter.setDiaryList(mockDiaryList)
+        checkMyDiaryExist()
+        setFabClickEvent()
+        clickStep1()
 
-        binding.fabPlus.setOnClickListener {
-            val dialog = WriteDiaryDialog(this)
-            dialog.show()
-        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setFabClickEvent() {
+        binding.fabPlus.setOnClickListener {
+            toggleFab()
+        }
+        binding.fabX.setOnClickListener {
+            toggleFab()
+        }
+    }
+
+    private fun toggleFab() {
+        with(binding) {
+            if (isFabOpen) {
+                ObjectAnimator.ofFloat(fabPlus, View.ROTATION, 45f, 0f).apply { start() }
+                ObjectAnimator.ofFloat(fabX, View.ROTATION, 0f, 45f).apply { start() }
+                fabPlus.visibility = View.VISIBLE
+                fabX.visibility = View.INVISIBLE
+                fabForeign.visibility = View.INVISIBLE
+                fabKorean.visibility = View.INVISIBLE
+
+            } else { // 플로팅 액션 버튼 열기 - 닫혀있는 플로팅 버튼 꺼내는 애니메이션
+                ObjectAnimator.ofFloat(fabPlus, View.ROTATION, 0f, 45f).apply { start() }
+                ObjectAnimator.ofFloat(fabX, View.ROTATION, 45f, 0f).apply { start() }
+                fabPlus.visibility = View.INVISIBLE
+                fabX.visibility = View.VISIBLE
+                fabForeign.visibility = View.VISIBLE
+                fabKorean.visibility = View.VISIBLE
+
+            }
+            isFabOpen = !isFabOpen
+        }
+
+    }
+
+    private fun clickStep1() {
+        binding.fabKorean.setOnClickListener {
+            val toStep1 = Intent(context, WriteDiaryKoreanActivity::class.java)
+            startActivity(toStep1)
+        }
+    }
+
+    private fun checkMyDiaryExist() {
+        if (mockDiaryList.size >= 0) {
+            binding.rvMyDiary.visibility = View.VISIBLE
+        }
     }
 
 }
