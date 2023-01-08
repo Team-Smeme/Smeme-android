@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/ic_my_diary"
-        android:icon="@drawable/ic_my_diary"
+        android:icon="@drawable/ic_diary"
         android:checked="true"
         android:title="내 일기" />
     <item
