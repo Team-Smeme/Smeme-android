@@ -11,6 +11,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.sopt.smeme.R
 import com.sopt.smeme.business.viewmodel.mydiary.DiarySource2TargetManager
 import com.sopt.smeme.business.viewmodel.mydiary.Topic
@@ -25,17 +29,33 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
         get() = requireNotNull(_binding) { "error in WriteDiaryKoreanActivity" }
     private val diarySource2TargetManager: DiarySource2TargetManager by viewModels()
 
+//    private val _signUpResult = MutableLiveData<String>()
+//    val signUpResult: LiveData<String>
+//        get() = _signUpResult
+
+//    private val _errorMessage = MutableLiveData<String>()
+//    val errorMessage: LiveData<String>
+//        get() = _errorMessage
+
+    val diary: MutableLiveData<String> = MutableLiveData("")
+    val isDiarySuit: LiveData<Boolean> = Transformations.map(diary) { isValidDiaryFormat(it) }
+
+    private var _isNextActive = MutableLiveData(false)
+    val isNextActive get() = _isNextActive
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityWriteStep1Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setQuestionState()
         setColorTip()
 
         setOnClickCheckbox()
         toStep2()
         listen()
         observe()
+        observeDiary()
     }
 
     private fun setColorTip() {
@@ -154,7 +174,7 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
     }
 
     private fun toStep2() {
-        binding.txtNext.setOnClickListener {
+        binding.btnNext.setOnClickListener {
             val toStep2 = Intent(this, WriteDiaryStep2Activity::class.java)
             val topic = diarySource2TargetManager.topic.value
             val isPublic = binding.cbPublic.isChecked
@@ -170,12 +190,23 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
 
     }
 
-    private fun checkDiaryCondition() {
-        with(binding) {
-            if (etDiaryKorean.text.trim().toString().length >= 10) {
-                txtNext.isEnabled = true
-                txtNext.setTextColor(Color.parseColor("#171716"))
-            }
+    private fun isValidDiaryFormat(diary: String) = diary.trim().length >= 10
+
+    private fun setNextState() {
+        if(isDiarySuit.value == true){
+            _isNextActive.value = true
+            binding.btnNext.isEnabled = true
+            binding.btnNext.setTextColor(Color.parseColor("#171716"))
+        }
+        else{
+            binding.btnNext.isEnabled = false
+            binding.btnNext.setTextColor(Color.parseColor("#BBBBBB"))
+        }
+    }
+
+    private fun observeDiary() {
+        isDiarySuit.observe(this) {
+            setNextState()
         }
     }
 }
