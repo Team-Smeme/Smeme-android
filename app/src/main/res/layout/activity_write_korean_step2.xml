@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_english"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_english"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="English"
+            android:textColor="@color/grey_500"
+            android:textAppearance="@style/TextAppearance.Subtitle2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_step2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="STEP 2"
+            android:textAppearance="@style/TextAppearance.Caption1"
+            android:textColor="@color/grey_400"
+            app:layout_constraintEnd_toEndOf="@id/txt_english"
+            app:layout_constraintStart_toStartOf="@+id/txt_english"
+            app:layout_constraintTop_toBottomOf="@+id/txt_english" />
+
+        <ImageButton
+            android:id="@+id/btn_select_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:background="@color/white"
+            android:src="@drawable/ic_arrow_under"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_english"
+            app:layout_constraintStart_toEndOf="@+id/txt_english"
+            app:layout_constraintTop_toTopOf="@+id/txt_english" />
+
+        <TextView
+            android:id="@+id/txt_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="24dp"
+            android:text="완료"
+            android:textAppearance="@style/TextAppearance.Body1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_hint"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toBottomOf="@id/cl_english">
+
+        <ScrollView
+            android:id="@+id/sv_hint"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:textColor="@color/black"
+                android:text="The issue that requires the phone call we have to solve it in person but sometimes some violence is needed. I was just the part of the process not. The issue that requires the phone call we have to solve it in person but sometimes some violence is needed. I was just the part of the process not."
+                android:textAppearance="@style/TextAppearance.Body1" />
+
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/grey_100"
+        app:layout_constraintTop_toBottomOf="@id/cl_hint" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_write_english"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cl_bottom_tool_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider">
+
+        <ScrollView
+            android:id="@+id/sv_write"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/et_diary_english"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="32dp"
+                android:background="@null"
+                android:hint="최소 10자 이상의 외국어를 작성해주세요"
+                android:textColorHint="@color/grey_400"
+                android:inputType="textMultiLine|textNoSuggestions"
+                android:textAppearance="@style/TextAppearance.Body1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
+
+
+        </ScrollView>
+
+
+        <requestFocus />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_bottom_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/shadow_app_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ToggleButton
+            android:id="@+id/btn_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/selc_step2_hint"
+            android:textOff=""
+            android:textOn=""
+            app:layout_constraintBottom_toBottomOf="@+id/cl_bottom_tool_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cl_bottom_tool_bar" />
+
+        <CheckBox
+            android:id="@+id/cb_random"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/custom_checkbox"
+            android:button="@null"
+            android:enabled="false"
+            app:layout_constraintBottom_toBottomOf="@id/txt_random"
+            app:layout_constraintEnd_toStartOf="@id/txt_random"
+            app:layout_constraintTop_toTopOf="@id/txt_random" />
+
+        <TextView
+            android:id="@+id/txt_random"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="18dp"
+            android:paddingVertical="18dp"
+            android:text="랜덤 주제"
+            android:textAppearance="@style/TextAppearance.Body2"
+            android:textColor="@color/grey_600"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/cb_public"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/cb_public"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/custom_checkbox"
+            android:button="@null"
+            android:enabled="false"
+            app:layout_constraintBottom_toBottomOf="@id/txt_public"
+            app:layout_constraintEnd_toStartOf="@id/txt_public"
+            app:layout_constraintTop_toTopOf="@id/txt_public" />
+
+        <TextView
+            android:id="@+id/txt_public"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:paddingVertical="18dp"
+            android:paddingRight="12dp"
+            android:text="공개"
+            android:textAppearance="@style/TextAppearance.Body2"
+            android:textColor="@color/grey_600"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
