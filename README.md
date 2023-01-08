@@ -3,7 +3,8 @@
 ![KakaoTalk_Photo_2023-01-04-04-02-58](https://user-images.githubusercontent.com/86944161/210424661-b00f2023-5cfc-4e36-a6ce-2e5cc09e9ad1.png)
 
 ## *🌏Project*
-```내 일기에 스미는 외국어✍️
+```
+내 일기에 스미는 외국어✍️
 ```
 
 ## *👨‍👩‍👧‍👦Contributers*
