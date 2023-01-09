@@ -1,5 +1,6 @@
 package com.sopt.smeme.presentation.view.archive
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +10,14 @@ import androidx.fragment.app.viewModels
 import com.sopt.smeme.business.adaptor.ArchiveAdapter
 import com.sopt.smeme.business.viewmodel.ArchiveViewModel
 import com.sopt.smeme.databinding.FragmentArchiveBinding
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class ArchiveFragment : Fragment() {
+@AndroidEntryPoint
+class ArchiveFragment @Inject constructor(
+    @ApplicationContext context: Context
+) : Fragment() {
     private val viewModel by viewModels<ArchiveViewModel>()
     private var _binding: FragmentArchiveBinding? = null
     private val binding: FragmentArchiveBinding
@@ -21,7 +28,6 @@ class ArchiveFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentArchiveBinding.inflate(inflater, container, false)
         return binding.root
     }
