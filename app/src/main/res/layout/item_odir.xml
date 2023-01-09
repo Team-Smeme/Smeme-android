@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="24dp"
+    android:background="@color/grey_1000w"
+    android:paddingHorizontal="18dp"
+    android:paddingBottom="19dp"
+    android:paddingTop="24dp">
+
+    <TextView
+        android:id="@+id/tv_diary_odir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLength="145"
+        android:text="The issue that requires the phone call we have to solve it in person but sometimes some violence is needed. process The issue that requires the phone call we have to solve it in person but sometimes some violence is needed. process"
+        android:textAppearance="@style/TextAppearance.Body1" />
+
+    <ToggleButton
+        android:id="@+id/btn_like_odir"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/selc_odir_detail_like"
+        android:textOff=""
+        android:textOn="" />
+
+    <TextView
+        android:id="@+id/tv_like_odir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textAppearance="@style/TextAppearance.Body2"
+        android:textColor="@color/grey_1000b" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_like_odir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        app:constraint_referenced_ids="btn_like_odir,tv_like_odir"
+        app:flow_horizontalGap="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_diary_odir" />
+
+    <TextView
+        android:id="@+id/tv_name_odir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="작성자 닉네임"
+        android:textAppearance="@style/TextAppearance.Body2"
+        android:textColor="@color/grey_700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/flow_like_odir" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
