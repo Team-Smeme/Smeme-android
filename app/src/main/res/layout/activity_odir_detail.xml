@@ -40,6 +40,7 @@
             android:layout_marginEnd="16dp"
             android:clickable="false"
             android:src="@drawable/ic_dots"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/appbar_top_odir_detail"
             app:layout_constraintEnd_toEndOf="@id/appbar_top_odir_detail"
             app:layout_constraintTop_toTopOf="@id/appbar_top_odir_detail" />
