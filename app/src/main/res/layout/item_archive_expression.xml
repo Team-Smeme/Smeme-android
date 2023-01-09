@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/rectangle_white_radius_10"
+    android:paddingHorizontal="15dp"
+    android:paddingTop="14dp"
+    android:paddingBottom="20dp">
+
+    <TextView
+        android:id="@+id/tv_item_archive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:textAppearance="@style/TextAppearance.Body1"
+        android:textColor="@color/grey_1000b"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="The bread was so soft... it was literally like cotton candy, melting away in my mouth." />
+
+    <ImageButton
+        android:id="@+id/btn_browser_archive"
+        style="@style/Style.ImageButton.Default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:src="@drawable/ic_browser"
+        android:visibility="visible" />
+
+    <ImageButton
+        android:id="@+id/btn_copy_archive"
+        style="@style/Style.ImageButton.Default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:src="@drawable/ic_copy"
+        android:visibility="visible" />
+
+    <ImageButton
+        android:id="@+id/btn_translate_archive"
+        style="@style/Style.ImageButton.Default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:src="@drawable/ic_translate"
+        android:visibility="visible" />
+
+    <ImageButton
+        android:id="@+id/btn_delete_archive"
+        style="@style/Style.ImageButton.Default"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:src="@drawable/ic_delete"
+        android:visibility="visible" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_btn_archive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="btn_browser_archive,btn_copy_archive,btn_translate_archive,btn_delete_archive"
+        app:flow_horizontalGap="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_item_archive" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
