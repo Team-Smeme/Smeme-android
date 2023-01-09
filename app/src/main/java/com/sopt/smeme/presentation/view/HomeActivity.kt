@@ -48,7 +48,9 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
         },
         COLLECTION {
             override fun changeFragment(supportFragmentManager: FragmentManager, context: Context) {
-                // TODO
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.home_container, ArchiveFragment(context))
+                    .commit()
             }
         }
         ;
