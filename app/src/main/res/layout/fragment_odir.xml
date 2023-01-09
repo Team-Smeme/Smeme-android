@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".presentation.view.archive.ArchiveFragment">
+
+        <!-- TODO: switch top bar to toolbar -->
+
+        <!-- top app bar -->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/appbar_top_odir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey_1000w"
+            android:elevation="18dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_title_odir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:layout_marginStart="24dp"
+                android:text="둘러보기"
+                android:textAppearance="@style/TextAppearance.Headline3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btn_profile_odir"
+                style="@style/Style.ImageButton.Default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/ic_profile"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- tab -->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_filter_bg_archive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey_1000w"
+            android:elevation="18dp"
+            android:outlineAmbientShadowColor="#0A000000"
+            android:outlineSpotShadowColor="#0A000000"
+            android:paddingBottom="20dp"
+            app:layout_constraintTop_toBottomOf="@id/appbar_top_odir">
+
+            <Button
+                android:id="@+id/btn_all_odir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:text="전체"
+                android:textAppearance="@style/TextAppearance.Subtitle2" />
+
+            <Button
+                android:id="@+id/btn_daily_odir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:text="일상"
+                android:textAppearance="@style/TextAppearance.Subtitle2" />
+
+            <Button
+                android:id="@+id/btn_holiday_odir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:text="기념일"
+                android:textAppearance="@style/TextAppearance.Subtitle2" />
+
+            <Button
+                android:id="@+id/btn_taste_odir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:text="취향"
+                android:textAppearance="@style/TextAppearance.Subtitle2" />
+
+            <Button
+                android:id="@+id/btn_self_odir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:text="자기계발"
+                android:textAppearance="@style/TextAppearance.Subtitle2" />
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow_catagory_odir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23dp"
+                app:constraint_referenced_ids="btn_all_odir,btn_daily_odir,btn_holiday_odir,btn_taste_odir,btn_self_odir"
+                app:flow_horizontalGap="3dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_language_odir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="4dp"
+                android:text="영어"
+                android:textAppearance="@style/TextAppearance.Body2"
+                android:textColor="@color/grey_500"
+                app:drawableEndCompat="@drawable/ic_arrow_under" />
+
+            <TextView
+                android:id="@+id/tv_sort_type_odir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="4dp"
+                android:text="추천순"
+                android:textAppearance="@style/TextAppearance.Body2"
+                android:textColor="@color/grey_500"
+                app:drawableEndCompat="@drawable/ic_arrow_under" />
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow_filter_odir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="23dp"
+                app:constraint_referenced_ids="tv_language_odir,tv_sort_type_odir"
+                app:flow_horizontalGap="16dp"
+                app:layout_constraintEnd_toEndOf="@id/cl_filter_bg_archive"
+                app:layout_constraintTop_toBottomOf="@+id/flow_catagory_odir" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- context -->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_diary_odir"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:paddingTop="17dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_filter_bg_archive" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
