@@ -96,7 +96,7 @@ class MyDiaryHomeFragment : Fragment() {
 
     private fun clickStep1() {
         binding.fabKorean.setOnClickListener {
-            val toStep1 = Intent(context, WriteDiaryKoreanActivity::class.java)
+            val toStep1 = Intent(context, WriteDiaryStep1Activity::class.java)
             startActivity(toStep1)
         }
     }

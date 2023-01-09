@@ -3,16 +3,16 @@ package com.sopt.smeme.presentation.view
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.sopt.smeme.databinding.ActivityWriteStep2Binding
+import com.sopt.smeme.databinding.ActivityWriteKoreanStep2Binding
 
 class WriteDiaryStep2Activity : AppCompatActivity() {
-    private var _binding: ActivityWriteStep2Binding? = null
-    private val binding: ActivityWriteStep2Binding
+    private var _binding: ActivityWriteKoreanStep2Binding? = null
+    private val binding: ActivityWriteKoreanStep2Binding
         get() = requireNotNull(_binding) { "error in WriteDiaryKoreanActivity" }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityWriteStep2Binding.inflate(layoutInflater)
+        _binding = ActivityWriteKoreanStep2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
         toStep1()
