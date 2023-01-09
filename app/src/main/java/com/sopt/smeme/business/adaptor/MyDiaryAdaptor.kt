@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.sopt.smeme.TextUtil
 import com.sopt.smeme.bridge.model.MyDiary
 import com.sopt.smeme.databinding.ItemMyDiaryBinding
 
@@ -16,7 +17,7 @@ class MyDiaryAdaptor(context: Context) : RecyclerView.Adapter<RecyclerView.ViewH
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bindDiary(data: MyDiary) {
             binding.txtDiaryTime.text = data.myDiaryTime
-            binding.txtMyDiary.text = data.myDiary
+            binding.txtMyDiary.text = TextUtil.wordControl(data.myDiary)
         }
     }
 
@@ -34,5 +35,4 @@ class MyDiaryAdaptor(context: Context) : RecyclerView.Adapter<RecyclerView.ViewH
         this.myDiaryList = myDiaryList.toList()
         notifyDataSetChanged()
     }
-
 }

@@ -1,8 +1,8 @@
 package com.sopt.smeme.bridge.agent.mydiary
 
-import com.sopt.smeme.bridge.controller.response.DataResponse
-import com.sopt.smeme.bridge.controller.response.MyDiaryData
+import com.sopt.smeme.bridge.model.MyDiary
+import java.time.LocalDate
 
 interface MyDiaryRetrieving {
-    suspend fun getList(): DataResponse<List<MyDiaryData>>
+    suspend fun getList(date: LocalDate): List<MyDiary>
 }

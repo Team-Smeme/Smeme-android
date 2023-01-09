@@ -1,5 +1,6 @@
 package com.sopt.smeme
 
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.regex.Pattern
 
@@ -23,8 +24,19 @@ object DateUtil {
 
     fun asString(date: LocalDateTime): String {
         val hour = if (date.hour / 10 >= 1) date.hour.toString() else "0${date.hour}"
-        val minute = if (date.minute != 0) date.minute.toString() else "00"
+        val minutes = if (date.minute < 10) "0${date.minute}" else date.minute.toString()
 
-        return "${date.year}년 ${date.monthValue}월 ${date.dayOfMonth}일 ${hour}:${minute}"
+        return "${date.year}년 ${date.monthValue}월 ${date.dayOfMonth}일 ${hour}:${minutes}"
+    }
+
+    fun asStringOnlyDate(now: LocalDate): String = "${now.year}.${now.monthValue}.${now.dayOfMonth}"
+    fun asStringOnlyTime(createdAt: LocalDateTime): String {
+        val toLocalTime = createdAt.toLocalTime()
+        val hour =
+            if (toLocalTime.hour / 10 >= 1) toLocalTime.hour.toString() else "0${toLocalTime.hour}"
+        val minutes =
+            if (toLocalTime.minute < 10) "0${toLocalTime.minute}" else toLocalTime.minute.toString()
+
+        return "$hour:$minutes"
     }
 }

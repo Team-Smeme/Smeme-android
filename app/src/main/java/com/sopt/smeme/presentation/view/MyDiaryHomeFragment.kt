@@ -10,11 +10,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.sopt.smeme.DateUtil
+import com.sopt.smeme.R
+import com.sopt.smeme.SmemeException
 import com.sopt.smeme.business.adaptor.MyDiaryAdaptor
 import com.sopt.smeme.business.viewmodel.mydiary.MyDiaryProvider
 import com.sopt.smeme.databinding.FragmentMyDiaryBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.qualifiers.ApplicationContext
+import retrofit2.HttpException
+import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -24,6 +30,7 @@ class MyDiaryHomeFragment @Inject constructor(
     private var _binding: FragmentMyDiaryBinding? = null
     private val binding get() = requireNotNull(_binding) { "Error exist on MyDiaryHomeFragment" }
     private var isFabOpen = false
+    lateinit var targetDate: LocalDate
 
     private val myDiaryProvider: MyDiaryProvider by viewModels()
 
@@ -42,7 +49,12 @@ class MyDiaryHomeFragment @Inject constructor(
         val adapter = MyDiaryAdaptor(requireContext())
         binding.rvMyDiary.adapter = adapter
 
-        listen()
+        // 오늘 날짜로 최초 화면 세팅 //
+        targetDate = LocalDateTime.now().toLocalDate()
+        binding.txtDate.setText(DateUtil.asStringOnlyDate(targetDate))
+        afterArrowAction()
+
+        request()
         observe(adapter)
 
         checkMyDiaryExist(adapter)
@@ -50,14 +62,42 @@ class MyDiaryHomeFragment @Inject constructor(
         clickStep1()
     }
 
-    fun listen() {
+    fun request() {
+        request2Server()
+
+        binding.icArrowLeft.setOnClickListener {
+            targetDate = targetDate.minusDays(1)
+            request2Server()
+            afterArrowAction()
+        }
+
+        binding.icArrowRight.setOnClickListener {
+            if (targetDate.isBefore(LocalDate.now())) {
+                targetDate = targetDate.plusDays(1)
+                request2Server()
+                afterArrowAction()
+            }
+        }
+    }
+
+    private fun request2Server() {
         myDiaryProvider.requestGetList(
+            targetDate,
             onError = {
                 if (it == null) {
                     Toast.makeText(context, "잘못된 접근입니다.", Toast.LENGTH_SHORT).show()
                 } else {
-                    if (it.code() == 401) {
-                        // TODO
+                    when (it) {
+                        is HttpException -> {
+                            if (it.code() == 401) {
+                                // TODO
+                            }
+                        }
+                        is SmemeException -> {
+                            if (it.status == 401) {
+                                // TODO
+                            }
+                        }
                     }
                 }
             }
@@ -121,4 +161,12 @@ class MyDiaryHomeFragment @Inject constructor(
         }
     }
 
+    private fun afterArrowAction() {
+        binding.txtDate.setText(DateUtil.asStringOnlyDate(targetDate))
+        if (targetDate.isEqual(LocalDate.now())) {
+            binding.icArrowRight.setImageResource(R.drawable.ic_arrow_right_inactive)
+        } else if (targetDate.isBefore(LocalDate.now())) {
+            binding.icArrowRight.setImageResource(R.drawable.ic_arrow_right)
+        }
+    }
 }
