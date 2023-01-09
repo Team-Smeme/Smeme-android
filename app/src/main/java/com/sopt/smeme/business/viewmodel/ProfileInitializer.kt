@@ -21,7 +21,7 @@ class ProfileInitializer @Inject constructor(
         nickname: String,
         introducing: String,
         onCompleted: () -> Unit = {},
-        onError: (HttpException?) -> Unit
+        onError: (HttpException?) -> Unit = {}
     ) {
         viewModelScope.launch {
             try {

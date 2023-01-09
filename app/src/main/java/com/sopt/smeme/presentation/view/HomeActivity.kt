@@ -1,17 +1,20 @@
 package com.sopt.smeme.presentation.view
 
+import android.content.Context
 import android.graphics.Color
 import androidx.fragment.app.FragmentManager
 import com.sopt.smeme.R
 import com.sopt.smeme.databinding.ActivityHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_home) {
 
     override fun constructLayout() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.home_container)
         if (currentFragment == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.home_container, MyDiaryHomeFragment())
+                .add(R.id.home_container, MyDiaryHomeFragment(this))
                 .commit()
         }
     }
@@ -20,7 +23,7 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
         binding.bnvMain.setOnItemSelectedListener {
             BottomMenu
                 .from(it.title.toString())
-                .changeFragment(supportFragmentManager)
+                .changeFragment(supportFragmentManager, this)
             return@setOnItemSelectedListener true
         }
     }
@@ -31,29 +34,28 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
 
     private enum class BottomMenu {
         MY_DIARY {
-            override fun changeFragment(supportFragmentManager: FragmentManager) {
+            override fun changeFragment(supportFragmentManager: FragmentManager, context: Context) {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.home_container, MyDiaryHomeFragment())
+                    .replace(R.id.home_container, MyDiaryHomeFragment(context))
                     .commit()
             }
         },
         EXPLORE {
-            override fun changeFragment(supportFragmentManager: FragmentManager) {
+            override fun changeFragment(supportFragmentManager: FragmentManager, context: Context) {
                 // TODO
             }
         },
         COLLECTION {
-            override fun changeFragment(supportFragmentManager: FragmentManager) {
+            override fun changeFragment(supportFragmentManager: FragmentManager, context: Context) {
                 // TODO
             }
         }
         ;
 
-        abstract fun changeFragment(supportFragmentManager: FragmentManager)
+        abstract fun changeFragment(supportFragmentManager: FragmentManager, context: Context)
 
         companion object {
             fun from(title: String): BottomMenu {
-                val toString = R.string.menu_myDiary.toString()
                 return when (title) {
                     "내 일기" -> MY_DIARY
                     "둘러보기" -> EXPLORE

@@ -31,8 +31,13 @@ object ApiConnectionModule {
 
     }
 
+    @Module
+    @InstallIn(ViewModelComponent::class)
     object MDir {
-
+        @Provides
+        @ViewModelScoped
+        fun provideMyDiaryConnection(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit) : MyDiaryConnection =
+            retrofit.create(MyDiaryConnection::class.java)
     }
 
     object ODir {
