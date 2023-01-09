@@ -4,13 +4,13 @@
         android:id="@+id/ic_my_diary"
         android:icon="@drawable/ic_diary"
         android:checked="true"
-        android:title="내 일기" />
+        android:title="@string/menu_myDiary" />
     <item
         android:id="@+id/ic_explore"
         android:icon="@drawable/ic_explore"
-        android:title="둘러보기" />
+        android:title="@string/menu_explore" />
     <item
         android:id="@+id/ic_save"
         android:icon="@drawable/ic_save"
-        android:title="보관함" />
+        android:title="@string/menu_collection" />
 </menu>

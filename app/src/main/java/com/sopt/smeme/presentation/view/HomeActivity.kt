@@ -1,56 +1,69 @@
 package com.sopt.smeme.presentation.view
 
 import android.graphics.Color
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.sopt.smeme.R
 import com.sopt.smeme.databinding.ActivityHomeBinding
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_home) {
 
-    private lateinit var binding: ActivityHomeBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+    override fun constructLayout() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.home_container)
         if (currentFragment == null) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.home_container, MyDiaryHomeFragment())
                 .commit()
-
         }
+    }
 
+    override fun listen() {
         binding.bnvMain.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.ic_my_diary -> {
-                    changeFragment(MyDiaryHomeFragment())
-                }
-                R.id.ic_explore -> {
-                    TODO()
-                }
-                R.id.ic_save -> {
-                    TODO()
-                }
-                else -> error("item id: {${it.itemId} is cannot be selected")
-            }
+            BottomMenu
+                .from(it.title.toString())
+                .changeFragment(supportFragmentManager)
             return@setOnItemSelectedListener true
         }
-
     }
 
-    private fun changeFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.home_container, fragment)
-            .commit()
-
-    }
-
-    fun changeBackgroundColor(color:String){
+    fun changeBackgroundColor(color: String) {
         binding.bnvMain.setBackgroundColor(Color.parseColor(color))
     }
 
+    private enum class BottomMenu {
+        MY_DIARY {
+            override fun changeFragment(supportFragmentManager: FragmentManager) {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.home_container, MyDiaryHomeFragment())
+                    .commit()
+            }
+        },
+        EXPLORE {
+            override fun changeFragment(supportFragmentManager: FragmentManager) {
+                // TODO
+            }
+        },
+        COLLECTION {
+            override fun changeFragment(supportFragmentManager: FragmentManager) {
+                // TODO
+            }
+        }
+        ;
+
+        abstract fun changeFragment(supportFragmentManager: FragmentManager)
+
+        companion object {
+            fun from(title: String): BottomMenu {
+                val toString = R.string.menu_myDiary.toString()
+                return when (title) {
+                    "내 일기" -> MY_DIARY
+                    "둘러보기" -> EXPLORE
+                    "보관함" -> COLLECTION
+                    else -> {
+                        println()
+                        throw IllegalArgumentException("invalid menu item")
+                    }
+                }
+            }
+        }
+    }
 }

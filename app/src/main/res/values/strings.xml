@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">smeme</string>
     <string name="no_diary">작성한 일기가 없어요.</string>
+    <string name="menu_myDiary">내 일기</string>
+    <string name="menu_explore">둘러보기</string>
+    <string name="menu_collection">보관함</string>
 </resources>
