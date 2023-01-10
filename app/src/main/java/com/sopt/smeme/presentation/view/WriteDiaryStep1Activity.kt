@@ -157,19 +157,20 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
             vm.content.observe(this, Observer<String> { sourceDiary = it })
             toStep2.putExtra("source diary", sourceDiary)
 
-            vm.translate(sourceDiary, onCompleted = {
-                Timber.d("액티비티에서의 결과 $it")
-                toStep2.putExtra("translated text",it)
-                translatedDiary = it
-            }
-            ) {
-                runOnUiThread {
-                    Toast.makeText(this, "번역과정중 에러가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                vm.translate(sourceDiary, onCompleted = {
+                    Timber.d("액티비티에서의 결과 $it")
+                    toStep2.putExtra("translated text",it)
+                    translatedDiary = it
+                    startActivity(toStep2)
+                }) {
+                    runOnUiThread {
+                        Toast.makeText(this, "번역과정중 에러가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
+
             toStep2.putExtra("번역 결과",translatedDiary)
             Timber.d("스텝원 번역: $translatedDiary")
-            startActivity(toStep2)
+
         }
     }
 
