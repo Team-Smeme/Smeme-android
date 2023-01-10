@@ -8,15 +8,15 @@ data class TranslateResult(
 ) {
     data class Message(
         @SerializedName("result")
-        val result: Result?
+        val result: Result
     ) {
         data class Result(
             @SerializedName("srcLangType")
-            val srcLangType: String = "",
+            val srcLangType: String,
             @SerializedName("tarLangType")
-            val tarLangType: String = "",
+            val tarLangType: String,
             @SerializedName("translatedText")
-            val translatedText: String = ""
+            val translatedText: String
         )
     }
 }

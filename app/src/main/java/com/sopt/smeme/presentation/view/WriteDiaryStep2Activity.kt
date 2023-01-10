@@ -101,21 +101,30 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
 
     private fun showHint(source: String) {
         binding.btnHint.setOnClickListener {
-            vm.translate(
-                source,
-                onCompleted = {
-                    Timber.d("")
-                    binding.txtHint.text = it
-                },
-                onError = {
-                    Timber.d(it.message)
+            // 번역으로 바뀐 경우
+            if (binding.btnHint.isChecked) {
+                vm.translate(
+                    source,
+                    onCompleted = {
+                        Timber.d("")
+                        binding.txtHint.text = it
+                    },
+                    onError = {
+                        Timber.d(it.message)
 
-                    runOnUiThread {
-                        Toast.makeText(this, "번역과정중 에러가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                        runOnUiThread {
+                            Toast.makeText(this, "번역과정중 에러가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                        binding.txtHint.text = source
                     }
-                    binding.txtHint.text = source
-                }
-            )
+                )
+            }
+
+            // 번역을 해제하는 경우
+            else {
+                binding.txtHint.text = source
+            }
+
         }
     }
 }
