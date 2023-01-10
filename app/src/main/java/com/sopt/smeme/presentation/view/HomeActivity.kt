@@ -5,6 +5,8 @@ import android.graphics.Color
 import androidx.fragment.app.FragmentManager
 import com.sopt.smeme.R
 import com.sopt.smeme.databinding.ActivityHomeBinding
+import com.sopt.smeme.presentation.view.odir.OdirFragment
+import dagger.hilt.android.AndroidEntryPoint
 import com.sopt.smeme.presentation.view.archive.ArchiveFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,7 +45,9 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
         },
         EXPLORE {
             override fun changeFragment(supportFragmentManager: FragmentManager, context: Context) {
-                // TODO
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.home_container, OdirFragment(context))
+                    .commit()
             }
         },
         COLLECTION {
