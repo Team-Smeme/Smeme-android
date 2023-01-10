@@ -18,6 +18,7 @@ import com.sopt.smeme.business.viewmodel.mydiary.DiarySource2TargetManager
 import com.sopt.smeme.business.viewmodel.mydiary.Topic
 import com.sopt.smeme.business.viewmodel.Step1ViewModel
 import com.sopt.smeme.databinding.ActivityWriteStep1Binding
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,7 +31,7 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
         get() = requireNotNull(_binding) { "error in WriteDiaryKoreanActivity" }
     private val diarySource2TargetManager: DiarySource2TargetManager by viewModels()
 
-    private var sourceDiary: String? = null
+    private lateinit var sourceDiary: String
 
 //    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
@@ -191,11 +192,24 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
 
     private fun toStep2() {
         val toStep2 = Intent(this, WriteDiaryStep2Activity::class.java)
-
+        var translatedDiary:String? = null
         binding.btnNext.setOnClickListener {
             vm.updateText(binding.etDiaryKorean.text.toString())
             vm.content.observe(this, Observer<String> { sourceDiary = it })
             toStep2.putExtra("source diary", sourceDiary)
+
+            vm.translate(sourceDiary, onCompleted = {
+                Timber.d("액티비티에서의 결과 $it")
+                toStep2.putExtra("translated text",it)
+                translatedDiary = it
+            }
+            ) {
+                runOnUiThread {
+                    Toast.makeText(this, "번역과정중 에러가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+            toStep2.putExtra("번역 결과",translatedDiary)
+            Timber.d("스텝원 번역: $translatedDiary")
             startActivity(toStep2)
         }
     }
