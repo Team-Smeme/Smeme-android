@@ -4,35 +4,36 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="24dp"
+    android:layout_marginBottom="16dp"
     android:background="@color/grey_1000w"
     android:paddingHorizontal="18dp"
-    android:paddingBottom="19dp"
-    android:paddingTop="24dp">
+    android:paddingTop="24dp"
+    android:paddingBottom="19dp">
 
     <TextView
         android:id="@+id/tv_diary_odir"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLength="145"
+        android:layout_height="84dp"
         android:text="The issue that requires the phone call we have to solve it in person but sometimes some violence is needed. process The issue that requires the phone call we have to solve it in person but sometimes some violence is needed. process"
-        android:textAppearance="@style/TextAppearance.Body1" />
+        android:textAppearance="@style/TextAppearance.Body1"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ToggleButton
         android:id="@+id/btn_like_odir"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:background="@drawable/selc_odir_detail_like"
         android:textOff=""
-        android:textOn="" />
+        android:textOn=""
+        app:layout_constraintDimensionRatio="1:1" />
 
     <TextView
         android:id="@+id/tv_like_odir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
-        android:textAppearance="@style/TextAppearance.Body2"
-        android:textColor="@color/grey_1000b" />
+        android:textAppearance="@style/TextAppearance.Caption1"
+        android:textColor="@color/grey_700" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow_like_odir"

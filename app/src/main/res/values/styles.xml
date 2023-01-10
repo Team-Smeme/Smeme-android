@@ -47,6 +47,14 @@
         <item name="cornerSize">8dp</item>
     </style>
 
+    <style name="Widget.App.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Chip.Choice</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Chip.Choice" parent="">
+
+        <item name="android:textAppearance">@style/TextAppearance.Subtitle2</item>
+    </style>
 
     <!-- Text Appearance -->
     <style name="TextAppearance.Headline1" parent="">
