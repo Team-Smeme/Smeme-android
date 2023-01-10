@@ -66,6 +66,7 @@ class MyDiaryHomeFragment @Inject constructor(
     fun listen() {
         setFabClickEvent()
         clickStep1()
+        clickForeign()
     }
 
     fun request() {
@@ -166,7 +167,14 @@ class MyDiaryHomeFragment @Inject constructor(
         }
     }
 
-    private fun checkMyDiaryExist(adaptor: MyDiaryAdaptor) {
+    private fun clickForeign() {
+        binding.fabForeign.setOnClickListener {
+            val toForeign = Intent(context, WriteDiaryForeignActivity::class.java)
+            startActivity(toForeign)
+        }
+    }
+
+    private fun checkMyDiaryExist() {
         if (adaptor.itemCount >= 0) {
             binding.rvMyDiary.visibility = View.VISIBLE
         }
