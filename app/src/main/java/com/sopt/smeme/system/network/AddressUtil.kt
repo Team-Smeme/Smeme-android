@@ -1,7 +1,8 @@
 package com.sopt.smeme.system.network
 
 object AddressUtil {
-    public fun domain(host: String, port: Int) = "${Protocol.using()}$host:$port"
+    public fun domainHttp(host: String, port: Int) = "${Protocol.using()}$host:$port"
+    fun domainHttps(host: String) = "${Protocol.HTTPS}$host"
 }
 
 object Protocol {

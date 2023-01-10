@@ -1,7 +1,8 @@
 package com.sopt.smeme.system.network
 
 import com.sopt.smeme.BuildConfig.*
-import com.sopt.smeme.system.network.AddressUtil.domain
+import com.sopt.smeme.system.network.AddressUtil.domainHttp
+import com.sopt.smeme.system.network.AddressUtil.domainHttps
 import javax.inject.Qualifier
 
 @Qualifier
@@ -15,8 +16,12 @@ enum class Cluster(
     val nodes: Map<String, String>
 ) {
     ORIGIN(
-        domain(ORIGIN_API_BASE_HOST, ORIGIN_API_BASE_PORT),
-        mapOf(Pair(ORIGIN_API_BASE_NAME, domain(ORIGIN_API_BASE_HOST, ORIGIN_API_BASE_PORT)))
+        domainHttp(ORIGIN_API_BASE_HOST, ORIGIN_API_BASE_PORT),
+        mapOf(Pair(ORIGIN_API_BASE_NAME, domainHttp(ORIGIN_API_BASE_HOST, ORIGIN_API_BASE_PORT)))
+    ),
+    PAPAGO(
+        domainHttps("openapi.naver.com/"),
+        mapOf(Pair("PAPAGO", domainHttps("openapi.naver.com/")))
     )
     ;
 

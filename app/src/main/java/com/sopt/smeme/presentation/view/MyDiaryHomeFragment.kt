@@ -3,6 +3,7 @@ package com.sopt.smeme.presentation.view
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.sopt.smeme.DateUtil
 import com.sopt.smeme.R
 import com.sopt.smeme.SmemeException
 import com.sopt.smeme.business.adaptor.MyDiaryAdaptor
+import com.sopt.smeme.databinding.ActivityHomeBinding
 import com.sopt.smeme.business.viewmodel.mydiary.MyDiaryProvider
 import com.sopt.smeme.databinding.FragmentMyDiaryBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -137,7 +139,8 @@ class MyDiaryHomeFragment @Inject constructor(
                 fabX.visibility = View.INVISIBLE
                 fabForeign.visibility = View.INVISIBLE
                 fabKorean.visibility = View.INVISIBLE
-
+                background.setBackgroundColor(Color.parseColor("#00000000"))
+                (activity as HomeActivity).changeBackgroundColor("#00000000")
             } else { // 플로팅 액션 버튼 열기 - 닫혀있는 플로팅 버튼 꺼내는 애니메이션
                 ObjectAnimator.ofFloat(fabPlus, View.ROTATION, 0f, 45f).apply { start() }
                 ObjectAnimator.ofFloat(fabX, View.ROTATION, 45f, 0f).apply { start() }
@@ -146,10 +149,12 @@ class MyDiaryHomeFragment @Inject constructor(
                 fabForeign.visibility = View.VISIBLE
                 fabKorean.visibility = View.VISIBLE
 
+                background.setBackgroundColor(Color.parseColor("#4D000000"))
+                (activity as HomeActivity).changeBackgroundColor("#4D000000")
+
             }
             isFabOpen = !isFabOpen
         }
-
     }
 
     private fun clickStep1() {

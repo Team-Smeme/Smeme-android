@@ -57,40 +57,16 @@
             app:layout_constraintStart_toEndOf="@+id/txt_english"
             app:layout_constraintTop_toTopOf="@+id/txt_english" />
 
-        <RelativeLayout
-            android:layout_width="38dp"
-            android:layout_height="21dp"
-            android:layout_marginTop="23dp"
-            android:layout_marginEnd="30dp"
-
+        <TextView
+            android:id="@+id/txt_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="24dp"
+            android:text="완료"
+            android:textAppearance="@style/TextAppearance.Body1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
-
-            <Button
-                android:id="@+id/btn_korean_complete"
-                android:layout_width="28dp"
-                android:layout_height="21dp"
-
-                android:background="@android:color/transparent"
-                android:textAppearance="@style/TextAppearance.Body1"
-
-                />
-
-            <TextView
-                android:id="@+id/txt_korean_complete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="완료"
-                android:fontFamily="@font/pretendard_regular"
-                android:textColor="@color/grey_400"
-                android:textSize="16sp"
-                android:layout_centerInParent="true"
-                />
-
-        </RelativeLayout>
-
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -111,6 +87,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/txt_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
@@ -138,15 +115,15 @@
         android:layout_height="0dp"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@id/cl_bottom_tool_bar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider">
 
         <ScrollView
             android:id="@+id/sv_write"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -166,12 +143,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent" />
-
+            <requestFocus />
 
         </ScrollView>
-
-
-        <requestFocus />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -204,7 +178,6 @@
             android:layout_marginRight="4dp"
             android:background="@drawable/custom_checkbox"
             android:button="@null"
-            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="@id/txt_random"
             app:layout_constraintEnd_toStartOf="@id/txt_random"
             app:layout_constraintTop_toTopOf="@id/txt_random" />
@@ -230,7 +203,6 @@
             android:layout_marginRight="4dp"
             android:background="@drawable/custom_checkbox"
             android:button="@null"
-            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="@id/txt_public"
             app:layout_constraintEnd_toStartOf="@id/txt_public"
             app:layout_constraintTop_toTopOf="@id/txt_public" />
@@ -248,7 +220,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

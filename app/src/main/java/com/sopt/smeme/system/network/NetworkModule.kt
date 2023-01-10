@@ -1,5 +1,6 @@
 package com.sopt.smeme.system.network
 
+import com.google.gson.Gson
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.sopt.smeme.HomeAccess
 import com.sopt.smeme.system.storage.LocalSharedPreference
@@ -13,6 +14,8 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -57,14 +60,22 @@ class NetworkModule {
         .addConverterFactory(json.asConverterFactory(requireNotNull("application/json".toMediaTypeOrNull())))
         .build()
 
-    /**
-     * api 요청 시에는 token setting 이 필요하다.
-     */
+    @ExperimentalSerializationApi
+    @Provides
+    @Singleton
+    @ConnectCluster(Cluster.PAPAGO)
+    fun providePapagoRetrofit(
+        @ConnectionWay(ConnectionType.ACCESS) client: OkHttpClient
+    ): Retrofit = Retrofit.Builder()
+        .baseUrl(Cluster.PAPAGO.default)
+        .client(client)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
     @Provides
     @Singleton
     @ConnectionWay(ConnectionType.ACCESS)
     fun provideAccessOkHttpClient(
-        localStorage: LocalSharedPreference
     ): OkHttpClient =
         OkHttpClient.Builder().apply {
             connectTimeout(5, TimeUnit.SECONDS)

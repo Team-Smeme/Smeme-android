@@ -54,6 +54,10 @@ object ApiConnectionModule {
         @ViewModelScoped
         fun provideDiaryWriteConnection(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit): DiaryWriteConnection =
             retrofit.create(DiaryWriteConnection::class.java)
+        @Provides
+        @ViewModelScoped
+        fun providePapago(@ConnectCluster(Cluster.PAPAGO) retrofit: Retrofit): PapagoAPI =
+            retrofit.create(PapagoAPI::class.java)
     }
 
     object ODir {

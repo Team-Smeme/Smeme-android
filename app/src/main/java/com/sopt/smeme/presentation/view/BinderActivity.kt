@@ -31,5 +31,10 @@ class BinderActivity : ViewBoundActivity<ActivityBinderBinding>(R.layout.activit
             val toDetailPage = Intent(this, OdirDetailActivity::class.java)
             startActivity(toDetailPage)
         }
+        binding.btnWriteKorenDiary.setOnClickListener {
+            val toWriteKoreanDiaryActivity = Intent(this, WriteDiaryStep1Activity::class.java)
+            startActivity(toWriteKoreanDiaryActivity)
+        }
+
     }
 }
