@@ -52,8 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
-            android:enabled="false"
             android:layout_marginRight="30dp"
+            android:enabled="true"
             android:text="다음"
             android:textAppearance="@style/TextAppearance.Body1"
             android:textColor="@color/grey_400"
@@ -64,17 +64,16 @@
 
     <TextView
         android:id="@+id/txt_random_topic"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:height="91dp"
         android:background="@color/grey_100"
         android:paddingHorizontal="24dp"
-        android:height="91dp"
-        android:visibility="gone"
         android:paddingTop="14dp"
         android:paddingBottom="12dp"
-        android:text="Q. 오늘부터 딱 일주일 후! 설레는 크리스마스네요. 일주일 전부터 세워보는 나의 크리스마스 계획은?"
         android:textAppearance="@style/TextAppearance.Body4"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_koran" />
@@ -83,14 +82,13 @@
         android:id="@+id/btn_refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_refresh"
-        android:visibility="gone"
-        android:background="@color/grey_100"
         android:layout_marginRight="26dp"
         android:layout_marginBottom="14dp"
+        android:background="@color/grey_100"
+        android:src="@drawable/ic_refresh"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/txt_random_topic"
         app:layout_constraintEnd_toEndOf="@+id/txt_random_topic" />
-
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -118,15 +116,15 @@
 
         <EditText
             android:id="@+id/et_diary_korean"
-            android:inputType="textMultiLine|textNoSuggestions|textAutoComplete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="8dp"
             android:background="@null"
             android:hint="최소 10자 이상 작성해주세요"
-            android:textColorHint="@color/grey_500"
+            android:inputType="textMultiLine|textNoSuggestions|textAutoComplete"
             android:textAppearance="@style/TextAppearance.Body1"
+            android:textColorHint="@color/grey_500"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_tip" />
@@ -140,65 +138,77 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/shadow_app_bar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <CheckBox
-            android:id="@+id/cb_random"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginRight="4dp"
-            android:button="@null"
-            android:background="@drawable/custom_checkbox"
-            app:layout_constraintTop_toTopOf="@id/txt_random"
-            app:layout_constraintBottom_toBottomOf="@id/txt_random"
-            app:layout_constraintEnd_toStartOf="@id/txt_random"
-            />
-
-        <TextView
-            android:id="@+id/txt_random"
-            android:text="랜덤 주제"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/layout_random_topic"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
             android:paddingVertical="18dp"
-            android:textAppearance="@style/TextAppearance.Body2"
-            android:textColor="@color/grey_600"
-            android:layout_marginRight="18dp"
-            app:layout_constraintEnd_toStartOf="@id/cb_public"
-            app:layout_constraintTop_toTopOf="parent"
+
             app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintEnd_toStartOf="@id/layout_public"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <CheckBox
-            android:id="@+id/cb_public"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginRight="4dp"
-            android:button="@null"
-            android:background="@drawable/custom_checkbox"
-            app:layout_constraintTop_toTopOf="@id/txt_public"
-            app:layout_constraintBottom_toBottomOf="@id/txt_public"
-            app:layout_constraintEnd_toStartOf="@id/txt_public"
-            />
+            <CheckBox
+                android:id="@+id/cb_random"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="3dp"
 
-        <TextView
-            android:id="@+id/txt_public"
-            android:text="공개"
-            android:layout_width="wrap_content"
+                android:background="@drawable/custom_checkbox"
+                android:button="@null" />
+
+            <TextView
+                android:id="@+id/txt_random"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="1dp"
+                android:text="랜덤 주제"
+                android:textAppearance="@style/TextAppearance.Body2"
+
+                android:textColor="@color/grey_600"
+                android:textSize="13sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_public"
+            android:layout_width="45dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
             android:paddingVertical="18dp"
-            android:textAppearance="@style/TextAppearance.Body2"
-            android:textColor="@color/grey_600"
-            android:paddingRight="12dp"
-            android:layout_marginRight="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <CheckBox
+                android:id="@+id/cb_public"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/custom_checkbox"
+
+                android:button="@null"
+                android:checked="true" />
+
+            <TextView
+                android:id="@+id/txt_public"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="1dp"
+                android:text="공개"
+                android:textAppearance="@style/TextAppearance.Body2"
+
+                android:textColor="#FE9870"
+                android:textSize="13sp" />
+        </RelativeLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

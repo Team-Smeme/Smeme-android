@@ -30,7 +30,7 @@ class MyDiaryHomeFragment @Inject constructor(
     private var _binding: FragmentMyDiaryBinding? = null
     private val binding get() = requireNotNull(_binding) { "Error exist on MyDiaryHomeFragment" }
     private var isFabOpen = false
-    lateinit var targetDate: LocalDate
+    private var targetDate: LocalDate = LocalDate.now()
 
     private val myDiaryProvider: MyDiaryProvider by viewModels()
 
@@ -56,8 +56,12 @@ class MyDiaryHomeFragment @Inject constructor(
 
         request()
         observe(adapter)
+        listen()
 
         checkMyDiaryExist(adapter)
+    }
+
+    fun listen() {
         setFabClickEvent()
         clickStep1()
     }
@@ -152,6 +156,8 @@ class MyDiaryHomeFragment @Inject constructor(
         binding.fabKorean.setOnClickListener {
             val toStep1 = Intent(context, WriteDiaryStep1Activity::class.java)
             startActivity(toStep1)
+            onDestroy()
+            onDestroyView()
         }
     }
 
@@ -168,5 +174,10 @@ class MyDiaryHomeFragment @Inject constructor(
         } else if (targetDate.isBefore(LocalDate.now())) {
             binding.icArrowRight.setImageResource(R.drawable.ic_arrow_right)
         }
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 }

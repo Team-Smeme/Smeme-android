@@ -49,9 +49,23 @@ object ApiConnectionModule {
         @ViewModelScoped
         fun provideMyDiaryConnection(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit): MyDiaryConnection =
             retrofit.create(MyDiaryConnection::class.java)
+
+        @Provides
+        @ViewModelScoped
+        fun provideDiaryWriteConnection(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit): DiaryWriteConnection =
+            retrofit.create(DiaryWriteConnection::class.java)
     }
 
     object ODir {
 
+    }
+
+    @Module
+    @InstallIn(ViewModelComponent::class)
+    object Else {
+        @Provides
+        @ViewModelScoped
+        fun provideRandomTopic(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit): TopicConnection =
+            retrofit.create(TopicConnection::class.java)
     }
 }

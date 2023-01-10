@@ -44,7 +44,12 @@
             android:name=".presentation.view.HomeActivity"
             android:exported="false"/>
         <activity
-            android:name=".presentation.view.WriteDiaryKoreanActivity"
+            android:name=".presentation.view.WriteDiaryStep1Activity"
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"
+            />
+        <activity
+            android:name=".presentation.view.WriteDiaryStep2Activity"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize"
             />
