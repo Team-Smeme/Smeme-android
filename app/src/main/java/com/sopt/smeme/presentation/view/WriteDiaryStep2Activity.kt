@@ -11,10 +11,7 @@ import com.sopt.smeme.databinding.ActivityWriteStep2Binding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
-@AndroidEntryPoint
 class WriteDiaryStep2Activity : AppCompatActivity() {
-    private val vm: Step2ViewModel by viewModels()
-
     private var _binding: ActivityWriteStep2Binding? = null
     private val binding: ActivityWriteStep2Binding
         get() = requireNotNull(_binding) { "error in WriteDiaryKoreanActivity" }
@@ -26,7 +23,14 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
 
         binding.etDiaryEnglish.requestFocus()
 
+//        val fromStep1 = intent.getStringExtra("번역 결과")
+        val translatedDiary = intent.getStringExtra("translated text")
         val sourceDiary = intent.getStringExtra("source diary") ?: ""
+        Timber.d("!?!?!?액티비티에서의 결과 $sourceDiary")
+        Timber.d("!?!?!?액티비티에서의 결과 $translatedDiary")
+//        Timber.d("<>>>>>>>>>액티비티에서의 결과 $fromStep1")
+
+
         connectStep1(sourceDiary)
 
         showHint(sourceDiary)
@@ -55,6 +59,7 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
 //        }
 
     }
+
 
     private fun connectStep1(source: String) {
         val toStep1 = Intent(this, WriteDiaryStep1Activity::class.java)
@@ -94,24 +99,25 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
     }
 
     private fun showHint(source: String) {
+        val translatedDiary = intent.getStringExtra("translated text")
         binding.btnHint.setOnClickListener {
             // 번역으로 바뀐 경우
+            Timber.d("translatedDiary:$translatedDiary")
             if (binding.btnHint.isChecked) {
-                vm.translate(
-                    source,
-                    onCompleted = {
-                        Timber.d("")
-                        binding.txtHint.text = it
-                    },
-                    onError = {
-                        Timber.d(it.message)
-
-                        runOnUiThread {
-                            Toast.makeText(this, "번역과정중 에러가 발생했습니다.", Toast.LENGTH_SHORT).show()
-                        }
-                        binding.txtHint.text = source
-                    }
-                )
+                binding.txtHint.text = translatedDiary
+//                vm.translate(
+//                    source,
+//                    onCompleted = {
+//                        Timber.d("")
+//                        binding.txtHint.text = it
+//                    },
+//                    onError = {
+//                        Timber.d(it.message)
+//
+//
+//                        binding.txtHint.text = source
+//                    }
+//                )
             }
 
             // 번역을 해제하는 경우

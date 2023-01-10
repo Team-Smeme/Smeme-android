@@ -8,6 +8,7 @@ import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -15,8 +16,10 @@ import androidx.lifecycle.*
 import com.sopt.smeme.R
 import com.sopt.smeme.business.viewmodel.Step1ViewModel
 import com.sopt.smeme.databinding.ActivityWriteStep1Binding
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class WriteDiaryStep1Activity : AppCompatActivity() {
     private val vm : Step1ViewModel by viewModels()
 
@@ -24,7 +27,7 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
     private val binding: ActivityWriteStep1Binding
         get() = requireNotNull(_binding) { "error in WriteDiaryStep1Activity" }
 
-    private var sourceDiary: String? = null
+    private lateinit var sourceDiary: String
 
 //    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
@@ -132,27 +135,40 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
             }
         }
 
-        binding.btnNext.setOnClickListener {
-            val viewModel = ViewModelProvider(
-                this,
-                ViewModelProvider.NewInstanceFactory()
-            )[Step1ViewModel::class.java]
-
-            viewModel.updateText(binding.etDiaryKorean.text.toString())
-            viewModel.content.observe(this, Observer<String> {
-                sourceDiary = it
-            })
-            toStep2.putExtra("source diary", sourceDiary)
-        }
+//        binding.btnNext.setOnClickListener {
+//            val viewModel = ViewModelProvider(
+//                this,
+//                ViewModelProvider.NewInstanceFactory()
+//            )[Step1ViewModel::class.java]
+//
+//            viewModel.updateText(binding.etDiaryKorean.text.toString())
+//            viewModel.content.observe(this, Observer<String> {
+//                sourceDiary = it
+//            })
+//            toStep2.putExtra("source diary", sourceDiary)
+//        }
     }
 
     private fun toStep2() {
         val toStep2 = Intent(this, WriteDiaryStep2Activity::class.java)
-
+        var translatedDiary:String? = null
         binding.btnNext.setOnClickListener {
             vm.updateText(binding.etDiaryKorean.text.toString())
             vm.content.observe(this, Observer<String> { sourceDiary = it })
             toStep2.putExtra("source diary", sourceDiary)
+
+            vm.translate(sourceDiary, onCompleted = {
+                Timber.d("액티비티에서의 결과 $it")
+                toStep2.putExtra("translated text",it)
+                translatedDiary = it
+            }
+            ) {
+                runOnUiThread {
+                    Toast.makeText(this, "번역과정중 에러가 발생했습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+            toStep2.putExtra("번역 결과",translatedDiary)
+            Timber.d("스텝원 번역: $translatedDiary")
             startActivity(toStep2)
         }
     }
