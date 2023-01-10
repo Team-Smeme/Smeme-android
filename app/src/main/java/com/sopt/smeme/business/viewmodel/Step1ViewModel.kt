@@ -32,7 +32,7 @@ class Step1ViewModel @Inject constructor(
         sourceDiary.value = newText
     }
 
-    private fun isValidDiaryFormat(diary: String) = diary.trim().length >= 10
+    private fun isValidDiaryFormat(diary: String) = diary.filterNot{it.isWhitespace()}.length >= 10
 
     fun setNextState() {
         _isNextActive.value = (isDiarySuit.value == true)
