@@ -9,7 +9,7 @@ import retrofit2.http.POST
 interface PapagoAPI {
     @FormUrlEncoded
     @POST("v1/papago/n2mt")
-    suspend fun transferPapago(
+    fun transferPapago(
         @Field("source") source: String,
         @Field("target") target: String,
         @Field("text") text: String,
