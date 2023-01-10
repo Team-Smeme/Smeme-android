@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.sopt.smeme.bridge.model.MyDiary
 import com.sopt.smeme.business.adaptor.MyDiaryAdaptor
-import com.sopt.smeme.databinding.ActivityHomeBinding
 import com.sopt.smeme.databinding.FragmentMyDiaryBinding
 
 class MyDiaryHomeFragment : Fragment() {
@@ -53,7 +52,7 @@ class MyDiaryHomeFragment : Fragment() {
         checkMyDiaryExist()
         setFabClickEvent()
         clickStep1()
-
+        clickForeign()
     }
 
     override fun onDestroyView() {
@@ -101,6 +100,13 @@ class MyDiaryHomeFragment : Fragment() {
         binding.fabKorean.setOnClickListener {
             val toStep1 = Intent(context, WriteDiaryStep1Activity::class.java)
             startActivity(toStep1)
+        }
+    }
+
+    private fun clickForeign() {
+        binding.fabForeign.setOnClickListener {
+            val toForeign = Intent(context, WriteDiaryForeignActivity::class.java)
+            startActivity(toForeign)
         }
     }
 
