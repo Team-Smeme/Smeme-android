@@ -7,7 +7,7 @@
 
         <variable
             name="step1"
-            type="com.sopt.smeme.presentation.view.WriteDiaryStep1Activity" />
+            type="com.sopt.smeme.business.viewmodel.Step1ViewModel" />
     </data>
 
 
@@ -125,24 +125,32 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-            <EditText
-                android:id="@+id/et_diary_korean"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
+                android:layout_height="0dp"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:layout_marginTop="8dp"
-                android:background="@null"
-                android:hint="최소 10자 이상 작성해주세요"
-                android:inputType="textMultiLine|textNoSuggestions|textAutoComplete"
-                android:text="@={step1.diary}"
-                android:textAppearance="@style/TextAppearance.Body1"
-                android:textColorHint="@color/grey_500"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_tip" />
+                app:layout_constraintTop_toBottomOf="@id/txt_tip">
 
-            <requestFocus />
+                <EditText
+                    android:id="@+id/et_diary_korean"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:background="@null"
+                    android:hint="최소 10자 이상 작성해주세요"
+                    android:inputType="textMultiLine|textNoSuggestions"
+                    android:text="@={step1.diary}"
+                    android:textAppearance="@style/TextAppearance.Body1"
+                    android:textColorHint="@color/grey_500"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_tip" />
+                <requestFocus />
+
+            </ScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

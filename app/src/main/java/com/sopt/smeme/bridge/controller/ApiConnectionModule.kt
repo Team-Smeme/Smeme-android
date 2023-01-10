@@ -31,11 +31,19 @@ object ApiConnectionModule {
 
     }
 
+    @Module
+    @InstallIn(ViewModelComponent::class)
     object MDir {
+        @Provides
+        @ViewModelScoped
+        fun provideMyDiaries(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit): MyDiaryApi =
+            retrofit.create(MyDiaryApi::class.java)
 
+        @Provides
+        @ViewModelScoped
+        fun providePapago(@ConnectCluster(Cluster.PAPAGO) retrofit: Retrofit): PapagoAPI =
+            retrofit.create(PapagoAPI::class.java)
     }
 
-    object ODir {
-
-    }
+    object ODir
 }

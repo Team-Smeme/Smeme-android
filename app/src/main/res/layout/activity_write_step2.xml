@@ -58,7 +58,7 @@
             app:layout_constraintTop_toTopOf="@+id/txt_english" />
 
         <TextView
-            android:id="@+id/txt_complete"
+            android:id="@+id/txt_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
@@ -87,6 +87,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/txt_hint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
@@ -114,15 +115,15 @@
         android:layout_height="0dp"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@id/cl_bottom_tool_bar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/divider">
 
         <ScrollView
             android:id="@+id/sv_write"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -142,12 +143,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent" />
-
+            <requestFocus />
 
         </ScrollView>
-
-
-        <requestFocus />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -180,7 +178,6 @@
             android:layout_marginRight="4dp"
             android:background="@drawable/custom_checkbox"
             android:button="@null"
-            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="@id/txt_random"
             app:layout_constraintEnd_toStartOf="@id/txt_random"
             app:layout_constraintTop_toTopOf="@id/txt_random" />
@@ -206,7 +203,6 @@
             android:layout_marginRight="4dp"
             android:background="@drawable/custom_checkbox"
             android:button="@null"
-            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="@id/txt_public"
             app:layout_constraintEnd_toStartOf="@id/txt_public"
             app:layout_constraintTop_toTopOf="@id/txt_public" />
@@ -224,7 +220,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

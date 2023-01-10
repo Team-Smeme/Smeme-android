@@ -2,14 +2,15 @@ package com.sopt.smeme.presentation.view
 
 import android.animation.ObjectAnimator
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import com.sopt.smeme.bridge.model.MyDiary
 import com.sopt.smeme.business.adaptor.MyDiaryAdaptor
+import com.sopt.smeme.databinding.ActivityHomeBinding
 import com.sopt.smeme.databinding.FragmentMyDiaryBinding
 
 class MyDiaryHomeFragment : Fragment() {
@@ -17,7 +18,6 @@ class MyDiaryHomeFragment : Fragment() {
     private val binding get() = requireNotNull(_binding) { "Error exist on MyDiaryHomeFragment" }
 
     private var isFabOpen = false
-
 
     private val mockDiaryList = listOf<MyDiary>(
         MyDiary(
@@ -79,7 +79,8 @@ class MyDiaryHomeFragment : Fragment() {
                 fabX.visibility = View.INVISIBLE
                 fabForeign.visibility = View.INVISIBLE
                 fabKorean.visibility = View.INVISIBLE
-
+                background.setBackgroundColor(Color.parseColor("#00000000"))
+                (activity as HomeActivity).changeBackgroundColor("#00000000")
             } else { // 플로팅 액션 버튼 열기 - 닫혀있는 플로팅 버튼 꺼내는 애니메이션
                 ObjectAnimator.ofFloat(fabPlus, View.ROTATION, 0f, 45f).apply { start() }
                 ObjectAnimator.ofFloat(fabX, View.ROTATION, 45f, 0f).apply { start() }
@@ -88,15 +89,17 @@ class MyDiaryHomeFragment : Fragment() {
                 fabForeign.visibility = View.VISIBLE
                 fabKorean.visibility = View.VISIBLE
 
+                background.setBackgroundColor(Color.parseColor("#4D000000"))
+                (activity as HomeActivity).changeBackgroundColor("#4D000000")
+
             }
             isFabOpen = !isFabOpen
         }
-
     }
 
     private fun clickStep1() {
         binding.fabKorean.setOnClickListener {
-            val toStep1 = Intent(context, WriteDiaryKoreanActivity::class.java)
+            val toStep1 = Intent(context, WriteDiaryStep1Activity::class.java)
             startActivity(toStep1)
         }
     }
