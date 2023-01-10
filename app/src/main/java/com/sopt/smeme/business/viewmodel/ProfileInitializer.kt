@@ -2,16 +2,19 @@ package com.sopt.smeme.business.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sopt.smeme.bridge.agent.InjectWay
+import com.sopt.smeme.bridge.agent.Way
 import com.sopt.smeme.bridge.agent.user.ProfileEditAgent
+import com.sopt.smeme.system.storage.LocalStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileInitializer @Inject constructor(
-    private val profileEditAgent: ProfileEditAgent
+    private val profileEditAgent: ProfileEditAgent,
+    @InjectWay(Way.DEV) private val localStorage: LocalStorage
 ) : ViewModel(), ViewModelFrame {
 
     /**
@@ -21,17 +24,19 @@ class ProfileInitializer @Inject constructor(
         nickname: String,
         introducing: String,
         onCompleted: () -> Unit = {},
-        onError: (HttpException?) -> Unit = {}
+        onError: (Throwable) -> Unit = {}
     ) {
         viewModelScope.launch {
             try {
-                val response = profileEditAgent.create(nickname, introducing)
-                if (response.isSuccessful()) {
-                    onCompleted.invoke()
-                } else onError.invoke(null)
-            } catch (e: HttpException) {
-                onError.invoke(e)
+                profileEditAgent.create(
+                    nickname,
+                    introducing,
+                    localStorage.getAccessToken(),
+                    onCompleted,
+                    onError
+                )
             } catch (t: Throwable) {
+                onError(t)
                 Timber.e(t)
             }
         }

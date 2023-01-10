@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class InitializingProfileRequest(
-    val name: String, // Mandatory, not blank
+    val username: String, // Mandatory, not blank
     val bio: String, // Mandatory
 )

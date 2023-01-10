@@ -2,6 +2,7 @@ package com.sopt.smeme.bridge.controller
 
 import com.sopt.smeme.system.network.Cluster
 import com.sopt.smeme.system.network.ConnectCluster
+import com.sopt.smeme.system.network.ConnectionType
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,6 +27,16 @@ object ApiConnectionModule {
     object User {
         @Provides
         @ViewModelScoped
+        fun provideLogin(
+            @ConnectCluster(
+                Cluster.ORIGIN,
+                ConnectionType.AUTHORIZE
+            ) retrofit: Retrofit
+        ): AuthConnection =
+            retrofit.create(AuthConnection::class.java)
+
+        @Provides
+        @ViewModelScoped
         fun provideProfileInitializer(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit): ProfileConnection =
             retrofit.create(ProfileConnection::class.java)
 
@@ -36,7 +47,7 @@ object ApiConnectionModule {
     object MDir {
         @Provides
         @ViewModelScoped
-        fun provideMyDiaryConnection(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit) : MyDiaryConnection =
+        fun provideMyDiaryConnection(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit): MyDiaryConnection =
             retrofit.create(MyDiaryConnection::class.java)
     }
 

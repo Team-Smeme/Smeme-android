@@ -17,6 +17,7 @@ import com.sopt.smeme.system.storage.LocalStorage.Companion.KAKAO_REFRESH_EXPIRE
 import com.sopt.smeme.system.storage.LocalStorage.Companion.KAKAO_REFRESH_TOKEN
 import com.sopt.smeme.system.storage.LocalStorage.Companion.LOGIN_CHECKED
 import com.sopt.smeme.system.storage.LocalStorage.Companion.REFRESH_TOKEN
+import com.sopt.smeme.system.storage.LocalStorage.Companion.SOCIAL_CHECKED
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.*
 import javax.inject.Inject
@@ -48,7 +49,6 @@ class LocalSharedPreference @Inject constructor(
                     putLong(ID, data.id ?: -1)
                     putString(ACCESS_TOKEN, data.accessToken)
                     putString(REFRESH_TOKEN, data.refreshToken)
-                    putBoolean(LOGIN_CHECKED, true)
                 }.apply()
             }
             // oauth access data //
@@ -65,7 +65,7 @@ class LocalSharedPreference @Inject constructor(
                         KAKAO_REFRESH_EXPIRED,
                         data.refreshExpired.toInstant().toEpochMilli()
                     )
-                    putBoolean(LOGIN_CHECKED, true)
+                    putBoolean(SOCIAL_CHECKED, true)
                 }.apply()
             }
             is LocalStorage.EMPTY -> {
@@ -76,22 +76,25 @@ class LocalSharedPreference @Inject constructor(
 
     override fun get(accessType: UserAccessType): LocalStorage.Data {
         with(dataStore) {
-            if (!getBoolean(LOGIN_CHECKED, false)) return LocalStorage.EMPTY
-
             when (accessType) {
-                is KakaoLoginAccess -> return AccessData(
-                    accessToken = getString(KAKAO_ACCESS_TOKEN, null) ?: "default",
-                    refreshToken = getString(KAKAO_REFRESH_TOKEN, null) ?: "default",
-                    accessExpired = Date(getLong(KAKAO_ACCESS_EXPIRED, -1)),
-                    refreshExpired = Date(getLong(KAKAO_REFRESH_EXPIRED, -1)),
-                    idToken = getString(KAKAO_ID_TOKEN, null)
-                )
+                is KakaoLoginAccess -> {
+                    if (!getBoolean(SOCIAL_CHECKED, false)) return LocalStorage.EMPTY
 
-                is HomeAccess -> return UserData(
-                    getLong(ID, -1),
-                    getString(ACCESS_TOKEN, null),
-                    getString(REFRESH_TOKEN, null)
-                )
+                    return AccessData(
+                        accessToken = getString(KAKAO_ACCESS_TOKEN, null) ?: "default",
+                        refreshToken = getString(KAKAO_REFRESH_TOKEN, null) ?: "default",
+                        accessExpired = Date(getLong(KAKAO_ACCESS_EXPIRED, -1)),
+                        refreshExpired = Date(getLong(KAKAO_REFRESH_EXPIRED, -1)),
+                        idToken = getString(KAKAO_ID_TOKEN, null)
+                    )
+                }
+                is HomeAccess -> {
+                    return UserData(
+                        getLong(ID, -1),
+                        getString(ACCESS_TOKEN, null),
+                        getString(REFRESH_TOKEN, null)
+                    )
+                }
             }
         }
     }
@@ -100,6 +103,22 @@ class LocalSharedPreference @Inject constructor(
         with(dataStore) {
             return getBoolean(LOGIN_CHECKED, false)
         }
+    }
+
+    override fun isSocialAuthenticated(): Boolean {
+        with(dataStore) {
+            return getBoolean(SOCIAL_CHECKED, false)
+        }
+    }
+
+    override fun authorize() {
+        dataStore.edit().run {
+            putBoolean(LOGIN_CHECKED, true)
+        }.apply()
+    }
+
+    override fun getAccessToken(): String? = with(dataStore) {
+        getString(ACCESS_TOKEN, null)
     }
 
     companion object {

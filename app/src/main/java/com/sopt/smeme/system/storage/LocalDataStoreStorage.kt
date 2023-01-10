@@ -12,4 +12,13 @@ class LocalDataStoreStorage : LocalStorage {
 
     // TODO
     override fun isAuthenticated() = false
+
+    // TODO
+    override fun isSocialAuthenticated() = false
+
+    // TODO
+    override fun authorize() = Unit
+
+    // TODO
+    override fun getAccessToken() = ""
 }

@@ -3,6 +3,7 @@ package com.sopt.smeme.system.storage
 import com.sopt.smeme.HomeAccess
 import com.sopt.smeme.KakaoLoginAccess
 import com.sopt.smeme.UserAccessType
+import com.sopt.smeme.system.storage.LocalStorage.Companion.ACCESS_TOKEN
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
@@ -19,7 +20,6 @@ class VolatileStorage @Inject constructor() : LocalStorage {
                 memory.put(LocalStorage.ID, data.id ?: -1)
                 memory.put(LocalStorage.ACCESS_TOKEN, data.accessToken as String)
                 memory.put(LocalStorage.REFRESH_TOKEN, data.refreshToken as String)
-                memory.put(LocalStorage.LOGIN_CHECKED, true)
             }
 
             // oauth access data //
@@ -35,7 +35,7 @@ class VolatileStorage @Inject constructor() : LocalStorage {
                     LocalStorage.KAKAO_REFRESH_EXPIRED,
                     data.refreshExpired.toInstant().toEpochMilli()
                 )
-                memory.put(LocalStorage.LOGIN_CHECKED, true)
+                memory.put(LocalStorage.SOCIAL_CHECKED, true)
             }
 
             is LocalStorage.EMPTY -> {
@@ -45,26 +45,43 @@ class VolatileStorage @Inject constructor() : LocalStorage {
     }
 
     override fun get(accessType: UserAccessType): LocalStorage.Data {
-        with(memory) {
-            if (!(memory.get(LocalStorage.LOGIN_CHECKED) as Boolean)) return LocalStorage.EMPTY
-
             when (accessType) {
-                is KakaoLoginAccess -> return AccessData(
-                    accessToken = memory.get(LocalStorage.KAKAO_ACCESS_TOKEN) as String,
-                    refreshToken = memory.get(LocalStorage.KAKAO_REFRESH_TOKEN) as String,
-                    accessExpired = Date(memory.get(LocalStorage.KAKAO_ACCESS_EXPIRED) as Long),
-                    refreshExpired = Date(memory.get(LocalStorage.KAKAO_REFRESH_EXPIRED) as Long),
-                    idToken = memory.get(LocalStorage.KAKAO_ID_TOKEN) as String
-                )
+                is KakaoLoginAccess -> {
+                    if (!(memory.getOrDefault(
+                            LocalStorage.SOCIAL_CHECKED,
+                            false
+                        ) as Boolean)
+                    ) return LocalStorage.EMPTY
 
-                is HomeAccess -> return UserData(
-                    id = memory.get(LocalStorage.ID) as Long,
-                    accessToken = memory.get(LocalStorage.ACCESS_TOKEN) as String,
-                    refreshToken = memory.get(LocalStorage.REFRESH_TOKEN) as String
-                )
+                    return AccessData(
+                        accessToken = memory.get(LocalStorage.KAKAO_ACCESS_TOKEN) as String,
+                        refreshToken = memory.get(LocalStorage.KAKAO_REFRESH_TOKEN) as String,
+                        accessExpired = Date(memory.get(LocalStorage.KAKAO_ACCESS_EXPIRED) as Long),
+                        refreshExpired = Date(memory.get(LocalStorage.KAKAO_REFRESH_EXPIRED) as Long),
+                        idToken = memory.get(LocalStorage.KAKAO_ID_TOKEN) as String
+                    )
+                }
+
+                is HomeAccess -> {
+                    return UserData(
+                        id = memory.getOrDefault(LocalStorage.ID, -1) as Long,
+                        accessToken = memory.getOrDefault(LocalStorage.ACCESS_TOKEN, "") as String,
+                        refreshToken = memory.getOrDefault(LocalStorage.REFRESH_TOKEN, "") as String
+                    )
+                }
             }
-        }
     }
 
-    override fun isAuthenticated() = memory.get(LocalStorage.LOGIN_CHECKED) as Boolean
+    // MOCK 의 경우 자동으로 로그인이 되도록 동작한다.
+    override fun isAuthenticated() =
+        memory.getOrDefault(LocalStorage.LOGIN_CHECKED, true) as Boolean
+
+    override fun isSocialAuthenticated() =
+        memory.getOrDefault(LocalStorage.SOCIAL_CHECKED, true) as Boolean
+
+    override fun authorize() {
+        memory.put(LocalStorage.LOGIN_CHECKED, true)
+    }
+
+    override fun getAccessToken(): String? = memory.getOrDefault(ACCESS_TOKEN, null) as String
 }

@@ -9,8 +9,7 @@ import com.sopt.smeme.R
 import com.sopt.smeme.business.policy.ProfilePolicy
 import com.sopt.smeme.business.viewmodel.ProfileInitializer
 import com.sopt.smeme.databinding.ActivityLoginProfileBinding
-import com.sopt.smeme.presentation.view.BinderActivity
-import com.sopt.smeme.presentation.view.TestActivity
+import com.sopt.smeme.presentation.view.HomeActivity
 import com.sopt.smeme.presentation.view.ViewBoundActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,10 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginProfileActivity :
     ViewBoundActivity<ActivityLoginProfileBinding>(R.layout.activity_login_profile) {
     private val profileInitializer: ProfileInitializer by viewModels()
-
-    override fun constructLayout() {
-
-    }
 
     override fun listen() {
         // text 의 작성 상태를 observe //
@@ -43,35 +38,18 @@ class LoginProfileActivity :
             if (ProfilePolicy.acceptNickname(nickname)) {
                 profileInitializer.initialize(nickname, introducing,
                     onCompleted = {
-                        val toMain = Intent(this, TestActivity::class.java)
+                        val toMain = Intent(this, HomeActivity::class.java)
                         startActivity(toMain)
                         finish()
                     },
                     onError = {
-                        if (it == null) {
-                            Toast.makeText(this, "정상적인 접근이 아닙니다.", Toast.LENGTH_SHORT).show()
-                        }
-                        if (it?.code() == 401) {
-                            Toast.makeText(this, "정상적인 접근이 아닙니다 (${it.code()})", Toast.LENGTH_SHORT)
+                        runOnUiThread {
+                            Toast.makeText(this, it.message, Toast.LENGTH_SHORT)
                                 .show()
-                        } else {
-                            Toast.makeText(
-                                this,
-                                "내부적인 오류입니다. 관리자에 문의하세요. (${it?.code()})",
-                                Toast.LENGTH_SHORT
-                            ).show()
                         }
-
-                        val toBinding = Intent(this, BinderActivity::class.java)
-                        startActivity(toBinding)
-                        finish()
                     })
             }
         }
-    }
-
-    override fun observe() {
-        super.observe()
     }
 
     private fun clearNickname() = binding.etLoginProfileNickname.text.clear()
@@ -93,9 +71,6 @@ class LoginProfileActivity :
         }
 
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun afterTextChanged(s: Editable?) {
-
-        }
-
+        override fun afterTextChanged(s: Editable?) {}
     }
 }

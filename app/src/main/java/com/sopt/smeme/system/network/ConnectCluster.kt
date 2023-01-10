@@ -5,7 +5,10 @@ import com.sopt.smeme.system.network.AddressUtil.domain
 import javax.inject.Qualifier
 
 @Qualifier
-annotation class ConnectCluster(val cluster: Cluster = Cluster.ORIGIN)
+annotation class ConnectCluster(
+    val cluster: Cluster = Cluster.ORIGIN,
+    val connectionType: ConnectionType = ConnectionType.ACCESS
+)
 
 enum class Cluster(
     val default: String,
@@ -19,4 +22,14 @@ enum class Cluster(
 
     fun node() = default
     fun node(target: String) = nodes.getOrDefault(target, default)
+}
+
+@Qualifier
+annotation class ConnectionWay(
+    val connectionType: ConnectionType = ConnectionType.ACCESS
+)
+
+enum class ConnectionType {
+    ACCESS,
+    AUTHORIZE
 }

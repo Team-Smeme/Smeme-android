@@ -15,7 +15,11 @@ class MockSignInAgent @Inject constructor(
     private val localStorage: LocalStorage
 ) : SignInAgent {
 
-    override fun call(type: SignInType.Type, onCompleted: () -> Unit, onError: () -> Unit) {
+    override fun call(
+        type: SignInType.Type,
+        onCompleted: (Boolean) -> Unit,
+        onError: (RuntimeException) -> Unit
+    ) {
         when (type) {
             is Own.OWN -> {}
             is Social.NAVER -> {}
@@ -29,7 +33,7 @@ class MockSignInAgent @Inject constructor(
                         idToken = null
                     )
                 )
-                onCompleted.invoke()
+                onCompleted.invoke(true)
             }
         }
     }

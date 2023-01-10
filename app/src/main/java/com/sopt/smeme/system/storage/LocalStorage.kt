@@ -6,6 +6,9 @@ interface LocalStorage {
     fun save(data: Data)
     fun get(accessType: UserAccessType): Data
     fun isAuthenticated(): Boolean
+    fun isSocialAuthenticated() : Boolean
+    fun authorize(): Unit
+    fun getAccessToken() : String?
 
     sealed interface Data {
         fun hasValue(): Boolean
@@ -27,5 +30,6 @@ interface LocalStorage {
         const val KAKAO_ID_TOKEN = "kakaoIdToken"
         const val KAKAO_ACCESS_EXPIRED = "kakaoAccessExpired"
         const val KAKAO_REFRESH_EXPIRED = "kakaoRefreshExpired"
+        const val SOCIAL_CHECKED = "socialChecked"
     }
 }

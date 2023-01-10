@@ -9,6 +9,13 @@ import javax.inject.Inject
 class MockProfileEditAgent @Inject constructor(
     profileConnection: ProfileConnection
 ) : ProfileAgent {
-    override suspend fun create(nickname: String, introducing: String)
-    = SimpleResponse(200, true, "success")
+    override suspend fun create(
+        nickname: String,
+        introducing: String,
+        token: String?,
+        onCompleted: () -> Unit,
+        onError: (Throwable) -> Unit
+    ) {
+        onCompleted.invoke()
+    }
 }
