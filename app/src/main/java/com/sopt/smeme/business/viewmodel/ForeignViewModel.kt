@@ -4,11 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 
-@HiltViewModel
-class Step2ViewModel @Inject constructor(): ViewModel() {
+class ForeignViewModel : ViewModel() {
     val diary: MutableLiveData<String> = MutableLiveData("")
     val isDiarySuit: LiveData<Boolean> =
         Transformations.map(diary) { isValidDiaryFormat(it) }
@@ -23,8 +20,8 @@ class Step2ViewModel @Inject constructor(): ViewModel() {
         diary.value = newText
     }
 
-    private fun isValidDiaryFormat(diary: String) : Boolean {
-        if (diary.replace("[^a-zA-Z]".toRegex(),"").length >= 10) {
+    private fun isValidDiaryFormat(diary: String): Boolean {
+        if (diary.replace("[^a-zA-Z]".toRegex(), "").length >= 10) {
             return true
         }
         return false
@@ -33,4 +30,5 @@ class Step2ViewModel @Inject constructor(): ViewModel() {
     fun setCompleteState() {
         _isCompleteActive.value = (isDiarySuit.value == true)
     }
+
 }

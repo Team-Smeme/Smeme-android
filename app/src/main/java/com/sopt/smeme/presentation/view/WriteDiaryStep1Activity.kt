@@ -29,13 +29,10 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
 
     private lateinit var sourceDiary: String
 
-//    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityWriteStep1Binding.inflate(layoutInflater)
         setContentView(binding.root)
-//        _binding = DataBindingUtil.setContentView(this, R.layout.activity_write_step1)
 
         binding.step1 = vm
         binding.lifecycleOwner = this
@@ -45,15 +42,8 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
         setColorTip()
         setOnClickCheckbox()
         observeDiary()
+        cancel()
         toStep2()
-
-//        resultLauncher =
-//            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-//                if (result.resultCode == Activity.RESULT_OK) {
-//                    toStep2()
-////                    binding.etDiaryKorean.text = result.data?.getStringExtra("diary")
-//                }
-//            }
     }
 
     private fun setColorTip() {
@@ -135,18 +125,6 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
             }
         }
 
-//        binding.btnNext.setOnClickListener {
-//            val viewModel = ViewModelProvider(
-//                this,
-//                ViewModelProvider.NewInstanceFactory()
-//            )[Step1ViewModel::class.java]
-//
-//            viewModel.updateText(binding.etDiaryKorean.text.toString())
-//            viewModel.content.observe(this, Observer<String> {
-//                sourceDiary = it
-//            })
-//            toStep2.putExtra("source diary", sourceDiary)
-//        }
     }
 
     private fun toStep2() {
@@ -185,8 +163,11 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
             }
         }
     }
-//
-//    companion object{
-//        const val REQ_CODE_DIARY = 1000
-//    }
+
+    private fun cancel(){
+        binding.txtCancel.setOnClickListener {
+            finish()
+        }
+    }
+
 }
