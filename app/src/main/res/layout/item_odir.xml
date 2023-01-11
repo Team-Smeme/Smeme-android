@@ -18,14 +18,12 @@
         android:textAppearance="@style/TextAppearance.Body1"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ToggleButton
-        android:id="@+id/btn_like_odir"
+    <ImageView
+        android:id="@+id/iv_like_odir"
         android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:background="@drawable/selc_odir_detail_like"
-        android:textOff=""
-        android:textOn=""
-        app:layout_constraintDimensionRatio="1:1" />
+        android:layout_height="0dp"
+        android:src="@drawable/ic_thumbs_up"
+        app:layout_constraintDimensionRatio="1" />
 
     <TextView
         android:id="@+id/tv_like_odir"
@@ -40,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
-        app:constraint_referenced_ids="btn_like_odir,tv_like_odir"
+        app:constraint_referenced_ids="iv_like_odir,tv_like_odir"
         app:flow_horizontalGap="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_diary_odir" />

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.kakao.sdk.auth.Constants.CLIENT_ID
 import com.sopt.smeme.BuildConfig
 import com.sopt.smeme.TextUtil
 import com.sopt.smeme.bridge.controller.PapagoAPI

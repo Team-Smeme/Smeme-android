@@ -48,12 +48,23 @@
     </style>
 
     <style name="Widget.App.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Chip.Choice</item>
+        <item name="elevationOverlayEnabled">false</item>
+        <item name="android:textAppearance">@style/TextAppearance.Body1</item>
+        <item name="chipStartPadding">12dp</item>
+        <item name="chipEndPadding">12dp</item>
+<!--        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Chip.Choice</item>-->
     </style>
 
-    <style name="ThemeOverlay.App.Chip.Choice" parent="">
+<!--    <style name="ThemeOverlay.App.Chip.Choice" parent="">-->
 
-        <item name="android:textAppearance">@style/TextAppearance.Subtitle2</item>
+<!--        <item name="android:textAppearance">@style/TextAppearance.Subtitle2</item>-->
+<!--    </style>-->
+
+    <style name="Widget.App.ChipGroup" parent="Widget.MaterialComponents.ChipGroup">
+        <item name="android:singleLine">true</item>
+        <item name="singleSelection">true</item>
+        <item name="selectionRequired">true</item>\
+        <item name="chipSpacingHorizontal">3dp</item>
     </style>
 
     <!-- Text Appearance -->

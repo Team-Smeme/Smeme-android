@@ -64,14 +64,13 @@
             app:layout_constraintTop_toBottomOf="@id/cl_appbar_top_odir">
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chips_catagory_odir"
+                android:id="@+id/chips_category_odir"
+                style="@style/Widget.App.ChipGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="23dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:selectionRequired="true"
-                app:singleSelection="true">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_all_odir"
@@ -82,31 +81,11 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_daily_odir"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/Widget.App.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:tag="0"
                     android:text="일상" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_travel_odir"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="여행" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_taste_odir"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="취향" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_self_odir"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="자기계발" />
 
             </com.google.android.material.chip.ChipGroup>
 
@@ -139,7 +118,7 @@
                 app:constraint_referenced_ids="tv_language_odir,tv_sort_type_odir"
                 app:flow_horizontalGap="16dp"
                 app:layout_constraintEnd_toEndOf="@id/cl_filter_bg_odir"
-                app:layout_constraintTop_toBottomOf="@+id/chips_catagory_odir" />
+                app:layout_constraintTop_toBottomOf="@+id/chips_category_odir" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

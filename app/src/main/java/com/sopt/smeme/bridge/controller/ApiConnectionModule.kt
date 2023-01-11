@@ -60,8 +60,20 @@ object ApiConnectionModule {
             retrofit.create(PapagoAPI::class.java)
     }
 
+    @Module
+    @InstallIn(ViewModelComponent::class)
     object ODir {
+        // open diary list
+        @Provides
+        @ViewModelScoped
+        fun provideOdirListConnection(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit) : OdirListConnection =
+            retrofit.create(OdirListConnection::class.java)
 
+        // open diary detail
+        @Provides
+        @ViewModelScoped
+        fun provideOdirDetailConnection(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit) : OdirDetailConnection =
+            retrofit.create(OdirDetailConnection::class.java)
     }
 
     @Module
