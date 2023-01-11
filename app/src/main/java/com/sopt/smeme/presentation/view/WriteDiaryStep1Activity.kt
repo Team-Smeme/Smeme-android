@@ -33,13 +33,10 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
 
     private lateinit var sourceDiary: String
 
-//    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityWriteStep1Binding.inflate(layoutInflater)
         setContentView(binding.root)
-//        _binding = DataBindingUtil.setContentView(this, R.layout.activity_write_step1)
 
         binding.step1 = vm
         binding.lifecycleOwner = this
@@ -49,6 +46,7 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
         setColorTip()
         setOnClickCheckbox()
         observeDiary()
+        cancel()
         toStep2()
         listen()
         observe()
@@ -226,8 +224,11 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
             }
         }
     }
-//
-//    companion object{
-//        const val REQ_CODE_DIARY = 1000
-//    }
+
+    private fun cancel(){
+        binding.txtCancel.setOnClickListener {
+            finish()
+        }
+    }
+
 }

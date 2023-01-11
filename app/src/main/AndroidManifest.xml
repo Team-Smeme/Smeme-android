@@ -89,6 +89,10 @@
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize"
             android:exported="false"
             />
+        <activity android:name=".presentation.view.WriteDiaryForeignActivity"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"
+            android:exported="false"
+            />
     </application>
 
 </manifest>
