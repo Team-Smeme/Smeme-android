@@ -1,15 +1,10 @@
 package com.sopt.smeme.business.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.sopt.smeme.BuildConfig
-import com.sopt.smeme.TextUtil
 import com.sopt.smeme.bridge.controller.PapagoAPI
 import com.sopt.smeme.bridge.controller.TranslateResult
-import com.sopt.smeme.business.policy.DiaryPolicy
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -17,20 +12,9 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class Step1ViewModel @Inject constructor(
+class Translator @Inject constructor(
     private val papagoAPI: PapagoAPI
 ) : ViewModel() {
-    val diary: MutableLiveData<String> = MutableLiveData("")
-    val isDiarySuit: LiveData<Boolean> =
-        Transformations.map(diary) { DiaryPolicy.textMoreThan10(it) }
-
-    private val _isNextActive = MutableLiveData(false)
-    val isNextActive get() = _isNextActive
-
-    fun setNextState() {
-        _isNextActive.value = (isDiarySuit.value == true)
-    }
-
     fun translate(
         text: String,
         onCompleted: (String) -> Unit = {},

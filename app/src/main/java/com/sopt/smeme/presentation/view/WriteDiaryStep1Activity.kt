@@ -11,46 +11,44 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.*
+import androidx.lifecycle.observe
 import com.sopt.smeme.R
-import com.sopt.smeme.business.viewmodel.mydiary.DiarySource2TargetManager
+import com.sopt.smeme.business.viewmodel.Translator
+import com.sopt.smeme.business.viewmodel.mydiary.SourceDiaryMoonJiGi
 import com.sopt.smeme.business.viewmodel.mydiary.Topic
-import com.sopt.smeme.business.viewmodel.Step1ViewModel
+import com.sopt.smeme.business.viewmodel.mydiary.TopicProvider
 import com.sopt.smeme.databinding.ActivityWriteStep1Binding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class WriteDiaryStep1Activity : AppCompatActivity() {
-    private val vm : Step1ViewModel by viewModels()
+    private val translator: Translator by viewModels()
+    private val topicProvider: TopicProvider by viewModels()
+    private val sourceDiaryObserver: SourceDiaryMoonJiGi by viewModels()
 
     private var _binding: ActivityWriteStep1Binding? = null
     private val binding: ActivityWriteStep1Binding
         get() = requireNotNull(_binding) { "error in WriteDiaryKoreanActivity" }
-    private val diarySource2TargetManager: DiarySource2TargetManager by viewModels()
-
-    private lateinit var sourceDiary: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityWriteStep1Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.step1 = vm
-        binding.lifecycleOwner = this
-        binding.etDiaryKorean.requestFocus()
-
-        setQuestionState()
-        setColorTip()
-        setOnClickCheckbox()
-        observeDiary()
-        cancel()
+        constructLayout()
         toStep2()
         listen()
         observe()
-        observeDiary()
+    }
+
+    fun constructLayout() {
+        binding.step1 = sourceDiaryObserver
+        binding.lifecycleOwner = this
+        binding.etDiaryKorean.requestFocus()
+
+        setQuestionState("")
+        setColorTip()
     }
 
     private fun setColorTip() {
@@ -84,7 +82,7 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
                     txtRandomTopic.visibility = View.VISIBLE
                     btnRefresh.visibility = View.VISIBLE
 
-                    diarySource2TargetManager.getRandomTopic {
+                    topicProvider.getRandomTopic {
                         runOnUiThread {
                             Timber.e(it.message)
                             Toast.makeText(
@@ -111,8 +109,8 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
                     txtRandom.setTextColor(Color.parseColor("#FE9870"))
                     txtRandomTopic.visibility = View.VISIBLE
                     btnRefresh.visibility = View.VISIBLE
-                    toStep2.putExtra("randomCheck", isChecked)
-                    Timber.d("isRandomChecked $isChecked")
+                    toStep2.putExtra("randomCheck", cbRandom.isChecked)
+                    Timber.d("isRandomChecked ${cbRandom.isChecked}")
                 }
 
                 // check 를 해제 하는 경우
@@ -154,14 +152,15 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
     }
 
     fun observe() {
-        diarySource2TargetManager.topic.observe(this) {
+        topicProvider.topic.observe(this) {
             setQuestionState(it.text)
         }
+        observeDiary()
     }
 
     fun listen() {
         binding.btnRefresh.setOnClickListener {
-            diarySource2TargetManager.getRandomTopic {
+            topicProvider.getRandomTopic {
                 runOnUiThread {
                     Timber.e(it.message)
                     Toast.makeText(
@@ -172,10 +171,17 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
                 }
             }
         }
+        binding.txtCancel.setOnClickListener {
+            finish()
+        }
 
+        setOnClickCheckbox()
+    }
+
+    private fun toStep2() {
+        val toStep2 = Intent(this, WriteDiaryStep2Activity::class.java)
         binding.btnNext.setOnClickListener {
-            val toStep2 = Intent(this, WriteDiaryStep2Activity::class.java)
-            val topic = diarySource2TargetManager.topic.value
+            val topic = topicProvider.topic.value
             val isPublic = binding.cbPublic.isChecked
 
             if (topic != null) {
@@ -184,50 +190,30 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
                 toStep2.putExtra("topic", Topic("", 0))
             }
             toStep2.putExtra("isPublic", isPublic)
-            startActivity(toStep2)
-        }
-    }
+            toStep2.putExtra("source diary", binding.etDiaryKorean.text.toString())
+            toStep2.putExtra("randomCheck", binding.cbRandom.isChecked)
+            toStep2.putExtra("publicCheck", binding.cbPublic.isChecked)
 
-    private fun toStep2() {
-        val toStep2 = Intent(this, WriteDiaryStep2Activity::class.java)
-        var translatedDiary:String? = null
-        binding.btnNext.setOnClickListener {
-            vm.updateText(binding.etDiaryKorean.text.toString())
-            vm.content.observe(this, Observer<String> { sourceDiary = it })
-            toStep2.putExtra("source diary", sourceDiary)
-
-                vm.translate(sourceDiary, onCompleted = {
-                    Timber.d("액티비티에서의 결과 $it")
-                    toStep2.putExtra("translated text",it)
-                    translatedDiary = it
-                    startActivity(toStep2)
-                }) {
-                    runOnUiThread {
-                        Toast.makeText(this, "번역과정중 에러가 발생했습니다.", Toast.LENGTH_SHORT).show()
-                    }
+            translator.translate(binding.etDiaryKorean.text.toString(), onCompleted = {
+                Timber.d("액티비티에서의 결과 $it")
+                toStep2.putExtra("translated text", it)
+                startActivity(toStep2)
+            }) {
+                runOnUiThread {
+                    Toast.makeText(this, "번역과정중 에러가 발생했습니다.", Toast.LENGTH_SHORT).show()
                 }
-
-            toStep2.putExtra("번역 결과",translatedDiary)
-            Timber.d("스텝원 번역: $translatedDiary")
-
+            }
         }
     }
 
     private fun observeDiary() {
-        vm.isDiarySuit.observe(this) {
-            vm.setNextState()
-            if(vm.isNextActive.value == true){
+        sourceDiaryObserver.isDiarySuit.observe(this) {
+            sourceDiaryObserver.setNextState()
+            if (sourceDiaryObserver.isNextActive.value == true) {
                 binding.btnNext.setTextColor(Color.parseColor("#171716"))
-            }
-            else{
+            } else {
                 binding.btnNext.setTextColor(Color.parseColor("#BBBBBB"))
             }
-        }
-    }
-
-    private fun cancel(){
-        binding.txtCancel.setOnClickListener {
-            finish()
         }
     }
 

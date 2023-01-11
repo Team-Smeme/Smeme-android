@@ -5,8 +5,8 @@ import android.graphics.Color
 import androidx.fragment.app.FragmentManager
 import com.sopt.smeme.R
 import com.sopt.smeme.databinding.ActivityHomeBinding
-import dagger.hilt.android.AndroidEntryPoint
 import com.sopt.smeme.presentation.view.archive.ArchiveFragment
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_home) {

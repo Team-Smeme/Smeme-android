@@ -5,18 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.smeme.SmemeException
-import com.sopt.smeme.bridge.agent.mydiary.DiaryWriter
 import com.sopt.smeme.bridge.controller.TopicConnection
-import com.sopt.smeme.business.viewmodel.ViewModelFrame
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import javax.inject.Inject
 
 @HiltViewModel
-class DiarySource2TargetManager @Inject constructor(
-    private val diaryWriter: DiaryWriter,
+class TopicProvider @Inject constructor(
     private val topicConnection: TopicConnection
-) : ViewModel(), ViewModelFrame {
+) : ViewModel() {
     private val _topic = MutableLiveData<Topic>()
     val topic: LiveData<Topic> get() = _topic
 
@@ -40,26 +37,5 @@ class DiarySource2TargetManager @Inject constructor(
             }
         }
     }
-
-    fun completeWriting(
-        topicId: Int,
-        content: String,
-        languageCode: String,
-        isPublic: Boolean,
-        onCompleted: () -> Unit = {},
-        onError: (Throwable) -> Unit = {}
-    ) {
-        viewModelScope.async {
-            diaryWriter.writeDiary(
-                content = content,
-                targetCode = languageCode,
-                topic = topicId,
-                isPublic = isPublic,
-                onCompleted = onCompleted,
-                onError = onError
-            )
-        }
-    }
-
 
 }

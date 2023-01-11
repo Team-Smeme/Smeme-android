@@ -7,7 +7,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
 @ViewModelScoped
-class DiaryWriter @Inject constructor(
+class DiaryAgent @Inject constructor(
     private val diaryWriteConnection: DiaryWriteConnection
 ) : DiaryWriting {
     override suspend fun writeDiary(

@@ -4,8 +4,8 @@
 
     <data>
         <variable
-            name="step2"
-            type="com.sopt.smeme.business.viewmodel.Step2ViewModel" />
+            name="moonjigi"
+            type="com.sopt.smeme.business.viewmodel.mydiary.DiaryMoonJiGi" />
 
     </data>
 
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:enabled="@{step2.isCompleteActive()}"
+            android:enabled="@{moonjigi.isActive()}"
             android:outlineProvider="none"
             android:text="완료"
             android:textAppearance="@style/TextAppearance.Body1"
@@ -190,6 +190,7 @@
             android:layout_marginRight="4dp"
             android:background="@drawable/custom_checkbox"
             android:button="@null"
+            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="@id/txt_random"
             app:layout_constraintEnd_toStartOf="@id/txt_random"
             app:layout_constraintTop_toTopOf="@id/txt_random" />
@@ -201,6 +202,7 @@
             android:layout_marginRight="18dp"
             android:paddingVertical="18dp"
             android:text="랜덤 주제"
+            android:enabled="false"
             android:textAppearance="@style/TextAppearance.Body2"
             android:textColor="@color/grey_600"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -215,6 +217,7 @@
             android:layout_marginRight="4dp"
             android:background="@drawable/custom_checkbox"
             android:button="@null"
+            android:enabled="false"
             app:layout_constraintBottom_toBottomOf="@id/txt_public"
             app:layout_constraintEnd_toStartOf="@id/txt_public"
             app:layout_constraintTop_toTopOf="@id/txt_public" />
@@ -227,6 +230,7 @@
             android:paddingVertical="18dp"
             android:paddingRight="12dp"
             android:text="공개"
+            android:enabled="false"
             android:textAppearance="@style/TextAppearance.Body2"
             android:textColor="@color/grey_600"
             app:layout_constraintBottom_toBottomOf="parent"

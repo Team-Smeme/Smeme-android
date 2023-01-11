@@ -15,7 +15,6 @@ import com.sopt.smeme.DateUtil
 import com.sopt.smeme.R
 import com.sopt.smeme.SmemeException
 import com.sopt.smeme.business.adaptor.MyDiaryAdaptor
-import com.sopt.smeme.databinding.ActivityHomeBinding
 import com.sopt.smeme.business.viewmodel.mydiary.MyDiaryProvider
 import com.sopt.smeme.databinding.FragmentMyDiaryBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,7 +52,7 @@ class MyDiaryHomeFragment @Inject constructor(
 
         // 오늘 날짜로 최초 화면 세팅 //
         targetDate = LocalDateTime.now().toLocalDate()
-        binding.txtDate.setText(DateUtil.asStringOnlyDate(targetDate))
+        binding.txtDate.text = DateUtil.asStringOnlyDate(targetDate)
         afterArrowAction()
 
         request()
@@ -174,14 +173,14 @@ class MyDiaryHomeFragment @Inject constructor(
         }
     }
 
-    private fun checkMyDiaryExist() {
+    private fun checkMyDiaryExist(adaptor: MyDiaryAdaptor) {
         if (adaptor.itemCount >= 0) {
             binding.rvMyDiary.visibility = View.VISIBLE
         }
     }
 
     private fun afterArrowAction() {
-        binding.txtDate.setText(DateUtil.asStringOnlyDate(targetDate))
+        binding.txtDate.text = DateUtil.asStringOnlyDate(targetDate)
         if (targetDate.isEqual(LocalDate.now())) {
             binding.icArrowRight.setImageResource(R.drawable.ic_arrow_right_inactive)
         } else if (targetDate.isBefore(LocalDate.now())) {

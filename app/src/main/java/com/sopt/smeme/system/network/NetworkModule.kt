@@ -2,7 +2,9 @@ package com.sopt.smeme.system.network
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.sopt.smeme.HomeAccess
-import com.sopt.smeme.system.storage.LocalSharedPreference
+import com.sopt.smeme.bridge.agent.InjectWay
+import com.sopt.smeme.bridge.agent.Way
+import com.sopt.smeme.system.storage.LocalStorage
 import com.sopt.smeme.system.storage.UserData
 import dagger.Module
 import dagger.Provides
@@ -74,6 +76,7 @@ class NetworkModule {
     @Singleton
     @ConnectionWay(ConnectionType.ACCESS)
     fun provideAccessOkHttpClient(
+        @InjectWay(Way.DEV) localStorage: LocalStorage
     ): OkHttpClient =
         OkHttpClient.Builder().apply {
             connectTimeout(5, TimeUnit.SECONDS)

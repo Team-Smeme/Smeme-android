@@ -4,9 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import com.sopt.smeme.R
 import com.sopt.smeme.databinding.ActivityBinderBinding
+import com.sopt.smeme.presentation.view.odir.OdirDetailActivity
 import com.sopt.smeme.presentation.view.welcome.LoginProfileActivity
 import com.sopt.smeme.presentation.view.welcome.OnBoardingActivity
-import com.sopt.smeme.presentation.view.odir.OdirDetailActivity
 
 class BinderActivity : ViewBoundActivity<ActivityBinderBinding>(R.layout.activity_binder) {
     override fun onCreate(savedInstanceState: Bundle?) {
