@@ -5,9 +5,8 @@ import android.graphics.Color
 import androidx.fragment.app.FragmentManager
 import com.sopt.smeme.R
 import com.sopt.smeme.databinding.ActivityHomeBinding
-import com.sopt.smeme.presentation.view.odir.OdirFragment
-import dagger.hilt.android.AndroidEntryPoint
 import com.sopt.smeme.presentation.view.archive.ArchiveFragment
+import com.sopt.smeme.presentation.view.odir.OdirFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
