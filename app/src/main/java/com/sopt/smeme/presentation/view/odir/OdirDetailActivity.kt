@@ -51,7 +51,7 @@ class OdirDetailActivity :
         odirDetailProvider.diary.observe(this) {
             binding.tvDiaryOdirDetail.text = it.content
             binding.tvTagOdirDetail.text = it.category
-            binding.tvQuestionOdirDetail.text = it.topic
+            binding.tvQuestionOdirDetail.text = "     " + it.topic
             binding.tvLikeOdirDetail.text =  it.likeCnt.toString()
             binding.tvDateOdirDetail.text = it.createdAt
             binding.tvNicknameOdirDetail.text = it.username
