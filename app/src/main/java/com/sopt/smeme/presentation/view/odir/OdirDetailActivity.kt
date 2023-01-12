@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.material.snackbar.Snackbar
+import com.sopt.smeme.DateUtil
 import com.sopt.smeme.R
 import com.sopt.smeme.business.viewmodel.opendiary.OdirDetailProvider
 import com.sopt.smeme.business.viewmodel.opendiary.OdirScrapProvider
@@ -50,10 +51,14 @@ class OdirDetailActivity :
     override fun observe() {
         odirDetailProvider.diary.observe(this) {
             binding.tvDiaryOdirDetail.text = it.content
-            binding.tvTagOdirDetail.text = it.category
+            if (it.category == "") {
+                binding.tvTagOdirDetail.text = "일상"
+            } else {
+                binding.tvTagOdirDetail.text = it.category
+            }
             binding.tvQuestionOdirDetail.text = "     " + it.topic
-            binding.tvLikeOdirDetail.text =  it.likeCnt.toString()
-            binding.tvDateOdirDetail.text = it.createdAt
+            binding.tvLikeOdirDetail.text = it.likeCnt.toString()
+            binding.tvDateOdirDetail.text = DateUtil.asString(it.createdAt())
             binding.tvNicknameOdirDetail.text = it.username
             binding.tvDescriptionOdirDetail.text = it.bio
         }

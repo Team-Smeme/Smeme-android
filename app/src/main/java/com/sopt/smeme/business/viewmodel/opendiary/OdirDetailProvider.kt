@@ -23,21 +23,6 @@ class OdirDetailProvider @Inject constructor(
         id: Int,
         onError: (Throwable) -> Unit = {},
     ) {
-//        try {
-//            val response = odirDetailConnection.getSelectedDiary(id)
-//            // 200
-//            // 500 (throw server related error before getting data)
-//            if (response.isSuccessful()) {
-//                val result = response.data ?: throw SmemeException(response.status, response.message)
-//                _diary.value = result
-//            } else {
-//                // 400. 401
-//                throw SmemeException(response.status, response.message)
-//            }
-//            // etc error
-//        } catch (t: Throwable) {
-//            onError.invoke(t)
-//        }
         viewModelScope.launch {
             try {
                 val response = odirDetailConnection.getSelectedDiary(id)

@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <!-- TODO: data binding -->
+        <import type="android.view.View" />
+        <variable
+            name="data"
+            type="com.sopt.smeme.business.viewmodel.opendiary.OdirDetailProvider" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,7 +57,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/rectangle_primary_radius_4"
-            android:text="기념일"
+            tools:text="기념일"
             android:textAppearance="@style/TextAppearance.Body2"
             android:textColor="@color/grey_1000w"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="코코하는 도레미"
+            tools:text="코코하는 도레미"
             android:textAppearance="@style/TextAppearance.Body3"
             android:textColor="@color/grey_1000b"
             app:layout_constraintStart_toStartOf="@+id/tv_tag_odir_detail"
@@ -78,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="미국 거주 4년차 일기 챌린저입니다."
+            tools:text="미국 거주 4년차 일기 챌린저입니다."
             android:textAppearance="@style/TextAppearance.Caption1"
             android:textColor="@color/grey_600"
             app:layout_constraintStart_toStartOf="@+id/tv_nickname_odir_detail"
@@ -94,7 +97,7 @@
             android:background="@color/grey_100"
             android:paddingHorizontal="24dp"
             android:paddingVertical="14dp"
-            android:text="     오늘부터 딱 일주일 후! 설레는 크리스마스네요. 일주일 전부터 세워보는 나의 크리스마스 계획은?"
+            tools:text="     오늘부터 딱 일주일 후! 설레는 크리스마스네요. 일주일 전부터 세워보는 나의 크리스마스 계획은?"
             android:textAppearance="@style/TextAppearance.Body4"
             android:textColor="@color/grey_1000b"
             app:layout_constraintTop_toBottomOf="@+id/tv_description_odir_detail" />
@@ -128,7 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="30dp"
-                    android:text="@string/odir_dummy_context"
+                    tools:text="@string/odir_dummy_context"
                     android:textAppearance="@style/TextAppearance.Body1"
                     android:textIsSelectable="true"
                     android:theme="@style/Style.TextView.Selected"
@@ -142,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="36dp"
-                    android:text="2023년 1월 4일 21:15"
+                    tools:text="2023년 1월 4일 21:15"
                     android:textAppearance="@style/TextAppearance.Body2"
                     android:textColor="@color/grey_500"
                     app:layout_constraintBottom_toBottomOf="parent"
