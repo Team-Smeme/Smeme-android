@@ -1,7 +1,6 @@
 package com.sopt.smeme.presentation.view.home
 
 import android.animation.ObjectAnimator
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -9,8 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,6 +17,7 @@ import com.sopt.smeme.SmemeException
 import com.sopt.smeme.business.adaptor.MyDiaryAdaptor
 import com.sopt.smeme.business.viewmodel.mydiary.MyDiaryProvider
 import com.sopt.smeme.databinding.FragmentMyDiaryBinding
+import com.sopt.smeme.presentation.view.mdir.MdirDetailActivity
 import com.sopt.smeme.presentation.view.mdir.WriteDiaryForeignActivity
 import com.sopt.smeme.presentation.view.mdir.WriteDiaryStep1Activity
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,9 +51,7 @@ class MyDiaryHomeFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-        val adapter = MyDiaryAdaptor(requireContext())
+        val adapter = MyDiaryAdaptor(::navigateToDetail, requireContext())
         binding.rvMyDiary.adapter = adapter
 
         // 오늘 날짜로 최초 화면 세팅 //
@@ -148,11 +144,13 @@ class MyDiaryHomeFragment @Inject constructor(
                 fabForeign.visibility = View.INVISIBLE
                 fabKorean.visibility = View.INVISIBLE
 
-                background.setBackgroundColor(Color.parseColor("#00000000"))
+                background.visibility = View.GONE
                 (activity as HomeActivity).changeBackgroundColor("#00000000")
-                (activity as HomeActivity).window.statusBarColor = Color.parseColor("#FFFFFFFF")
+                (activity as HomeActivity).window.statusBarColor = Color.parseColor("#00000000")
+                background.isEnabled = true
+                (activity as HomeActivity).binding.viewBnv.visibility = View.GONE
 
-            } else { // 플로팅 액션 버튼 열기 - 닫혀있는 플로팅 버튼 꺼내는 애니메이션
+            } else { // 플로팅 액션 버튼 열기
                 ObjectAnimator.ofFloat(fabPlus, View.ROTATION, 0f, 45f).apply { start() }
                 ObjectAnimator.ofFloat(fabX, View.ROTATION, 45f, 0f).apply { start() }
                 fabPlus.visibility = View.INVISIBLE
@@ -160,17 +158,17 @@ class MyDiaryHomeFragment @Inject constructor(
                 fabForeign.visibility = View.VISIBLE
                 fabKorean.visibility = View.VISIBLE
 
-                clMyDiaryHome.isClickable = false
-                background.setBackgroundColor(Color.parseColor("#4D000000"))
+                background.visibility = View.VISIBLE
                 (activity as HomeActivity).changeBackgroundColor("#4D000000")
                 (activity as HomeActivity).window.statusBarColor = Color.parseColor("#4D000000")
-                (activity as HomeActivity).binding.viewBnv.isClickable = false
-
-
+                background.setOnClickListener(null)
+                (activity as HomeActivity).binding.viewBnv.setOnClickListener(null)
             }
+
             isFabOpen = !isFabOpen
         }
     }
+
 
     private fun clickStep1() {
         binding.fabKorean.setOnClickListener {
@@ -207,5 +205,12 @@ class MyDiaryHomeFragment @Inject constructor(
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
+    }
+
+    private fun navigateToDetail(id: Long) {
+        val intent = Intent(requireContext(), MdirDetailActivity::class.java).apply {
+            putExtra("diaryId", id)
+        }
+        startActivity(intent)
     }
 }

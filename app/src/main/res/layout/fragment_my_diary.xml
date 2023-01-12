@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/cl_my_diary_home"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_my_diary_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
@@ -11,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/tb_my_diary"
         android:layout_width="match_parent"
-        android:layout_height="121dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
         android:background="@drawable/item_diary_toolbar_background"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -76,23 +76,22 @@
         android:id="@+id/txt_no_diary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
         android:layout_marginTop="88dp"
+        android:text="@string/no_diary"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.Body2"
         android:textColor="@color/grey_700"
-        android:text="@string/no_diary"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_my_diary"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="gone"
         android:paddingTop="10dp"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb_my_diary"
@@ -101,7 +100,6 @@
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_foreign"
-        app:shapeAppearanceOverlay="@style/AppShapeAppearance.SmallComponent"
         android:layout_width="179dp"
         android:layout_height="44dp"
         android:layout_marginBottom="8dp"
@@ -114,11 +112,11 @@
         app:iconSize="20dp"
         app:iconTint="@color/primary"
         app:layout_constraintBottom_toTopOf="@id/fab_korean"
-        app:layout_constraintEnd_toEndOf="@id/fab_x" />
+        app:layout_constraintEnd_toEndOf="@id/fab_x"
+        app:shapeAppearanceOverlay="@style/AppShapeAppearance.SmallComponent" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_korean"
-        app:shapeAppearanceOverlay="@style/AppShapeAppearance.SmallComponent"
         android:layout_width="179dp"
         android:layout_height="44dp"
         android:layout_marginBottom="8dp"
@@ -131,7 +129,8 @@
         app:iconSize="20dp"
         app:iconTint="@color/primary"
         app:layout_constraintBottom_toTopOf="@id/fab_x"
-        app:layout_constraintEnd_toEndOf="@id/fab_x" />
+        app:layout_constraintEnd_toEndOf="@id/fab_x"
+        app:shapeAppearanceOverlay="@style/AppShapeAppearance.SmallComponent" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -166,13 +165,12 @@
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#00000000"
-        app:layout_constraintTop_toTopOf="parent"
+        android:background="#4D000000"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

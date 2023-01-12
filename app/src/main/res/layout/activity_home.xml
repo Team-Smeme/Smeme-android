@@ -26,6 +26,9 @@
             app:layout_constraintTop_toBottomOf="@+id/home_container"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
+
+        <!--    TODO 아이콘 색깔 바꾸기   -->
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bnv_main"
             android:layout_width="match_parent"
