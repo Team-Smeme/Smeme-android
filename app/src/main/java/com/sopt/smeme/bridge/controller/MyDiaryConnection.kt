@@ -11,5 +11,5 @@ interface MyDiaryConnection {
     @GET("/api/v1/users/diaries")
     suspend fun getMyDiaries(
         @Query("date") date: String = DateUtil.asStringOnlyDate(LocalDate.now())
-    ): DataResponse<List<MyDiaryData>>
+    ): DataResponse<MyDiaryData>
 }

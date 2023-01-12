@@ -18,15 +18,18 @@ class MyDiaryRetriever @Inject constructor(
 
     override suspend fun getList(date: LocalDate) =
         CoroutineScope(Dispatchers.IO).async {
-            val response = myDiaryConnection.getMyDiaries(DateUtil.asStringOnlyDate(date))
+            val response = myDiaryConnection.getMyDiaries(
+                DateUtil.asStringOnlyDate(date)
+            )
 
-            if(!response.isSuccessful()) {
+            if (!response.isSuccessful()) {
                 throw SmemeException(response.status, response.message)
             }
 
-            response.data
-                ?.map {
-                    MyDiary(DateUtil.asStringOnlyTime(it.createdAt()), it.content)
-                } ?: emptyList()
+            val diaries = response.data?.diaries ?: emptyList()
+
+            diaries.map {
+                MyDiary(DateUtil.asStringOnlyTime(it.createdAt()), it.content)
+            }
         }.await()
 }
