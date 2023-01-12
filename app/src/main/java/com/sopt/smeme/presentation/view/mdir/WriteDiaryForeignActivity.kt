@@ -1,4 +1,4 @@
-package com.sopt.smeme.presentation.view
+package com.sopt.smeme.presentation.view.mdir
 
 import android.graphics.Color
 import android.os.Bundle

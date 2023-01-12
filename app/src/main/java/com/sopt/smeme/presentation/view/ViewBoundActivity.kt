@@ -1,6 +1,7 @@
 package com.sopt.smeme.presentation.view
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -14,7 +15,6 @@ abstract class ViewBoundActivity<Binding : ViewDataBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutRes)
-
         // TODO : concurrent as coroutine
         constructLayout()
         listen()

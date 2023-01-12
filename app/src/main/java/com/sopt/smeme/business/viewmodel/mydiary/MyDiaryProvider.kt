@@ -19,6 +19,7 @@ import javax.inject.Inject
 class MyDiaryProvider @Inject constructor(
     private val myDiaryRetriever: MyDiaryRetriever
 ) : ViewModel(), ViewModelFrame {
+
     private val _dairies = MutableLiveData<List<MyDiary>>()
     val dairies: LiveData<List<MyDiary>> get() = _dairies
 

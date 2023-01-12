@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import com.sopt.smeme.R
 import com.sopt.smeme.databinding.ActivityBinderBinding
+import com.sopt.smeme.presentation.view.home.HomeActivity
+import com.sopt.smeme.presentation.view.mdir.WriteDiaryStep1Activity
 import com.sopt.smeme.presentation.view.odir.OdirDetailActivity
 import com.sopt.smeme.presentation.view.welcome.LoginProfileActivity
 import com.sopt.smeme.presentation.view.welcome.OnBoardingActivity

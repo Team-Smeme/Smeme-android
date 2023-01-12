@@ -50,26 +50,4 @@ class MdirDetailActivity :
 
 
 
-//    override fun onCreateContextMenu(
-//        menu: ContextMenu?,
-//        v: View?,
-//        menuInfo: ContextMenu.ContextMenuInfo?
-//    ) {
-//        super.onCreateContextMenu(menu, v, menuInfo)
-//
-//        when(v?.id){
-//            R.id.btn_option_mdir_detail -> menuInflater.inflate(R.menu.menu_option,menu)
-//        }
-//
-//    }
-//
-//    override fun onContextItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.menu_delete -> {
-//                Snackbar.make(binding.root, "삭제하시겠습니까?", Snackbar.LENGTH_SHORT).show()
-//            }
-//        }
-//        return super.onContextItemSelected(item)
-//    }
-
 }

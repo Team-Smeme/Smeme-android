@@ -14,7 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.view.WriteDiaryStep1Activity">
+        tools:context=".presentation.view.mdir.WriteDiaryStep1Activity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_koran"
@@ -155,13 +155,7 @@
             android:id="@+id/cl_bottom_tool_bar"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="8dp"
             android:background="@drawable/shadow_app_bar"
-            android:hint="최소 10자 이상 작성해주세요"
-            android:inputType="textMultiLine|textNoSuggestions|textAutoComplete"
-            android:textAppearance="@style/TextAppearance.Body1"
-            android:textColorHint="@color/grey_500"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -172,10 +166,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="18dp"
                 android:paddingVertical="18dp"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/layout_public"
                 app:layout_constraintTop_toTopOf="parent">
+
+                <CheckBox
+                    android:id="@+id/cb_random"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_alignParentStart="true"
+                    android:background="@drawable/custom_checkbox"
+                    android:layout_marginTop="3dp" />
 
                 <TextView
                     android:id="@+id/txt_random"
@@ -185,16 +186,8 @@
                     android:layout_marginTop="1dp"
                     android:text="랜덤 주제"
                     android:textAppearance="@style/TextAppearance.Body2"
-
                     android:textColor="@color/grey_600"
-                    android:textSize="13sp" />
-
-                <CheckBox
-                    android:id="@+id/cb_random"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="3dp" />
+                     />
 
             </RelativeLayout>
 
@@ -215,7 +208,6 @@
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="3dp"
                     android:background="@drawable/custom_checkbox"
-
                     android:button="@null"
                     android:checked="true" />
 
@@ -227,9 +219,8 @@
                     android:layout_marginTop="1dp"
                     android:text="공개"
                     android:textAppearance="@style/TextAppearance.Body2"
-
                     android:textColor="#FE9870"
-                    android:textSize="13sp" />
+                   />
             </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.sopt.smeme.presentation.view
+package com.sopt.smeme.presentation.view.mdir
 
 import android.content.Intent
 import android.graphics.Color
@@ -11,6 +11,7 @@ import com.sopt.smeme.business.viewmodel.mydiary.DiaryRegister
 import com.sopt.smeme.business.viewmodel.mydiary.EnglishDiaryMoonJiGi
 import com.sopt.smeme.business.viewmodel.mydiary.Topic
 import com.sopt.smeme.databinding.ActivityWriteStep2Binding
+import com.sopt.smeme.presentation.view.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

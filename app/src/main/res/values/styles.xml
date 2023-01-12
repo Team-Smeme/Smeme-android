@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="StatusBackground">
+        <item name="android:statusBarColor">@color/blur</item>
+    </style>
+
     <style name="BottomNavigationViewTextStyle" parent="Widget.Design.BottomNavigationView">
         <item name="android:textStyle">normal</item>
         <item name="android:letterSpacing">-0.01</item>

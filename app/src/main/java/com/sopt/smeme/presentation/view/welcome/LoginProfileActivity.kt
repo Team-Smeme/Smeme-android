@@ -9,7 +9,7 @@ import com.sopt.smeme.R
 import com.sopt.smeme.business.policy.ProfilePolicy
 import com.sopt.smeme.business.viewmodel.ProfileInitializer
 import com.sopt.smeme.databinding.ActivityLoginProfileBinding
-import com.sopt.smeme.presentation.view.HomeActivity
+import com.sopt.smeme.presentation.view.home.HomeActivity
 import com.sopt.smeme.presentation.view.ViewBoundActivity
 import dagger.hilt.android.AndroidEntryPoint
 

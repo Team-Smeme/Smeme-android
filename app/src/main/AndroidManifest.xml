@@ -32,6 +32,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".presentation.view.welcome.OnBoardingActivity"
@@ -41,18 +42,17 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".presentation.view.HomeActivity"
-            android:exported="false"/>
+            android:name=".presentation.view.home.HomeActivity"
+            android:exported="false">
+        </activity>
         <activity
-            android:name=".presentation.view.WriteDiaryStep1Activity"
+            android:name=".presentation.view.mdir.WriteDiaryStep1Activity"
             android:exported="false"
-            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"
-            />
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
-            android:name=".presentation.view.WriteDiaryStep2Activity"
+            android:name=".presentation.view.mdir.WriteDiaryStep2Activity"
             android:exported="false"
-            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"
-            />
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
             android:name=".presentation.view.odir.OdirDetailActivity"
             android:exported="false">
@@ -85,14 +85,13 @@
                     android:scheme="kakao${kakao_api_key}" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.view.WriteDiaryStep2Activity"
-            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"
+        <activity
+            android:name=".presentation.view.mdir.WriteDiaryForeignActivity"
             android:exported="false"
-            />
-        <activity android:name=".presentation.view.WriteDiaryForeignActivity"
-            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"
-            android:exported="false"
-            />
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
+        <activity
+            android:name=".presentation.view.mdir.MdirDetailActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

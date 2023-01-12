@@ -1,10 +1,11 @@
-package com.sopt.smeme.presentation.view
+package com.sopt.smeme.presentation.view.home
 
 import android.content.Context
 import android.graphics.Color
 import androidx.fragment.app.FragmentManager
 import com.sopt.smeme.R
 import com.sopt.smeme.databinding.ActivityHomeBinding
+import com.sopt.smeme.presentation.view.ViewBoundActivity
 import com.sopt.smeme.presentation.view.archive.ArchiveFragment
 import com.sopt.smeme.presentation.view.odir.OdirListFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,19 +20,20 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
                 .add(R.id.home_container, MyDiaryHomeFragment(this))
                 .commit()
         }
+
+
     }
 
     override fun listen() {
         binding.bnvMain.setOnItemSelectedListener {
-            BottomMenu
-                .from(it.title.toString())
+            BottomMenu.from(it.title.toString())
                 .changeFragment(supportFragmentManager, this)
             return@setOnItemSelectedListener true
         }
     }
 
     fun changeBackgroundColor(color: String) {
-        binding.bnvMain.setBackgroundColor(Color.parseColor(color))
+        binding.viewBnv.setBackgroundColor(Color.parseColor(color))
     }
 
     private enum class BottomMenu {
@@ -57,6 +59,7 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
             }
         }
         ;
+
 
         abstract fun changeFragment(supportFragmentManager: FragmentManager, context: Context)
 
