@@ -5,7 +5,7 @@
     <data>
         <variable
             name="moonjigi"
-            type="com.sopt.smeme.business.viewmodel.mydiary.DiaryMoonJiGi" />
+            type="com.sopt.smeme.business.viewmodel.mydiary.EnglishDiaryMoonJiGi" />
 
     </data>
 
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
-            android:enabled="@{moonjigi.isActive()}"
+            android:enabled="@{moonjigi.isCompleteActive()}"
             android:outlineProvider="none"
             android:text="완료"
             android:textAppearance="@style/TextAppearance.Body1"
@@ -150,6 +150,7 @@
                 android:background="@null"
                 android:hint="최소 10자 이상의 외국어를 작성해주세요"
                 android:textColorHint="@color/grey_400"
+                android:text="@={moonjigi.diary}"
                 android:inputType="textMultiLine|textNoSuggestions"
                 android:textAppearance="@style/TextAppearance.Body1"
                 app:layout_constraintEnd_toEndOf="parent"

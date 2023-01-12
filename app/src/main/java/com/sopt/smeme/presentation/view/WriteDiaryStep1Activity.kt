@@ -18,6 +18,7 @@ import com.sopt.smeme.business.viewmodel.mydiary.SourceDiaryMoonJiGi
 import com.sopt.smeme.business.viewmodel.mydiary.Topic
 import com.sopt.smeme.business.viewmodel.mydiary.TopicProvider
 import com.sopt.smeme.databinding.ActivityWriteStep1Binding
+import com.sopt.smeme.presentation.DiaryBooleanObserver
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -207,14 +208,14 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
     }
 
     private fun observeDiary() {
-        sourceDiaryObserver.isDiarySuit.observe(this) {
+        sourceDiaryObserver.isDiarySuit.observe(this, DiaryBooleanObserver {
             sourceDiaryObserver.setNextState()
             if (sourceDiaryObserver.isNextActive.value == true) {
                 binding.btnNext.setTextColor(Color.parseColor("#171716"))
             } else {
                 binding.btnNext.setTextColor(Color.parseColor("#BBBBBB"))
             }
-        }
+        })
     }
 
 }

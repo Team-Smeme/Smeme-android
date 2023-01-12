@@ -6,17 +6,17 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.observe
 import com.sopt.smeme.business.viewmodel.mydiary.DiaryRegister
 import com.sopt.smeme.business.viewmodel.mydiary.EnglishDiaryMoonJiGi
 import com.sopt.smeme.business.viewmodel.mydiary.Topic
 import com.sopt.smeme.databinding.ActivityWriteStep2Binding
+import com.sopt.smeme.presentation.DiaryBooleanObserver
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class WriteDiaryStep2Activity : AppCompatActivity() {
     // TOOD : 다른 언어로 확장을 위해 추상화만 시켜둠
-    private val diaryValidation: EnglishDiaryMoonJiGi by viewModels()
+    private val diaryMoonJiGi: EnglishDiaryMoonJiGi by viewModels()
     private val diaryRegister: DiaryRegister by viewModels()
 
     private var _binding: ActivityWriteStep2Binding? = null
@@ -37,7 +37,7 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
     }
 
     fun constructLayout() {
-        binding.moonjigi = diaryValidation
+        binding.moonjigi = diaryMoonJiGi
         binding.lifecycleOwner = this
         binding.etDiaryEnglish.requestFocus()
     }
@@ -112,14 +112,14 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
     }
 
     private fun observeDiary() {
-        diaryValidation.isDiarySuit.observe(this) {
-            diaryValidation.setCompleteState()
-            if (diaryValidation.isCompleteActive.value == true) {
+        diaryMoonJiGi.isDiarySuit.observe(this, DiaryBooleanObserver {
+            diaryMoonJiGi.setCompleteState()
+            if (diaryMoonJiGi.isCompleteActive.value == true) {
                 binding.btnComplete.setTextColor(Color.parseColor("#171716"))
             } else {
                 binding.btnComplete.setTextColor(Color.parseColor("#BBBBBB"))
             }
-        }
+        })
     }
 
 }
