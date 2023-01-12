@@ -1,6 +1,4 @@
-package com.sopt.smeme.presentation
-
-import com.sopt.smeme.DiaryObserver
+package com.sopt.smeme
 
 class DiaryBooleanObserver(private val onEventUnhandledContent: (Boolean) -> Unit) :
     DiaryObserver<Boolean> {

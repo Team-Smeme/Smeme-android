@@ -38,4 +38,7 @@ class TopicProvider @Inject constructor(
         }
     }
 
+    fun clear() {
+        _topic.value = Topic("", 0)
+    }
 }

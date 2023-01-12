@@ -81,7 +81,6 @@
             android:paddingHorizontal="24dp"
             android:paddingTop="14dp"
             android:paddingBottom="12dp"
-            android:text="Q. 오늘부터 딱 일주일 후! 설레는 크리스마스네요. 일주일 전부터 세워보는 나의 크리스마스 계획은?"
             android:textAppearance="@style/TextAppearance.Body4"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"

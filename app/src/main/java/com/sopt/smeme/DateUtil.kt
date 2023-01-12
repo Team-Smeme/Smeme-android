@@ -29,14 +29,30 @@ object DateUtil {
         return "${date.year}년 ${date.monthValue}월 ${date.dayOfMonth}일 ${hour}:${minutes}"
     }
 
-    fun asStringOnlyDate(now: LocalDate): String = "${now.year}.${now.monthValue}.${now.dayOfMonth}"
-    fun asStringOnlyTime(createdAt: LocalDateTime): String {
-        val toLocalTime = createdAt.toLocalTime()
-        val hour =
-            if (toLocalTime.hour / 10 >= 1) toLocalTime.hour.toString() else "0${toLocalTime.hour}"
-        val minutes =
-            if (toLocalTime.minute < 10) "0${toLocalTime.minute}" else toLocalTime.minute.toString()
+    object WithServer {
+        fun asStringOnlyDate(now: LocalDate): String {
+            val monthValue =
+                if (now.monthValue < 10) "0${now.monthValue}" else now.monthValue.toString()
+            return "${now.year}-${monthValue}-${now.dayOfMonth}"
+        }
 
-        return "$hour:$minutes"
+    }
+
+    object WithUser {
+        fun asStringOnlyDate(now: LocalDate): String {
+            val monthValue =
+                if (now.monthValue < 10) "0${now.monthValue}" else now.monthValue.toString()
+            return "${now.year.toString().substring(2)}.${monthValue}.${now.dayOfMonth}"
+        }
+
+        fun asStringOnlyTime(createdAt: LocalDateTime): String {
+            val toLocalTime = createdAt.toLocalTime()
+            val hour =
+                if (toLocalTime.hour / 10 >= 1) toLocalTime.hour.toString() else "0${toLocalTime.hour}"
+            val minutes =
+                if (toLocalTime.minute < 10) "0${toLocalTime.minute}" else toLocalTime.minute.toString()
+
+            return "$hour:$minutes"
+        }
     }
 }
