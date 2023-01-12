@@ -19,7 +19,7 @@ class MyDiaryRetriever @Inject constructor(
     override suspend fun getList(date: LocalDate) =
         CoroutineScope(Dispatchers.IO).async {
             val response = myDiaryConnection.getMyDiaries(
-                //DateUtil.asStringOnlyDate(date)
+                DateUtil.WithServer.asStringOnlyDate(date)
             )
 
             if (!response.isSuccessful()) {

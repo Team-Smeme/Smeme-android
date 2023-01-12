@@ -12,13 +12,20 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
+import com.sopt.smeme.Constants.Diary.Companion.DIARY
+import com.sopt.smeme.Constants.Diary.Companion.IS_PUBLIC
+import com.sopt.smeme.Constants.Diary.Companion.IS_TOPIC_SELECTED
+import com.sopt.smeme.Constants.Diary.Companion.SOURCE_DIARY
+import com.sopt.smeme.Constants.Diary.Companion.TOPIC
+import com.sopt.smeme.Constants.Diary.Companion.TRANSLATED_TEXT
 import com.sopt.smeme.R
 import com.sopt.smeme.business.viewmodel.Translator
 import com.sopt.smeme.business.viewmodel.mydiary.SourceDiaryMoonJiGi
 import com.sopt.smeme.business.viewmodel.mydiary.Topic
 import com.sopt.smeme.business.viewmodel.mydiary.TopicProvider
 import com.sopt.smeme.databinding.ActivityWriteStep1Binding
-import com.sopt.smeme.presentation.DiaryBooleanObserver
+import com.sopt.smeme.DiaryBooleanObserver
+import com.sopt.smeme.presentation.Diary
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -97,6 +104,7 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
 
                 // check 취소하는 경우
                 else {
+                    topicProvider.clear()
                     txtRandom.setTextColor(Color.parseColor("#A6A6A6"))
                     txtRandomTopic.visibility = View.GONE
                     btnRefresh.visibility = View.GONE
@@ -110,12 +118,11 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
                     txtRandom.setTextColor(Color.parseColor("#FE9870"))
                     txtRandomTopic.visibility = View.VISIBLE
                     btnRefresh.visibility = View.VISIBLE
-                    toStep2.putExtra("randomCheck", cbRandom.isChecked)
-                    Timber.d("isRandomChecked ${cbRandom.isChecked}")
                 }
 
                 // check 를 해제 하는 경우
                 else {
+                    topicProvider.clear()
                     cbRandom.isChecked = false
                     txtRandom.setTextColor(Color.parseColor("#A6A6A6"))
                     txtRandomTopic.visibility = View.GONE
@@ -182,22 +189,14 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
     private fun toStep2() {
         val toStep2 = Intent(this, WriteDiaryStep2Activity::class.java)
         binding.btnNext.setOnClickListener {
-            val topic = topicProvider.topic.value
-            val isPublic = binding.cbPublic.isChecked
-
-            if (topic != null) {
-                toStep2.putExtra("topic", topic)
-            } else {
-                toStep2.putExtra("topic", Topic("", 0))
-            }
-            toStep2.putExtra("isPublic", isPublic)
-            toStep2.putExtra("source diary", binding.etDiaryKorean.text.toString())
-            toStep2.putExtra("randomCheck", binding.cbRandom.isChecked)
-            toStep2.putExtra("publicCheck", binding.cbPublic.isChecked)
-
             translator.translate(binding.etDiaryKorean.text.toString(), onCompleted = {
-                Timber.d("액티비티에서의 결과 $it")
-                toStep2.putExtra("translated text", it)
+                toStep2.putExtra(DIARY, Diary(
+                    topic = topicProvider.topic.value ?: Topic("", 0),
+                    isPublic = binding.cbPublic.isChecked,
+                    sourceDiaryContent = binding.etDiaryKorean.text.toString(),
+                    isTopicSelected = binding.cbRandom.isChecked,
+                    translatedText = it
+                ))
                 startActivity(toStep2)
             }) {
                 runOnUiThread {

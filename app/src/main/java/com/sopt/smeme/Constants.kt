@@ -8,4 +8,15 @@ class Constants {
             }
         }
     }
+
+    class Diary {
+        companion object {
+            const val TOPIC = "topic"
+            const val IS_PUBLIC = "isPublic"
+            const val SOURCE_DIARY = "source diary"
+            const val IS_TOPIC_SELECTED = "random diary"
+            const val TRANSLATED_TEXT = "translated text"
+            const val DIARY = "diary"
+        }
+    }
 }

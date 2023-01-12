@@ -56,7 +56,7 @@ class MyDiaryHomeFragment @Inject constructor(
 
         // 오늘 날짜로 최초 화면 세팅 //
         targetDate = LocalDateTime.now().toLocalDate()
-        binding.txtDate.text = DateUtil.asStringOnlyDate(targetDate)
+        binding.txtDate.text = DateUtil.WithUser.asStringOnlyDate(targetDate)
         afterArrowAction()
 
         request()
@@ -194,7 +194,7 @@ class MyDiaryHomeFragment @Inject constructor(
     }
 
     private fun afterArrowAction() {
-        binding.txtDate.text = DateUtil.asStringOnlyDate(targetDate)
+        binding.txtDate.text = DateUtil.WithUser.asStringOnlyDate(targetDate)
         if (targetDate.isEqual(LocalDate.now())) {
             binding.icArrowRight.setImageResource(R.drawable.ic_arrow_right_inactive)
         } else if (targetDate.isBefore(LocalDate.now())) {
