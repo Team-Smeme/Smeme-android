@@ -10,6 +10,7 @@ import java.time.LocalDate
 interface MyDiaryConnection {
     @GET("/api/v1/users/diaries")
     suspend fun getMyDiaries(
-        @Query("date") date: String = DateUtil.asStringOnlyDate(LocalDate.now())
+        // @Query("date") date: String = DateUtil.asStringOnlyDate(LocalDate.now())
+    // @Query("date") date: String? = null
     ): DataResponse<MyDiaryData>
 }
