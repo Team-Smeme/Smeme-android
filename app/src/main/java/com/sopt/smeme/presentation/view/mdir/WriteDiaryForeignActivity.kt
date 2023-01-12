@@ -9,11 +9,13 @@ import android.text.style.StyleSpan
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.observe
 import com.sopt.smeme.R
 import com.sopt.smeme.business.viewmodel.ForeignViewModel
 import com.sopt.smeme.databinding.ActivityWriteForeignBinding
+import com.sopt.smeme.presentation.DiaryBooleanObserver
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WriteDiaryForeignActivity : AppCompatActivity() {
     private val foreignViewModel by viewModels<ForeignViewModel>()
 
@@ -99,14 +101,14 @@ class WriteDiaryForeignActivity : AppCompatActivity() {
     }
 
     private fun observeDiary() {
-        foreignViewModel.isDiarySuit.observe(this) {
+        foreignViewModel.isDiarySuit.observe(this, DiaryBooleanObserver {
             foreignViewModel.setCompleteState()
             if (foreignViewModel.isCompleteActive.value == true) {
                 binding.btnComplete.setTextColor(Color.parseColor("#171716"))
             } else {
                 binding.btnComplete.setTextColor(Color.parseColor("#BBBBBB"))
             }
-        }
+        })
     }
 
     private fun toHome() {
