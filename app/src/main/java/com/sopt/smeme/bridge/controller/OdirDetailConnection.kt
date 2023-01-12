@@ -14,8 +14,8 @@ import retrofit2.http.Path
 interface OdirDetailConnection {
     // detail
     @GET("/api/v1/diaries/{diaryId}")
-    fun getSelectedDiary(
-        @Path("diaryId") diaryId: Int? = null
+    suspend fun getSelectedDiary(
+        @Path("diaryId") diaryId: Int
     ): DataResponse<OdirDetailData>
 
     // scrap

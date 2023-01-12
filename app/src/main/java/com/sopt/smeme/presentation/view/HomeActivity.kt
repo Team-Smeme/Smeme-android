@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import com.sopt.smeme.R
 import com.sopt.smeme.databinding.ActivityHomeBinding
 import com.sopt.smeme.presentation.view.archive.ArchiveFragment
-import com.sopt.smeme.presentation.view.odir.OdirFragment
+import com.sopt.smeme.presentation.view.odir.OdirListFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,7 +45,7 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
         EXPLORE {
             override fun changeFragment(supportFragmentManager: FragmentManager, context: Context) {
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.home_container, OdirFragment(context))
+                    .replace(R.id.home_container, OdirListFragment(context))
                     .commit()
             }
         },

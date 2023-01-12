@@ -14,14 +14,14 @@ import com.sopt.smeme.business.viewmodel.opendiary.OdirDetailProvider
 import com.sopt.smeme.business.viewmodel.opendiary.OdirScrapProvider
 import com.sopt.smeme.databinding.ActivityOdirDetailBinding
 import com.sopt.smeme.presentation.view.ViewBoundActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class OdirDetailActivity :
     ViewBoundActivity<ActivityOdirDetailBinding>(R.layout.activity_odir_detail) {
 
     private val odirDetailProvider: OdirDetailProvider by viewModels()
     private val odirScrapProvider: OdirScrapProvider by viewModels()
-    private val diaryId = intent.getIntExtra("diaryId", -1)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +32,8 @@ class OdirDetailActivity :
     }
 
     override fun constructLayout() {
+        val diaryId = intent.getIntExtra("diaryId", -1)
+
         binding.tvDiaryOdirDetail.customSelectionActionModeCallback = actionModeCallback
         odirDetailProvider.requestGetDiary(
             diaryId,
@@ -47,8 +49,15 @@ class OdirDetailActivity :
 
     override fun observe() {
         odirDetailProvider.diary.observe(this) {
-
+            binding.tvDiaryOdirDetail.text = it.content
+            binding.tvTagOdirDetail.text = it.category
+            binding.tvQuestionOdirDetail.text = it.topic
+            binding.tvLikeOdirDetail.text =  it.likeCnt.toString()
+            binding.tvDateOdirDetail.text = it.createdAt
+            binding.tvNicknameOdirDetail.text = it.username
+            binding.tvDescriptionOdirDetail.text = it.bio
         }
+
     }
 
     private val actionModeCallback = object : ActionMode.Callback {
@@ -73,6 +82,8 @@ class OdirDetailActivity :
         }
 
         override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
+            val diaryId = intent.getIntExtra("diaryId", -1)
+
             return when (item.itemId) {
                 R.id.item_menu_clip -> {
                     val start = binding.tvDiaryOdirDetail.selectionStart
@@ -84,13 +95,16 @@ class OdirDetailActivity :
 //                        Snackbar.make(binding.root, selection, Snackbar.LENGTH_SHORT).show()
 //                    }
                     odirScrapProvider.requestSendScrap(
-                        diaryId!!.toInt(),
+                        diaryId,
                         selection,
                         onCompleted = {
-                            Snackbar.make(binding.root, "스크랩이 완료되었습니다.", Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(binding.root, "스크랩이 완료되었습니다.", Snackbar.LENGTH_SHORT)
+                                .show()
                         },
                         onError = {
-                            Toast.makeText(this@OdirDetailActivity, it!!.message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@OdirDetailActivity,
+                                it!!.message,
+                                Toast.LENGTH_SHORT).show()
                         }
                     )
                     true

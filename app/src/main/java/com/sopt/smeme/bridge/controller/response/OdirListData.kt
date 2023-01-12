@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class OdirListData(
-    val diaries: List<Detail> = emptyList()
+    val diaries: List<Detail> = emptyList(),
 ) {
     @Serializable
     data class Detail(
@@ -14,7 +14,7 @@ data class OdirListData(
         val likeCnt: Int,
         val userId: Int,
         val username: String,
-        val isSeen: Boolean,
+        var isSeen: Boolean,
         val hasLike: Boolean,
         val createdAt: String,
     ) : DateProvider {

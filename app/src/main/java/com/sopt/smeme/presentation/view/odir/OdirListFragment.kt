@@ -1,6 +1,7 @@
 package com.sopt.smeme.presentation.view.odir
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
-import com.google.android.material.snackbar.Snackbar
 import com.sopt.smeme.business.adaptor.OdirListAdapter
 import com.sopt.smeme.business.viewmodel.opendiary.CategoryProvider
 import com.sopt.smeme.business.viewmodel.opendiary.OdirListProvider
@@ -20,7 +20,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class OdirFragment @Inject constructor(
+class OdirListFragment @Inject constructor(
     @ApplicationContext context: Context,
 ) : Fragment() {
     private var _binding: FragmentOdirBinding? = null
@@ -59,8 +59,7 @@ class OdirFragment @Inject constructor(
                 Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
             }
         )
-
-        val adapter = OdirListAdapter(requireContext())
+        val adapter = OdirListAdapter(::navigateToDetail, requireContext())
         binding.rvDiaryOdir.adapter = adapter
         observe(adapter)
 
@@ -74,10 +73,6 @@ class OdirFragment @Inject constructor(
     fun listen() {
         binding.chipsCategoryOdir.setOnCheckedStateChangeListener { group, checkedIds ->
             val selectedChip: Chip = group.findViewById(group.checkedChipId)
-//            selectedChip.let {
-//                Snackbar.make(binding.root, selectedChip.text, Snackbar.LENGTH_SHORT).show()
-//            } ?: kotlin.run {
-//            }
             odirListProvider.requestGetList(
                 selectedChip.tag?.toString(),
                 onError = {
@@ -106,5 +101,12 @@ class OdirFragment @Inject constructor(
         chip.tag = tag
 
         return chip
+    }
+
+    private fun navigateToDetail(id: Int) {
+        val intent = Intent(requireContext(), OdirDetailActivity::class.java).apply {
+            putExtra("diaryId", id)
+        }
+        startActivity(intent)
     }
 }

@@ -27,7 +27,6 @@ class OdirListProvider @Inject constructor(
     ) {
         viewModelScope.launch {
             try {
-
                 val response = odirListConnection.getDiaries(category)
                 if (response.isSuccessful()) {
                     val result =
