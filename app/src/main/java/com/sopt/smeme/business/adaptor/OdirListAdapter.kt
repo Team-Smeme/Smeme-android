@@ -2,8 +2,10 @@ package com.sopt.smeme.business.adaptor
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.smeme.bridge.controller.response.OdirListData
 import com.sopt.smeme.databinding.ItemOdirBinding
@@ -20,6 +22,11 @@ class OdirListAdapter(
         private val binding: ItemOdirBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: OdirListData.Detail) {
+            if (data.isSeen) {
+                binding.tvDiaryOdir.setTextColor(Color.parseColor("#d2d2d2"))
+            } else {
+                binding.tvDiaryOdir.setTextColor(Color.parseColor("#171716"))
+            }
             binding.tvDiaryOdir.text = endWithDots(data.content)
             binding.tvLikeOdir.text = data.likeCnt.toString()
             binding.tvNameOdir.text = data.username

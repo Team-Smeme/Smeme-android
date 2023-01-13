@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:paddingTop="16dp"
-            app:layout_constraintBottom_toTopOf="@id/appbar_bottom_odir_detail"
+            app:layout_constraintBottom_toTopOf="@id/cl_appbar_bottom_odir_detail"
             app:layout_constraintTop_toBottomOf="@id/cl_appbar_top_odir_detail">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -177,8 +177,8 @@
             android:id="@+id/cl_appbar_bottom_odir_detail"
             android:layout_width="match_parent"
             android:layout_height="53dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@color/grey_1000w">
+            android:background="@color/grey_1000w"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <ToggleButton
                 android:id="@+id/btn_like_odir_detail"
@@ -216,7 +216,7 @@
                 android:textOn=""
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/appbar_bottom_odir_detail" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
