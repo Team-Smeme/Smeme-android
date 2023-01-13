@@ -3,10 +3,7 @@ package com.sopt.smeme.presentation.view.odir
 import android.R.id
 import android.content.Intent
 import android.os.Bundle
-import android.view.ActionMode
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import android.view.*
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.commit
@@ -116,7 +113,13 @@ class OdirDetailActivity :
             } else {
                 binding.tvTagOdirDetail.text = it.category
             }
-            binding.tvQuestionOdirDetail.text = "     " + it.topic
+            if(it.topic ==""){
+                binding.tvQuestionOdirDetail.visibility = View.GONE
+                binding.tvQuestionIconOdirDetail.visibility = View.GONE
+            }
+            else{
+                binding.tvQuestionOdirDetail.text = "     " + it.topic
+            }
             binding.tvLikeOdirDetail.text = it.likeCnt.toString()
             likeNum = it.likeCnt
             sourceDiary = it.content
