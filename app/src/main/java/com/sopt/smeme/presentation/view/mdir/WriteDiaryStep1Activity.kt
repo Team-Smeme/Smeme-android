@@ -90,6 +90,9 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
                     txtRandomTopic.visibility = View.VISIBLE
                     btnRefresh.visibility = View.VISIBLE
 
+                    toStep2.putExtra("randomCheck", isChecked)
+                    Timber.d("isRandomChecked $isChecked")
+
                     topicProvider.getRandomTopic {
                         runOnUiThread {
                             Timber.e(it.message)
@@ -108,6 +111,9 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
                     txtRandom.setTextColor(Color.parseColor("#A6A6A6"))
                     txtRandomTopic.visibility = View.GONE
                     btnRefresh.visibility = View.GONE
+
+                    toStep2.putExtra("randomCheck", isChecked)
+                    Timber.d("isRandomChecked $isChecked")
                 }
             }
 
@@ -143,6 +149,7 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
                     toStep2.putExtra("publicCheck", isChecked)
                 }
             }
+
             layoutPublic.setOnClickListener {
                 // public check 하는 경우
                 if (!cbPublic.isChecked) {

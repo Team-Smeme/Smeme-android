@@ -183,7 +183,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="1dp"
                     android:text="랜덤 주제"
                     android:textAppearance="@style/TextAppearance.Body2"
                     android:textColor="@color/grey_600"
@@ -203,10 +202,9 @@
 
                 <CheckBox
                     android:id="@+id/cb_public"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
                     android:layout_alignParentStart="true"
-                    android:layout_marginTop="3dp"
                     android:background="@drawable/custom_checkbox"
                     android:button="@null"
                     android:checked="true" />
@@ -219,8 +217,8 @@
                     android:layout_marginTop="1dp"
                     android:text="공개"
                     android:textAppearance="@style/TextAppearance.Body2"
-                    android:textColor="#FE9870"
-                   />
+                    android:textColor="@color/primary"
+                    />
             </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
