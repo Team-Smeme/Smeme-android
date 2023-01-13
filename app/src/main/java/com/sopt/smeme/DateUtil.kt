@@ -16,7 +16,7 @@ object DateUtil {
                 yyyyMMddHHmm.substring(8, 10).toInt(),
                 yyyyMMddHHmm.substring(11, 13).toInt(),
                 yyyyMMddHHmm.substring(14).toInt()
-            )
+            ).plusHours(9)
         }
 
         throw IllegalArgumentException("wrong date format")

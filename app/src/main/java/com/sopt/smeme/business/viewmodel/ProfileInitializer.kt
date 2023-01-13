@@ -2,6 +2,7 @@ package com.sopt.smeme.business.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sopt.smeme.SmemeException
 import com.sopt.smeme.bridge.agent.InjectWay
 import com.sopt.smeme.bridge.agent.Way
 import com.sopt.smeme.bridge.agent.user.ProfileEditAgent
@@ -36,8 +37,7 @@ class ProfileInitializer @Inject constructor(
                     onError
                 )
             } catch (t: Throwable) {
-                onError(t)
-                Timber.e(t)
+                if (t is SmemeException) onError.invoke(t)
             }
         }
     }

@@ -35,7 +35,7 @@ class DiaryAgent @Inject constructor(
                 throw SmemeException(response.status, response.message)
             }
         } catch (t: Throwable) {
-            onError.invoke(t)
+            if (t is SmemeException) onError.invoke(t)
         }
     }
 }

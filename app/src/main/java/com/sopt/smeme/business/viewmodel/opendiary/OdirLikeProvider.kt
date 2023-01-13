@@ -32,11 +32,8 @@ class OdirLikeProvider @Inject constructor(
                 val response = odirLikeSender.sendLike(id)
                 _likeResult.value = response
                 onCompleted.invoke()
-            } catch (e: SmemeException) {
-                onError.invoke(e)
-            } catch (e: HttpException) {
-                onError.invoke(e)
             } catch (t: Throwable) {
+                if (t is SmemeException) onError.invoke(t)
                 Timber.e(t)
             }
         }

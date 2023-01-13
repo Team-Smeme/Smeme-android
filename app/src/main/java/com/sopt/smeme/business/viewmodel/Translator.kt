@@ -3,6 +3,7 @@ package com.sopt.smeme.business.viewmodel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.sopt.smeme.BuildConfig
+import com.sopt.smeme.SmemeException
 import com.sopt.smeme.bridge.controller.PapagoAPI
 import com.sopt.smeme.bridge.controller.TranslateResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -44,7 +45,7 @@ class Translator @Inject constructor(
             }
 
             override fun onFailure(call: Call<TranslateResult>, t: Throwable) {
-                onError.invoke(t)
+                if (t is SmemeException) onError.invoke(t)
             }
         })
     }

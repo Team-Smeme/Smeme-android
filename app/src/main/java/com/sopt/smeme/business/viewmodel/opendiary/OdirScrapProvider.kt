@@ -33,12 +33,8 @@ class OdirScrapProvider @Inject constructor(
                 val response = odirScrapSender.sendScrap(id, paragraph)
                 _scrapResult.value = response
                 onCompleted.invoke()
-            } catch (e: SmemeException) {
-                onError.invoke(e)
-            } catch (e: HttpException) {
-                onError.invoke(e)
             } catch (t: Throwable) {
-                Timber.e(t)
+                if (t is SmemeException) onError.invoke(t)
             }
         }
     }

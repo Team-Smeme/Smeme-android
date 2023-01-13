@@ -35,7 +35,7 @@ class MyDiaryHomeFragment @Inject constructor(
     private var _binding: FragmentMyDiaryBinding? = null
     private val binding get() = requireNotNull(_binding) { "Error exist on MyDiaryHomeFragment" }
     private var isFabOpen = false
-    private var targetDate: LocalDate = LocalDate.now()
+    private var targetDate: LocalDate = LocalDateTime.now().minusHours(9).toLocalDate() // TODO
 
     private val myDiaryProvider: MyDiaryProvider by viewModels()
 
@@ -56,7 +56,7 @@ class MyDiaryHomeFragment @Inject constructor(
         binding.rvMyDiary.adapter = adapter
 
         // 오늘 날짜로 최초 화면 세팅 //
-        targetDate = LocalDateTime.now().toLocalDate()
+        targetDate = LocalDateTime.now().minusHours(9).toLocalDate() // TODO
         binding.txtDate.text = DateUtil.WithUser.asStringOnlyDate(targetDate)
         afterArrowAction()
 

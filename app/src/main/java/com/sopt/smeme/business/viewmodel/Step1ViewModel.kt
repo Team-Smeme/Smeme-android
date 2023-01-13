@@ -7,6 +7,7 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.kakao.sdk.auth.Constants.CLIENT_ID
 import com.sopt.smeme.BuildConfig
+import com.sopt.smeme.SmemeException
 import com.sopt.smeme.TextUtil
 import com.sopt.smeme.bridge.controller.PapagoAPI
 import com.sopt.smeme.bridge.controller.TranslateResult
@@ -60,7 +61,7 @@ class Step1ViewModel @Inject constructor(
             }
 
             override fun onFailure(call: Call<TranslateResult>, t: Throwable) {
-                onError.invoke(t)
+                if (t is SmemeException) onError.invoke(t)
             }
         })
     }

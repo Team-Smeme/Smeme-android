@@ -19,7 +19,7 @@ class ArchiveRemover @Inject constructor(
 
                 if(!response.isSuccessful()) throw SmemeException(500, "서버에서 처리하지 못한 요청입니다.")
             } catch (t: Throwable) {
-                onError.invoke(t)
+                if (t is SmemeException) onError.invoke(t)
             }
         }
     }

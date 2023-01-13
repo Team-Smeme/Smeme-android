@@ -38,7 +38,7 @@ class OdirDetailProvider @Inject constructor(
                 }
                 // etc error
             } catch (t: Throwable) {
-                onError.invoke(t)
+                if (t is SmemeException) onError.invoke(t)
             }
         }
     }

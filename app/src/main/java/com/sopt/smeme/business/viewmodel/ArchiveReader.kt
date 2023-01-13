@@ -32,7 +32,7 @@ class ArchiveReader @Inject constructor(
                     )
                 }
             } catch (t: Throwable) {
-                onError.invoke(t)
+                if (t is SmemeException) onError.invoke(t)
             }
         }
     }
