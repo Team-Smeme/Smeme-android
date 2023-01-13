@@ -14,7 +14,7 @@ import com.sopt.smeme.business.viewmodel.mydiary.DeleteMdir
 import com.sopt.smeme.business.viewmodel.mydiary.MdirDetailProvider
 import com.sopt.smeme.databinding.ActivityMyDiaryDetailBinding
 import com.sopt.smeme.presentation.view.ViewBoundActivity
-import com.sopt.smeme.presentation.view.home.MyDiaryHomeFragment
+import com.sopt.smeme.presentation.view.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,6 +49,7 @@ class MdirDetailActivity :
     override fun listen() {
         super.listen()
         binding.btnBackMdirDetail.setOnClickListener {
+            startActivity(Intent(this,HomeActivity::class.java))
             finish()
         }
     }
@@ -57,11 +58,10 @@ class MdirDetailActivity :
         mdirDetailProvider.diary.observe(this) {
             binding.tvDiaryMdirDetail.text = it.content
             binding.tvTagMdirDetail.text = if (it.category.isEmpty()) "일상" else it.category
-            if (it.category == "일상"){
-                binding.tvTagMdirDetail.visibility = View.GONE
+            if (it.topicId.toString() == "0") {
+                binding.tvQuestionMdirDetail.visibility = View.GONE
                 binding.tvQuestionIconMdirDetail.visibility = View.GONE
-            }
-            else{
+            } else {
                 binding.tvQuestionMdirDetail.text = "     " + it.topic
             }
             binding.tvLikeNumber.text = it.likeCnt.toString() + " 개의 추천"
@@ -103,21 +103,27 @@ class MdirDetailActivity :
             .setCancelable(false)
             .setNegativeButton("아니오", object : DialogInterface.OnClickListener {
                 override fun onClick(p0: DialogInterface?, p1: Int) {
-                    Toast.makeText(this@MdirDetailActivity,"삭제를 취소합니다",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MdirDetailActivity, "삭제를 취소합니다", Toast.LENGTH_SHORT).show()
                 }
             })
             .setPositiveButton("예", object : DialogInterface.OnClickListener {
                 override fun onClick(p0: DialogInterface?, p1: Int) {
-                    val diaryId = intent.getLongExtra("diaryId",-1).toString()
+                    val diaryId = intent.getLongExtra("diaryId", -1).toString()
 
                     if (diaryId != null) {
                         deleteMdir.deleteDiary(
                             diaryId,
                             onError = {
-                                Toast.makeText(this@MdirDetailActivity, it.message, Toast.LENGTH_SHORT)
+                                Toast.makeText(
+                                    this@MdirDetailActivity,
+                                    it.message,
+                                    Toast.LENGTH_SHORT
+                                )
                                     .show()
                             }
                         )
+                        startActivity(Intent(this@MdirDetailActivity,HomeActivity::class.java))
+                        finish()
                     }
                 }
 
