@@ -62,7 +62,9 @@ class OdirDetailActivity :
                 putExtra("bnvMenu", "둘러보기")
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
+
             startActivity(intent)
+            finish()
         }
 
         binding.btnHintOdirDetail.setOnClickListener {

@@ -49,7 +49,7 @@ class MdirDetailActivity :
     override fun listen() {
         super.listen()
         binding.btnBackMdirDetail.setOnClickListener {
-            startActivity(Intent(this,HomeActivity::class.java))
+            startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }
     }
@@ -122,7 +122,7 @@ class MdirDetailActivity :
                                     .show()
                             }
                         )
-                        startActivity(Intent(this@MdirDetailActivity,HomeActivity::class.java))
+                        startActivity(Intent(this@MdirDetailActivity, HomeActivity::class.java))
                         finish()
                     }
                 }

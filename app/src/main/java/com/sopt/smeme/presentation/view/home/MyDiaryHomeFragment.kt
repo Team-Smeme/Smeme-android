@@ -186,7 +186,6 @@ class MyDiaryHomeFragment @Inject constructor(
 
 
     private fun checkMyDiaryExist(adaptor: MyDiaryAdaptor) {
-        val itemCount = adaptor.itemCount
         if (adaptor.itemCount > 0) {
             binding.rvMyDiary.visibility = View.VISIBLE
             binding.txtNoDiary.visibility = View.GONE
