@@ -2,6 +2,7 @@ package com.sopt.smeme.presentation.view.welcome
 
 import android.content.Intent
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.sopt.smeme.EventObserver
 import com.sopt.smeme.R
@@ -16,6 +17,10 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class SplashActivity : ViewBoundActivity<ActivitySplashBinding>(R.layout.activity_splash) {
     private val splashCaller: SplashViewModel by viewModels()
+
+    override fun constructLayout() {
+        window.statusBarColor = ContextCompat.getColor(this, R.color.background)
+    }
 
     override fun listen() {
         splashCaller.isSignedUser.observe(this, EventObserver { isSigned ->
