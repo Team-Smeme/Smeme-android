@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnSecondary">@color/secondary</item>
         <item name="colorAccent">@color/white</item>
-        
+
         <item name="shapeAppearanceSmallComponent">@style/AppShapeAppearance.SmallComponent</item>
     </style>
 
@@ -30,21 +31,17 @@
 
     <style name="Widget.App.Chip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="elevationOverlayEnabled">false</item>
+        <item name="itemShapeAppearance">@drawable/rectangle_primary_radius_8</item>
         <item name="android:textAppearance">@style/TextAppearance.Body1</item>
         <item name="chipStartPadding">12dp</item>
         <item name="chipEndPadding">12dp</item>
-<!--        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Chip.Choice</item>-->
     </style>
 
-<!--    <style name="ThemeOverlay.App.Chip.Choice" parent="">-->
-
-<!--        <item name="android:textAppearance">@style/TextAppearance.Subtitle2</item>-->
-<!--    </style>-->
 
     <style name="Widget.App.ChipGroup" parent="Widget.MaterialComponents.ChipGroup">
         <item name="android:singleLine">true</item>
         <item name="singleSelection">true</item>
-        <item name="selectionRequired">true</item>\
+        <item name="selectionRequired">true</item>
         <item name="chipSpacingHorizontal">3dp</item>
     </style>
 
