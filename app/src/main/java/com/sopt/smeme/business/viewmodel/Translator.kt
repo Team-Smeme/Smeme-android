@@ -17,11 +17,13 @@ class Translator @Inject constructor(
 ) : ViewModel() {
     fun translate(
         text: String,
+        sourceCode: String,
+        targetCode: String,
         onCompleted: (String) -> Unit = {},
         onError: (Throwable) -> Unit = {}
     ) {
         papagoAPI.transferPapago(
-            "ko", "en", text,
+            sourceCode, targetCode, text,
             BuildConfig.CLIENT_ID, BuildConfig.CLIENT_SECRET
         ).enqueue(object : Callback<TranslateResult> {
             override fun onResponse(
@@ -33,7 +35,6 @@ class Translator @Inject constructor(
 
                     if (result != null) {
                         onCompleted.invoke(result)
-                        Log.d("번역 성공", "변역된 일기:$result")
                     } else {
                         throw IllegalStateException("TODO : change to SmemeException")
                     }

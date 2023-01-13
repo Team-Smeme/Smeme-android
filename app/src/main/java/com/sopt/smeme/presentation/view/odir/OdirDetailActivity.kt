@@ -11,6 +11,7 @@ import androidx.activity.viewModels
 import com.google.android.material.snackbar.Snackbar
 import com.sopt.smeme.DateUtil
 import com.sopt.smeme.R
+import com.sopt.smeme.business.viewmodel.Translator
 import com.sopt.smeme.business.viewmodel.opendiary.OdirDetailProvider
 import com.sopt.smeme.business.viewmodel.opendiary.OdirLikeProvider
 import com.sopt.smeme.business.viewmodel.opendiary.OdirScrapProvider
@@ -26,6 +27,9 @@ class OdirDetailActivity :
     private val odirScrapProvider: OdirScrapProvider by viewModels()
     private val odirLikeProvider: OdirLikeProvider by viewModels()
     private var likeNum: Int = 0
+    private var sourceDiary: String = ""
+
+    private val translator: Translator by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +43,7 @@ class OdirDetailActivity :
         val diaryId = intent.getIntExtra("diaryId", -1)
 
         binding.tvDiaryOdirDetail.customSelectionActionModeCallback = actionModeCallback
-        
+
         odirDetailProvider.requestGetDiary(
             diaryId,
             onError = {
@@ -50,9 +54,31 @@ class OdirDetailActivity :
 
     override fun listen() {
         val diaryId = intent.getIntExtra("diaryId", -1)
-        binding.btnHintOdirDetail.setOnClickListener {
 
+        binding.btnHintOdirDetail.setOnClickListener {
+            if (binding.btnHintOdirDetail.isChecked) {
+                translator.translate(
+                    text = binding.tvDiaryOdirDetail.text.toString(),
+                    sourceCode = "en",
+                    targetCode = "ko",
+                    onCompleted = {
+                        binding.tvDiaryOdirDetail.text = it
+                    },
+                    onError = {
+                        runOnUiThread {
+                            Toast.makeText(
+                                this,
+                                "${it.message} 번역과정중 에러가 발생했습니다.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                )
+            } else {
+                binding.tvDiaryOdirDetail.text = sourceDiary
+            }
         }
+
         binding.btnLikeOdirDetail.setOnClickListener {
             val btn = binding.btnLikeOdirDetail
             binding.tvLikeOdirDetail.text = (likeNum + 1).toString()
@@ -80,6 +106,7 @@ class OdirDetailActivity :
             binding.tvQuestionOdirDetail.text = "     " + it.topic
             binding.tvLikeOdirDetail.text = it.likeCnt.toString()
             likeNum = it.likeCnt
+            sourceDiary = it.content
             binding.tvDateOdirDetail.text = DateUtil.asString(it.createdAt())
             binding.tvNicknameOdirDetail.text = it.username
             binding.tvDescriptionOdirDetail.text = it.bio
@@ -131,9 +158,11 @@ class OdirDetailActivity :
                                 .show()
                         },
                         onError = {
-                            Toast.makeText(this@OdirDetailActivity,
+                            Toast.makeText(
+                                this@OdirDetailActivity,
                                 it!!.message,
-                                Toast.LENGTH_SHORT).show()
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     )
                     true

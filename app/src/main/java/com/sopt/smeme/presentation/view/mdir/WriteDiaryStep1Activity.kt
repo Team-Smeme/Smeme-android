@@ -13,18 +13,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import com.sopt.smeme.Constants.Diary.Companion.DIARY
-import com.sopt.smeme.Constants.Diary.Companion.IS_PUBLIC
-import com.sopt.smeme.Constants.Diary.Companion.IS_TOPIC_SELECTED
-import com.sopt.smeme.Constants.Diary.Companion.SOURCE_DIARY
-import com.sopt.smeme.Constants.Diary.Companion.TOPIC
-import com.sopt.smeme.Constants.Diary.Companion.TRANSLATED_TEXT
+import com.sopt.smeme.DiaryBooleanObserver
 import com.sopt.smeme.R
 import com.sopt.smeme.business.viewmodel.Translator
 import com.sopt.smeme.business.viewmodel.mydiary.SourceDiaryMoonJiGi
 import com.sopt.smeme.business.viewmodel.mydiary.Topic
 import com.sopt.smeme.business.viewmodel.mydiary.TopicProvider
 import com.sopt.smeme.databinding.ActivityWriteStep1Binding
-import com.sopt.smeme.DiaryBooleanObserver
 import com.sopt.smeme.presentation.Diary
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -196,16 +191,22 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
     private fun toStep2() {
         val toStep2 = Intent(this, WriteDiaryStep2Activity::class.java)
         binding.btnNext.setOnClickListener {
-            translator.translate(binding.etDiaryKorean.text.toString(), onCompleted = {
-                toStep2.putExtra(DIARY, Diary(
-                    topic = topicProvider.topic.value ?: Topic("", 0),
-                    isPublic = binding.cbPublic.isChecked,
-                    sourceDiaryContent = binding.etDiaryKorean.text.toString(),
-                    isTopicSelected = binding.cbRandom.isChecked,
-                    translatedText = it
-                ))
-                startActivity(toStep2)
-            }) {
+            translator.translate(
+                text = binding.etDiaryKorean.text.toString(),
+                sourceCode = "ko",
+                targetCode = "en",
+                onCompleted = {
+                    toStep2.putExtra(
+                        DIARY, Diary(
+                            topic = topicProvider.topic.value ?: Topic("", 0),
+                            isPublic = binding.cbPublic.isChecked,
+                            sourceDiaryContent = binding.etDiaryKorean.text.toString(),
+                            isTopicSelected = binding.cbRandom.isChecked,
+                            translatedText = it
+                        )
+                    )
+                    startActivity(toStep2)
+                }) {
                 runOnUiThread {
                     Toast.makeText(this, "번역과정중 에러가 발생했습니다.", Toast.LENGTH_SHORT).show()
                 }
