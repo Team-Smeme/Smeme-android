@@ -15,12 +15,16 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
 
     override fun constructLayout() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.home_container)
-        if (currentFragment == null) {
+        if (currentFragment == null && intent.getStringExtra("bnvMenu") != "둘러보기") {
             supportFragmentManager.beginTransaction()
                 .add(R.id.home_container, MyDiaryHomeFragment(this))
                 .commit()
+        } else if (intent.getStringExtra("bnvMenu") == "둘러보기") {
+            intent.putExtra("bnvMenu", "")
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.home_container, OdirListFragment(this))
+                .commit()
         }
-
     }
 
     override fun listen() {

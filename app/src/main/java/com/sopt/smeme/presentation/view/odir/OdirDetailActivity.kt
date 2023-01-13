@@ -1,6 +1,7 @@
 package com.sopt.smeme.presentation.view.odir
 
 import android.R.id
+import android.content.Intent
 import android.os.Bundle
 import android.view.ActionMode
 import android.view.Menu
@@ -8,6 +9,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.google.android.material.snackbar.Snackbar
 import com.sopt.smeme.DateUtil
 import com.sopt.smeme.R
@@ -17,6 +20,8 @@ import com.sopt.smeme.business.viewmodel.opendiary.OdirLikeProvider
 import com.sopt.smeme.business.viewmodel.opendiary.OdirScrapProvider
 import com.sopt.smeme.databinding.ActivityOdirDetailBinding
 import com.sopt.smeme.presentation.view.ViewBoundActivity
+import com.sopt.smeme.presentation.view.home.HomeActivity
+import com.sopt.smeme.presentation.view.home.MyDiaryHomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,6 +59,14 @@ class OdirDetailActivity :
 
     override fun listen() {
         val diaryId = intent.getIntExtra("diaryId", -1)
+
+        binding.btnBackOdirDetail.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java).apply {
+                putExtra("bnvMenu", "둘러보기")
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            startActivity(intent)
+        }
 
         binding.btnHintOdirDetail.setOnClickListener {
             if (binding.btnHintOdirDetail.isChecked) {
