@@ -64,6 +64,9 @@ class MdirDetailActivity :
             } else {
                 binding.tvQuestionMdirDetail.text = "     " + it.topic
             }
+            if (!it.isPublic){ binding.tvLikeNumber.visibility = View.GONE
+                binding.btnLikeMdirDetail.visibility = View.GONE
+            }
             binding.tvLikeNumber.text = it.likeCnt.toString() + " 개의 추천"
             binding.tvDateMdirDetail.text = it.createdAt
             if (it.isPublic) {

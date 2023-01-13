@@ -37,6 +37,7 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
         observeDiary()
         showHint(diary)
         listen()
+        setOnClickCheckBox()
     }
 
     fun constructLayout() {
@@ -76,7 +77,7 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
                 topicId = diary.topic.id,
                 content = binding.etDiaryEnglish.text.toString(),
                 languageCode = "en", // TODO
-                isPublic = diary.isPublic,
+                isPublic = binding.cbPublic.isChecked,
                 onCompleted = {
                     startActivity(Intent(this, HomeActivity::class.java))
                     finish()
@@ -115,6 +116,24 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
                 binding.btnComplete.setTextColor(Color.parseColor("#171716"))
             } else {
                 binding.btnComplete.setTextColor(Color.parseColor("#BBBBBB"))
+            }
+        }
+    }
+
+    private fun setOnClickCheckBox(){
+        with(binding){
+            layoutPublic.setOnClickListener {
+                // public check 하는 경우
+                if (!cbPublic.isChecked) {
+                    cbPublic.isChecked = true
+                    txtPublic.setTextColor(Color.parseColor("#FE9870"))
+                }
+
+                // public check 해제하는 경우
+                else {
+                    cbPublic.isChecked = false
+                    txtPublic.setTextColor(Color.parseColor("#A6A6A6"))
+                }
             }
         }
     }

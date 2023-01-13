@@ -207,36 +207,40 @@
             android:textAppearance="@style/TextAppearance.Body2"
             android:textColor="@color/grey_600"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/cb_public"
+            app:layout_constraintEnd_toStartOf="@id/layout_public"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <CheckBox
-            android:id="@+id/cb_public"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginRight="4dp"
-            android:background="@drawable/custom_checkbox"
-            android:button="@null"
-            android:enabled="false"
-            app:layout_constraintBottom_toBottomOf="@id/txt_public"
-            app:layout_constraintEnd_toStartOf="@id/txt_public"
-            app:layout_constraintTop_toTopOf="@id/txt_public" />
-
-        <TextView
-            android:id="@+id/txt_public"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/layout_public"
+            android:layout_width="45dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="12dp"
+            android:layout_marginEnd="24dp"
             android:paddingVertical="18dp"
-            android:paddingRight="12dp"
-            android:text="공개"
-            android:enabled="false"
-            android:textAppearance="@style/TextAppearance.Body2"
-            android:textColor="@color/grey_600"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <CheckBox
+                android:id="@+id/cb_public"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginTop="4dp"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/custom_checkbox"
+                android:button="@null"
+                android:checked="true" />
+
+            <TextView
+                android:id="@+id/txt_public"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="1dp"
+                android:text="공개"
+                android:textAppearance="@style/TextAppearance.Body2"
+                android:textColor="@color/primary"
+                />
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
