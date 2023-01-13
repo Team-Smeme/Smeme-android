@@ -158,7 +158,7 @@ class MyDiaryHomeFragment @Inject constructor(
                 fabForeign.visibility = View.VISIBLE
                 fabKorean.visibility = View.VISIBLE
                 background.visibility = View.VISIBLE
-                (activity as HomeActivity).changeBackgroundColor("#4D000000")
+
                 (activity as HomeActivity).window.statusBarColor = Color.parseColor("#4D000000")
                 background.setOnClickListener(null)
                 (activity as HomeActivity).binding.viewBnv.visibility = View.VISIBLE
