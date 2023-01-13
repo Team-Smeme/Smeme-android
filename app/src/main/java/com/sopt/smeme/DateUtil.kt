@@ -39,7 +39,7 @@ object DateUtil {
     }
 
     object WithUser {
-        fun asStringOnlyDate(now: LocalDate): String {
+        fun asStringOnlyDate(now: LocalDateTime): String {
             val monthValue =
                 if (now.monthValue < 10) "0${now.monthValue}" else now.monthValue.toString()
             return "${now.year.toString().substring(2)}.${monthValue}.${now.dayOfMonth}"

@@ -35,7 +35,7 @@ class MyDiaryHomeFragment @Inject constructor(
     private var _binding: FragmentMyDiaryBinding? = null
     private val binding get() = requireNotNull(_binding) { "Error exist on MyDiaryHomeFragment" }
     private var isFabOpen = false
-    private var targetDate: LocalDate = LocalDateTime.now().minusHours(9).toLocalDate() // TODO
+    private var targetDate: LocalDateTime = LocalDateTime.now() // TODO
 
     private val myDiaryProvider: MyDiaryProvider by viewModels()
 
@@ -56,7 +56,7 @@ class MyDiaryHomeFragment @Inject constructor(
         binding.rvMyDiary.adapter = adapter
 
         // 오늘 날짜로 최초 화면 세팅 //
-        targetDate = LocalDateTime.now().minusHours(9).toLocalDate() // TODO
+        targetDate = LocalDateTime.now() // TODO
         binding.txtDate.text = DateUtil.WithUser.asStringOnlyDate(targetDate)
         afterArrowAction()
 
@@ -82,7 +82,7 @@ class MyDiaryHomeFragment @Inject constructor(
         }
 
         binding.icArrowRight.setOnClickListener {
-            if (targetDate.isBefore(LocalDate.now())) {
+            if (targetDate.isBefore(LocalDateTime.now())) {
                 targetDate = targetDate.plusDays(1)
                 request2Server()
                 afterArrowAction()
@@ -92,7 +92,7 @@ class MyDiaryHomeFragment @Inject constructor(
 
     private fun request2Server() {
         myDiaryProvider.requestGetList(
-            targetDate,
+            targetDate.minusHours(9).toLocalDate(),
             onError = {
                 if (it == null) {
                     Toast.makeText(context, "잘못된 접근입니다.", Toast.LENGTH_SHORT).show()
@@ -198,9 +198,9 @@ class MyDiaryHomeFragment @Inject constructor(
 
     private fun afterArrowAction() {
         binding.txtDate.text = DateUtil.WithUser.asStringOnlyDate(targetDate)
-        if (targetDate.isEqual(LocalDate.now())) {
+        if (targetDate.isEqual(LocalDateTime.now())) {
             binding.icArrowRight.setImageResource(R.drawable.ic_arrow_right_inactive)
-        } else if (targetDate.isBefore(LocalDate.now())) {
+        } else if (targetDate.isBefore(LocalDateTime.now())) {
             binding.icArrowRight.setImageResource(R.drawable.ic_arrow_right)
         }
     }
