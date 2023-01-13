@@ -172,11 +172,12 @@
 
                 <CheckBox
                     android:id="@+id/cb_random"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginTop="3dp"
                     android:layout_alignParentStart="true"
                     android:background="@drawable/custom_checkbox"
-                    android:layout_marginTop="3dp" />
+                    android:button="@null" />
 
                 <TextView
                     android:id="@+id/txt_random"
@@ -204,6 +205,7 @@
                     android:id="@+id/cb_public"
                     android:layout_width="14dp"
                     android:layout_height="14dp"
+                    android:layout_marginTop="3dp"
                     android:layout_alignParentStart="true"
                     android:background="@drawable/custom_checkbox"
                     android:button="@null"
