@@ -9,8 +9,8 @@ import com.sopt.smeme.bridge.agent.InjectWay
 import com.sopt.smeme.bridge.agent.Way
 import com.sopt.smeme.business.viewmodel.Receptionist
 import com.sopt.smeme.databinding.ActivityOnBoardingBinding
-import com.sopt.smeme.presentation.view.home.HomeActivity
 import com.sopt.smeme.presentation.view.ViewBoundActivity
+import com.sopt.smeme.presentation.view.home.HomeActivity
 import com.sopt.smeme.system.storage.LocalStorage
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

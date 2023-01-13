@@ -21,6 +21,7 @@ import com.sopt.smeme.business.viewmodel.mydiary.Topic
 import com.sopt.smeme.business.viewmodel.mydiary.TopicProvider
 import com.sopt.smeme.databinding.ActivityWriteForeignBinding
 import com.sopt.smeme.presentation.Diary
+import com.sopt.smeme.presentation.view.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 

@@ -7,10 +7,11 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
+import com.sopt.smeme.Constants
 import com.sopt.smeme.business.viewmodel.mydiary.DiaryRegister
 import com.sopt.smeme.business.viewmodel.mydiary.EnglishDiaryMoonJiGi
-import com.sopt.smeme.business.viewmodel.mydiary.Topic
 import com.sopt.smeme.databinding.ActivityWriteStep2Binding
+import com.sopt.smeme.presentation.Diary
 import com.sopt.smeme.presentation.view.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,12 +29,13 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityWriteStep2Binding.inflate(layoutInflater)
         setContentView(binding.root)
-        val sourceDiary = intent.getStringExtra("source diary") ?: ""
+
+        val diary = intent.getSerializableExtra(Constants.Diary.DIARY) as Diary
 
         constructLayout()
-        setCheckBoxStateFromStep1(sourceDiary)
+        setCheckBoxStateFromStep1(diary)
         observeDiary()
-        showHint(sourceDiary)
+        showHint(diary)
         listen()
     }
 
@@ -44,26 +46,23 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
     }
 
 
-    private fun setCheckBoxStateFromStep1(source: String) {
-        binding.txtHint.text = source
-        binding.cbRandom.isChecked = intent.getBooleanExtra("randomCheck", false)
-        binding.cbRandom.isChecked = intent.getBooleanExtra("publicCheck", false)
+    private fun setCheckBoxStateFromStep1(diary: Diary) {
+        binding.txtHint.text = diary.sourceDiaryContent
+        binding.cbPublic.isChecked = diary.isPublic
+        binding.cbRandom.isChecked = diary.isTopicSelected
 
+        if (diary.isTopicSelected) {
+            binding.txtRandom.setTextColor(Color.parseColor("#FE9870"))
+        } else {
+            binding.txtRandom.setTextColor(Color.parseColor("#A6A6A6"))
+        }
+
+        if (diary.isPublic) {
+            binding.txtPublic.setTextColor(Color.parseColor("#FE9870"))
+        } else {
+            binding.txtPublic.setTextColor(Color.parseColor("#A6A6A6"))
+        }
         with(binding) {
-            cbRandom.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    txtRandom.setTextColor(Color.parseColor("#FE9870"))
-                } else {
-                    txtRandom.setTextColor(Color.parseColor("#A6A6A6"))
-                }
-            }
-            cbPublic.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    txtPublic.setTextColor(Color.parseColor("#FE9870"))
-                } else {
-                    txtPublic.setTextColor(Color.parseColor("#A6A6A6"))
-                }
-            }
             btnBack.setOnClickListener {
                 finish()
             }
@@ -72,14 +71,12 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
 
     fun listen() {
         binding.btnComplete.setOnClickListener {
-            val topic = intent.getSerializableExtra("topic") as Topic
-            val isPublic = intent.getBooleanExtra("isPublic", true)
-
+            val diary = intent.getSerializableExtra(Constants.Diary.DIARY) as Diary
             diaryRegister.completeWriting(
-                topicId = topic.id,
+                topicId = diary.topic.id,
                 content = binding.etDiaryEnglish.text.toString(),
                 languageCode = "en", // TODO
-                isPublic = isPublic,
+                isPublic = diary.isPublic,
                 onCompleted = {
                     startActivity(Intent(this, HomeActivity::class.java))
                     finish()
@@ -98,15 +95,14 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
     }
 
 
-    private fun showHint(source: String) {
-        val translatedDiary = intent.getStringExtra("translated text")
+    private fun showHint(diary: Diary) {
         binding.btnHint.setOnClickListener {
             if (binding.btnHint.isChecked) {
-                binding.txtHint.text = translatedDiary
+                binding.txtHint.text = diary.translatedText
             }
             // 번역을 해제하는 경우
             else {
-                binding.txtHint.text = source
+                binding.txtHint.text = diary.sourceDiaryContent
             }
 
         }

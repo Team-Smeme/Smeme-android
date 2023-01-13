@@ -7,8 +7,8 @@ import com.sopt.smeme.EventObserver
 import com.sopt.smeme.R
 import com.sopt.smeme.business.viewmodel.SplashViewModel
 import com.sopt.smeme.databinding.ActivitySplashBinding
-import com.sopt.smeme.presentation.view.home.HomeActivity
 import com.sopt.smeme.presentation.view.ViewBoundActivity
+import com.sopt.smeme.presentation.view.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
