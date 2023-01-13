@@ -20,128 +20,130 @@
         <!-- top app bar -->
         <!-- TODO: switch top bar to toolbar -->
 
-        <View
-            android:id="@+id/appbar_top_odir_detail"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_appbar_top_odir_detail"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/btn_back_odir_detail"
-            style="@style/Style.ImageButton.Default"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_marginStart="21dp"
-            android:src="@drawable/ic_arrow_back"
-            app:layout_constraintBottom_toBottomOf="@+id/appbar_top_odir_detail"
-            app:layout_constraintStart_toStartOf="@id/appbar_top_odir_detail"
-            app:layout_constraintTop_toTopOf="@id/appbar_top_odir_detail" />
+            <ImageButton
+                android:id="@+id/btn_back_odir_detail"
+                style="@style/Style.ImageButton.Default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="21dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/btn_option_odir_detail"
-            style="@style/Style.ImageButton.Default"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:clickable="false"
-            android:src="@drawable/ic_dots"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/appbar_top_odir_detail"
-            app:layout_constraintEnd_toEndOf="@id/appbar_top_odir_detail"
-            app:layout_constraintTop_toTopOf="@id/appbar_top_odir_detail" />
+            <ImageButton
+                android:id="@+id/btn_option_odir_detail"
+                style="@style/Style.ImageButton.Default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:clickable="false"
+                android:src="@drawable/ic_dots"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- tag -->
-
-        <TextView
-            android:id="@+id/tv_tag_odir_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rectangle_primary_radius_4"
-            android:textAppearance="@style/TextAppearance.Body2"
-            android:textColor="@color/grey_1000w"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appbar_top_odir_detail"
-            tools:text="기념일" />
-
-        <!-- user info -->
-
-        <TextView
-            android:id="@+id/tv_nickname_odir_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textAppearance="@style/TextAppearance.Body3"
-            android:textColor="@color/grey_1000b"
-            app:layout_constraintStart_toStartOf="@+id/tv_tag_odir_detail"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tag_odir_detail"
-            tools:text="코코하는 도레미" />
-
-        <TextView
-            android:id="@+id/tv_description_odir_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textAppearance="@style/TextAppearance.Caption1"
-            android:textColor="@color/grey_600"
-            app:layout_constraintStart_toStartOf="@+id/tv_nickname_odir_detail"
-            app:layout_constraintTop_toBottomOf="@+id/tv_nickname_odir_detail"
-            tools:text="미국 거주 4년차 일기 챌린저입니다." />
-
-        <!-- context -->
-
-        <TextView
-            android:id="@+id/tv_question_odir_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/grey_100"
-            android:paddingHorizontal="24dp"
-            android:paddingVertical="14dp"
-            android:textAppearance="@style/TextAppearance.Body4"
-            android:textColor="@color/grey_1000b"
-
-            app:layout_constraintTop_toBottomOf="@+id/tv_description_odir_detail"
-            tools:text="     오늘부터 딱 일주일 후! 설레는 크리스마스네요. 일주일 전부터 세워보는 나의 크리스마스 계획은?" />
-
-        <TextView
-            android:id="@+id/tv_question_icon_odir_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="13dp"
-            android:text="Q."
-            android:textAppearance="@style/TextAppearance.Body3"
-            android:textColor="@color/primary"
-
-            app:layout_constraintStart_toStartOf="@id/tv_question_odir_detail"
-            app:layout_constraintTop_toTopOf="@+id/tv_question_odir_detail" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll_odir_detail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:paddingTop="16dp"
             app:layout_constraintBottom_toTopOf="@id/appbar_bottom_odir_detail"
-            app:layout_constraintTop_toBottomOf="@id/tv_question_odir_detail">
+            app:layout_constraintTop_toBottomOf="@id/cl_appbar_top_odir_detail">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/tv_tag_odir_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:background="@drawable/rectangle_primary_radius_4"
+                    android:textAppearance="@style/TextAppearance.Body2"
+                    android:textColor="@color/grey_1000w"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="기념일" />
+
+                <!-- user info -->
+
+                <TextView
+                    android:id="@+id/tv_nickname_odir_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textAppearance="@style/TextAppearance.Body3"
+                    android:textColor="@color/grey_1000b"
+                    app:layout_constraintStart_toStartOf="@+id/tv_tag_odir_detail"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_tag_odir_detail"
+                    tools:text="코코하는 도레미" />
+
+                <TextView
+                    android:id="@+id/tv_description_odir_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAppearance="@style/TextAppearance.Caption1"
+                    android:textColor="@color/grey_600"
+                    app:layout_constraintStart_toStartOf="@+id/tv_nickname_odir_detail"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_nickname_odir_detail"
+                    tools:text="미국 거주 4년차 일기 챌린저입니다." />
+
+                <!-- context -->
+
+                <TextView
+                    android:id="@+id/tv_question_odir_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/grey_100"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="14dp"
+                    android:textAppearance="@style/TextAppearance.Body4"
+                    android:textColor="@color/grey_1000b"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_description_odir_detail"
+                    tools:text="     오늘부터 딱 일주일 후! 설레는 크리스마스네요. 일주일 전부터 세워보는 나의 크리스마스 계획은?" />
+
+                <TextView
+                    android:id="@+id/tv_question_icon_odir_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="13dp"
+                    android:text="Q."
+                    android:textAppearance="@style/TextAppearance.Body3"
+                    android:textColor="@color/primary"
+
+                    app:layout_constraintStart_toStartOf="@id/tv_question_odir_detail"
+                    app:layout_constraintTop_toTopOf="@+id/tv_question_odir_detail" />
+
+                <TextView
                     android:id="@+id/tv_diary_odir_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="16dp"
                     android:textAppearance="@style/TextAppearance.Body1"
                     android:textIsSelectable="true"
                     android:theme="@style/Style.TextView.Selected"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_question_odir_detail"
                     tools:text="@string/odir_dummy_context" />
 
                 <TextView
