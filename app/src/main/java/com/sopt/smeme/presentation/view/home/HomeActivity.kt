@@ -3,7 +3,6 @@ package com.sopt.smeme.presentation.view.home
 import android.content.Context
 import android.graphics.Color
 import androidx.fragment.app.FragmentManager
-import com.google.android.material.shape.MaterialShapeDrawable
 import com.sopt.smeme.R
 import com.sopt.smeme.databinding.ActivityHomeBinding
 import com.sopt.smeme.presentation.view.ViewBoundActivity
@@ -27,12 +26,7 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
     override fun listen() {
         binding.bnvMain.setOnItemSelectedListener {
             BottomMenu.from(it.title.toString())
-                .changeFragment(supportFragmentManager, this,
-                    onClick = {
-                        MaterialShapeDrawable()
-//                        binding.bnvMain.itemBackground = Color.parseColor("#FE9870")
-                    }
-                )
+                .changeFragment(supportFragmentManager, this,)
             return@setOnItemSelectedListener true
         }
     }
@@ -46,9 +40,7 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
             override fun changeFragment(
                 supportFragmentManager: FragmentManager,
                 context: Context,
-                onClick: () -> Unit
             ) {
-                onClick.invoke()
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.home_container, MyDiaryHomeFragment(context))
                     .commit()
@@ -58,9 +50,7 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
             override fun changeFragment(
                 supportFragmentManager: FragmentManager,
                 context: Context,
-                onClick: () -> Unit
             ) {
-                onClick.invoke()
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.home_container, OdirListFragment(context))
                     .commit()
@@ -70,9 +60,7 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
             override fun changeFragment(
                 supportFragmentManager: FragmentManager,
                 context: Context,
-                onClick: () -> Unit
             ) {
-                onClick.invoke()
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.home_container, ArchiveFragment(context))
                     .commit()
@@ -83,7 +71,6 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
         abstract fun changeFragment(
             supportFragmentManager: FragmentManager,
             context: Context,
-            onClick: () -> Unit = {}
         )
 
         companion object {

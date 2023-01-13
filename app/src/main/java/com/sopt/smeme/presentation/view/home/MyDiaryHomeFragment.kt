@@ -120,11 +120,6 @@ class MyDiaryHomeFragment @Inject constructor(
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     private fun setFabClickEvent() {
         binding.fabPlus.setOnClickListener {
             toggleFab()
@@ -176,6 +171,7 @@ class MyDiaryHomeFragment @Inject constructor(
             startActivity(toStep1)
             onDestroy()
             onDestroyView()
+            (activity as HomeActivity).finish()
         }
     }
 
@@ -183,13 +179,18 @@ class MyDiaryHomeFragment @Inject constructor(
         binding.fabForeign.setOnClickListener {
             val toForeign = Intent(context, WriteDiaryForeignActivity::class.java)
             startActivity(toForeign)
+            (activity as HomeActivity).finish()
         }
     }
 
 
     private fun checkMyDiaryExist(adaptor: MyDiaryAdaptor) {
-        if (adaptor.itemCount >= 0) {
+        if (adaptor.itemCount > 0) {
             binding.rvMyDiary.visibility = View.VISIBLE
+            binding.txtNoDiary.visibility = View.GONE
+        } else {
+            binding.rvMyDiary.visibility = View.GONE
+            binding.txtNoDiary.visibility = View.VISIBLE
         }
     }
 
@@ -213,4 +214,11 @@ class MyDiaryHomeFragment @Inject constructor(
         }
         startActivity(intent)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
+
+

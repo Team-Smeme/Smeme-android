@@ -4,6 +4,8 @@ import com.sopt.smeme.DateUtil
 import com.sopt.smeme.bridge.controller.response.DataResponse
 import com.sopt.smeme.bridge.controller.response.MdirDetailData
 import com.sopt.smeme.bridge.controller.response.MyDiaryData
+import com.sopt.smeme.bridge.controller.response.SimpleResponse
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -20,4 +22,9 @@ interface MyDiaryConnection {
     suspend fun selectDiary(
         @Path("diaryId") diaryId:Long
     ):DataResponse<MdirDetailData>
+
+    @DELETE("/api/v1/diaries/{diaryId}")
+    suspend fun deleteDiary(
+        @Path("diaryId") diaryId:String
+    ):SimpleResponse
 }

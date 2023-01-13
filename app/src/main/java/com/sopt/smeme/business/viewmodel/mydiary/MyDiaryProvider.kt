@@ -11,6 +11,7 @@ import com.sopt.smeme.bridge.model.MyDiary
 import com.sopt.smeme.business.viewmodel.ViewModelFrame
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import timber.log.Timber
 import java.time.LocalDate
@@ -18,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyDiaryProvider @Inject constructor(
-    private val myDiaryRetriever: MockMyDiaryRetriever
+    private val myDiaryRetriever: MyDiaryRetriever
 ) : ViewModel(), ViewModelFrame {
 
     private val _dairies = MutableLiveData<List<MyDiary>>()
