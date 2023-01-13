@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.sopt.smeme.DateUtil
 import com.sopt.smeme.R
 import com.sopt.smeme.business.viewmodel.opendiary.OdirDetailProvider
+import com.sopt.smeme.business.viewmodel.opendiary.OdirLikeProvider
 import com.sopt.smeme.business.viewmodel.opendiary.OdirScrapProvider
 import com.sopt.smeme.databinding.ActivityOdirDetailBinding
 import com.sopt.smeme.presentation.view.ViewBoundActivity
@@ -23,19 +24,22 @@ class OdirDetailActivity :
 
     private val odirDetailProvider: OdirDetailProvider by viewModels()
     private val odirScrapProvider: OdirScrapProvider by viewModels()
+    private val odirLikeProvider: OdirLikeProvider by viewModels()
+    private var likeNum: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         constructLayout()
-        listen()
         observe()
+        listen()
     }
 
     override fun constructLayout() {
         val diaryId = intent.getIntExtra("diaryId", -1)
 
         binding.tvDiaryOdirDetail.customSelectionActionModeCallback = actionModeCallback
+        
         odirDetailProvider.requestGetDiary(
             diaryId,
             onError = {
@@ -45,11 +49,28 @@ class OdirDetailActivity :
     }
 
     override fun listen() {
+        val diaryId = intent.getIntExtra("diaryId", -1)
+        binding.btnHintOdirDetail.setOnClickListener {
 
+        }
+        binding.btnLikeOdirDetail.setOnClickListener {
+            val btn = binding.btnLikeOdirDetail
+            binding.tvLikeOdirDetail.text = (likeNum + 1).toString()
+            odirLikeProvider.requestSendLike(
+                diaryId,
+                onError = {
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                }
+            )
+        }
     }
 
     override fun observe() {
         odirDetailProvider.diary.observe(this) {
+            if (it.hasLike) {
+                binding.btnLikeOdirDetail.isChecked = true
+                binding.btnLikeOdirDetail.isClickable = false
+            }
             binding.tvDiaryOdirDetail.text = it.content
             if (it.category == "") {
                 binding.tvTagOdirDetail.text = "일상"
@@ -58,11 +79,17 @@ class OdirDetailActivity :
             }
             binding.tvQuestionOdirDetail.text = "     " + it.topic
             binding.tvLikeOdirDetail.text = it.likeCnt.toString()
+            likeNum = it.likeCnt
             binding.tvDateOdirDetail.text = DateUtil.asString(it.createdAt())
             binding.tvNicknameOdirDetail.text = it.username
             binding.tvDescriptionOdirDetail.text = it.bio
         }
-
+        odirLikeProvider.likeResult.observe(this) {
+            if (it.hasLike) {
+                binding.btnLikeOdirDetail.isChecked = true
+                binding.btnLikeOdirDetail.isClickable = false
+            }
+        }
     }
 
     private val actionModeCallback = object : ActionMode.Callback {
@@ -81,7 +108,6 @@ class OdirDetailActivity :
             menu.removeItem(id.shareText)
             // google related
             menu.removeItem(id.textAssist)
-            // TODO: remove papago menu
 
             return false
         }

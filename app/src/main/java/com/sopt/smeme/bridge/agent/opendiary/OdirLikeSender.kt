@@ -8,11 +8,13 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import retrofit2.HttpException
+import timber.log.Timber
 import javax.inject.Inject
 
 @ViewModelScoped
 class OdirLikeSender @Inject constructor(
-    private val odirDetailConnection: OdirDetailConnection
+    private val odirDetailConnection: OdirDetailConnection,
 ) {
     suspend fun sendLike(id: Int) =
         CoroutineScope(Dispatchers.IO).async {
@@ -23,5 +25,6 @@ class OdirLikeSender @Inject constructor(
                 throw SmemeException(response.status, response.message)
             }
             OdirLikeData(response.data?.hasLike ?: false)
+
         }.await()
 }
