@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="data"
             type="com.sopt.smeme.business.viewmodel.opendiary.OdirDetailProvider" />
@@ -57,11 +59,11 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/rectangle_primary_radius_4"
-            tools:text="기념일"
             android:textAppearance="@style/TextAppearance.Body2"
             android:textColor="@color/grey_1000w"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appbar_top_odir_detail" />
+            app:layout_constraintTop_toBottomOf="@+id/appbar_top_odir_detail"
+            tools:text="기념일" />
 
         <!-- user info -->
 
@@ -70,22 +72,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            tools:text="코코하는 도레미"
             android:textAppearance="@style/TextAppearance.Body3"
             android:textColor="@color/grey_1000b"
             app:layout_constraintStart_toStartOf="@+id/tv_tag_odir_detail"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tag_odir_detail" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_tag_odir_detail"
+            tools:text="코코하는 도레미" />
 
         <TextView
             android:id="@+id/tv_description_odir_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            tools:text="미국 거주 4년차 일기 챌린저입니다."
             android:textAppearance="@style/TextAppearance.Caption1"
             android:textColor="@color/grey_600"
             app:layout_constraintStart_toStartOf="@+id/tv_nickname_odir_detail"
-            app:layout_constraintTop_toBottomOf="@+id/tv_nickname_odir_detail" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_nickname_odir_detail"
+            tools:text="미국 거주 4년차 일기 챌린저입니다." />
 
         <!-- context -->
 
@@ -97,10 +99,11 @@
             android:background="@color/grey_100"
             android:paddingHorizontal="24dp"
             android:paddingVertical="14dp"
-            tools:text="     오늘부터 딱 일주일 후! 설레는 크리스마스네요. 일주일 전부터 세워보는 나의 크리스마스 계획은?"
             android:textAppearance="@style/TextAppearance.Body4"
             android:textColor="@color/grey_1000b"
-            app:layout_constraintTop_toBottomOf="@+id/tv_description_odir_detail" />
+            android:visibility="@{data.topic ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description_odir_detail"
+            tools:text="     오늘부터 딱 일주일 후! 설레는 크리스마스네요. 일주일 전부터 세워보는 나의 크리스마스 계획은?" />
 
         <TextView
             android:id="@+id/tv_question_icon_odir_detail"
@@ -111,6 +114,7 @@
             android:text="Q."
             android:textAppearance="@style/TextAppearance.Body3"
             android:textColor="@color/primary"
+            android:visibility="@{data.topic ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="@id/tv_question_odir_detail"
             app:layout_constraintTop_toTopOf="@+id/tv_question_odir_detail" />
 
@@ -131,13 +135,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="30dp"
-                    tools:text="@string/odir_dummy_context"
                     android:textAppearance="@style/TextAppearance.Body1"
                     android:textIsSelectable="true"
                     android:theme="@style/Style.TextView.Selected"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/odir_dummy_context" />
 
                 <TextView
                     android:id="@+id/tv_date_odir_detail"
@@ -145,12 +149,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="36dp"
-                    tools:text="2023년 1월 4일 21:15"
                     android:textAppearance="@style/TextAppearance.Body2"
                     android:textColor="@color/grey_500"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/tv_diary_odir_detail"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_diary_odir_detail" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_diary_odir_detail"
+                    tools:text="2023년 1월 4일 21:15" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

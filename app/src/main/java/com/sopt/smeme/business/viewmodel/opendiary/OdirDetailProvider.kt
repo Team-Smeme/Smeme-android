@@ -19,6 +19,8 @@ class OdirDetailProvider @Inject constructor(
     val diary: LiveData<OdirDetailData>
         get() = _diary
 
+    val isTopic = diary.value?.topic != ""
+
     fun requestGetDiary(
         id: Int,
         onError: (Throwable) -> Unit = {},
@@ -42,4 +44,6 @@ class OdirDetailProvider @Inject constructor(
             }
         }
     }
+
+
 }
