@@ -9,6 +9,7 @@ import com.sopt.smeme.bridge.agent.opendiary.OdirScrapSender
 import com.sopt.smeme.bridge.controller.response.OdirScrapData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import timber.log.Timber
 import javax.inject.Inject
@@ -22,14 +23,16 @@ class OdirScrapProvider @Inject constructor(
         get() = _scrapResult
 
     fun requestSendScrap (
-        id: Int, paragraph: String,
+        id: Int,
+        paragraph: String,
         onCompleted: () -> Unit = {},
         onError: (RuntimeException?) -> Unit = {}
     ) {
-        viewModelScope.async {
+        viewModelScope.launch {
             try {
                 val response = odirScrapSender.sendScrap(id, paragraph)
                 _scrapResult.value = response
+                onCompleted.invoke()
             } catch (e: SmemeException) {
                 onError.invoke(e)
             } catch (e: HttpException) {

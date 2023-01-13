@@ -96,12 +96,10 @@ class OdirDetailActivity :
 
                     val selection =
                         binding.tvDiaryOdirDetail.text.toString().substring(start, end).trim()
-//                    if (selection.isNotEmpty()) {
-//                        Snackbar.make(binding.root, selection, Snackbar.LENGTH_SHORT).show()
-//                    }
+
                     odirScrapProvider.requestSendScrap(
-                        diaryId,
-                        selection,
+                        id = diaryId,
+                        paragraph = selection,
                         onCompleted = {
                             Snackbar.make(binding.root, "스크랩이 완료되었습니다.", Snackbar.LENGTH_SHORT)
                                 .show()

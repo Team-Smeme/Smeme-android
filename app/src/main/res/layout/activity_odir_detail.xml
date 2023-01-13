@@ -101,7 +101,7 @@
             android:paddingVertical="14dp"
             android:textAppearance="@style/TextAppearance.Body4"
             android:textColor="@color/grey_1000b"
-            android:visibility="@{data.topic ? View.VISIBLE : View.GONE}"
+
             app:layout_constraintTop_toBottomOf="@+id/tv_description_odir_detail"
             tools:text="     오늘부터 딱 일주일 후! 설레는 크리스마스네요. 일주일 전부터 세워보는 나의 크리스마스 계획은?" />
 
@@ -114,7 +114,7 @@
             android:text="Q."
             android:textAppearance="@style/TextAppearance.Body3"
             android:textColor="@color/primary"
-            android:visibility="@{data.topic ? View.VISIBLE : View.GONE}"
+
             app:layout_constraintStart_toStartOf="@id/tv_question_odir_detail"
             app:layout_constraintTop_toTopOf="@+id/tv_question_odir_detail" />
 
