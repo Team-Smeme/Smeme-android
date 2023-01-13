@@ -72,8 +72,10 @@ class ArchiveFragment @Inject constructor(
     }
 
     private fun listen() {
-        // TODO : 위치 조정
         binding.tvDiaryTitleArchive.setOnClickListener {
+            Snackbar.make(binding.root, "더 나은 서비스를 위해 페이지 준비중에 있습니다.", Snackbar.LENGTH_SHORT).show()
+        }
+        binding.btnProfileArchive.setOnClickListener {
             Snackbar.make(binding.root, "더 나은 서비스를 위해 페이지 준비중에 있습니다.", Snackbar.LENGTH_SHORT).show()
         }
 

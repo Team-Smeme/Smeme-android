@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.google.android.material.snackbar.Snackbar
 import com.sopt.smeme.DateUtil
 import com.sopt.smeme.R
 import com.sopt.smeme.SmemeException
@@ -70,6 +71,9 @@ class MyDiaryHomeFragment @Inject constructor(
         setFabClickEvent()
         clickStep1()
         clickForeign()
+        binding.icProfileMyDiary.setOnClickListener {
+            Snackbar.make(binding.root, "더 나은 서비스를 위해 페이지 준비중에 있습니다.", Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     fun request() {

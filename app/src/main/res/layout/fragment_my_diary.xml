@@ -19,18 +19,19 @@
             android:id="@+id/ic_smeme_logo"
             android:layout_width="98dp"
             android:layout_height="21dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="17dp"
             android:src="@drawable/ic_smeme_logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/ic_profile_my_diary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="22dp"
-            android:padding="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="14dp"
+            android:padding="10dp"
             android:src="@drawable/ic_profile"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintEnd_toEndOf="parent"
