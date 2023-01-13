@@ -1,11 +1,7 @@
 # 🙏Smeme-AOS🙏
 
 ![KakaoTalk_Photo_2023-01-04-04-02-58](https://user-images.githubusercontent.com/86944161/210424661-b00f2023-5cfc-4e36-a6ce-2e5cc09e9ad1.png)
-
-## *🌏Project*
-```
-내 일기에 스미는 외국어✍️
-```
+![소개이미지](https://user-images.githubusercontent.com/74162198/212345354-1b1a09b6-a9d0-40a6-aba5-21f6dc383b17.png)
 
 ## *👨‍👩‍👧‍👦Contributers*
 [계대환 <br> @daehwan2yo](https://github.com/daehwan2yo) | [이태희 <br> @taeheeL](https://github.com/taeheeL) | [배수민 <br> @waterminn](https://github.com/waterminn) 
@@ -15,7 +11,8 @@
 
 ## *📋Kanban Board*
 [**1️⃣Phase 1**](https://github.com/orgs/Team-Smeme/projects/2/views/1) <br>
-[**2️⃣Phase 2**](https://github.com/orgs/Team-Smeme/projects/6)
+[**2️⃣Phase 2**](https://github.com/orgs/Team-Smeme/projects/6) <br>
+[**3️⃣Phase 3**](https://github.com/orgs/Team-Smeme/projects/8/views/1) <br>
 
 ## *✅Conventions*
 [**🙏Coding Convention**](https://carnation-hearing-eb3.notion.site/Coding-Convention-b69f421118fa4a42bbf3624691a92a3c) <br>
