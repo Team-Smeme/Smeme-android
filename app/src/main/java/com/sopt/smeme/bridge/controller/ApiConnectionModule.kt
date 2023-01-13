@@ -59,6 +59,7 @@ object ApiConnectionModule {
         @ViewModelScoped
         fun providePapago(@ConnectCluster(Cluster.PAPAGO) retrofit: Retrofit): PapagoAPI =
             retrofit.create(PapagoAPI::class.java)
+
     }
 
     @Module
