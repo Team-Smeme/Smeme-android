@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
+import com.google.android.material.snackbar.Snackbar
 import com.sopt.smeme.business.adaptor.OdirListAdapter
 import com.sopt.smeme.business.viewmodel.opendiary.CategoryProvider
 import com.sopt.smeme.business.viewmodel.opendiary.OdirListProvider
@@ -79,6 +80,9 @@ class OdirListFragment @Inject constructor(
                     Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             )
+        }
+        binding.btnProfileOdir.setOnClickListener {
+            Snackbar.make(binding.root, "더 나은 서비스를 위해 페이지 준비중에 있습니다.", Snackbar.LENGTH_SHORT).show()
         }
     }
 

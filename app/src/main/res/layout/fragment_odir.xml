@@ -43,7 +43,8 @@
                 style="@style/Style.ImageButton.Default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="14dp"
+                android:padding="10dp"
                 android:src="@drawable/ic_profile"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +58,7 @@
             android:id="@+id/cl_filter_bg_odir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/grey_1000w"
+            android:background="@drawable/rectangle_white_bottom_radius_30"
             android:elevation="18dp"
             android:outlineAmbientShadowColor="#0A000000"
             android:outlineSpotShadowColor="#0A000000"
@@ -107,7 +108,7 @@
                 android:drawablePadding="4dp"
                 android:text="영어"
                 android:textAppearance="@style/TextAppearance.Body2"
-                android:textColor="@color/grey_500"
+                android:textColor="@color/grey_1000b"
                 app:drawableEndCompat="@drawable/ic_arrow_under" />
 
             <TextView
@@ -117,14 +118,14 @@
                 android:drawablePadding="4dp"
                 android:text="최신순"
                 android:textAppearance="@style/TextAppearance.Body2"
-                android:textColor="@color/grey_500"
+                android:textColor="@color/grey_1000b"
                 app:drawableEndCompat="@drawable/ic_arrow_under" />
 
             <androidx.constraintlayout.helper.widget.Flow
                 android:id="@+id/flow_filter_odir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="11dp"
                 android:layout_marginEnd="23dp"
                 app:constraint_referenced_ids="tv_language_odir,tv_sort_type_odir"
                 app:flow_horizontalGap="16dp"

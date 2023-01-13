@@ -27,7 +27,6 @@ class OdirListAdapter(
                 navigateToDetail(data.diaryId)
             }
         }
-
         private fun endWithDots(text: String): String {
             return if (text.length > 145) {
                 text.substring(0 until 145).trimEnd() + " ..."
@@ -44,14 +43,6 @@ class OdirListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is OdirListViewHolder) holder.onBind(odirList[position])
-//        holder.itemView.setOnClickListener {
-//            //Snackbar.make(it, odirList[position].diaryId, Snackbar.LENGTH_SHORT).show()
-//            val intent = Intent(context.applicationContext, OdirDetailActivity::class.java).apply {
-//                val diaryId = odirList[position].diaryId
-//                putExtra("diaryId", diaryId)
-//            }
-//            context.startActivity(intent)
-//        }
     }
 
     override fun getItemCount() = odirList.size
