@@ -21,7 +21,6 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
                 .commit()
         }
 
-        binding.bnvMain.itemIconTintList = null
     }
 
     override fun listen() {
