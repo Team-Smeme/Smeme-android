@@ -58,12 +58,12 @@ class OdirDetailActivity :
         val diaryId = intent.getIntExtra("diaryId", -1)
 
         binding.btnBackOdirDetail.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java).apply {
-                putExtra("bnvMenu", "둘러보기")
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            }
+//            val intent = Intent(this, HomeActivity::class.java).apply {
+//                putExtra("bnvMenu", "둘러보기")
+//                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//            }
 
-            startActivity(intent)
+            startActivity(Intent(this,HomeActivity::class.java))
             finish()
         }
 

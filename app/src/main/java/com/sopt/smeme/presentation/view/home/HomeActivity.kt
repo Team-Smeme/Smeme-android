@@ -17,10 +17,9 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
         val currentFragment = supportFragmentManager.findFragmentById(R.id.home_container)
         if (currentFragment == null && intent.getStringExtra("bnvMenu") != "둘러보기") {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.home_container, OdirListFragment(this))
+                .replace(R.id.home_container, MyDiaryHomeFragment(this))
                 .commit()
         } else if (intent.getStringExtra("bnvMenu") == "둘러보기") {
-            intent.putExtra("bnvMenu", "")
             supportFragmentManager.beginTransaction()
                 .replace(R.id.home_container, OdirListFragment(this))
                 .commit()
@@ -30,7 +29,7 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
     override fun listen() {
         binding.bnvMain.setOnItemSelectedListener {
             BottomMenu.from(it.title.toString())
-                .changeFragment(supportFragmentManager, this,)
+                .changeFragment(supportFragmentManager, this)
             return@setOnItemSelectedListener true
         }
     }
