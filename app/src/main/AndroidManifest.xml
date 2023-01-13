@@ -19,6 +19,7 @@
         tools:targetApi="31">
         <activity
             android:name=".presentation.view.welcome.LoginProfileActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -26,6 +27,7 @@
         </activity>
         <activity
             android:name=".presentation.view.welcome.SplashActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +38,7 @@
         </activity>
         <activity
             android:name=".presentation.view.welcome.OnBoardingActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -43,18 +46,22 @@
         </activity>
         <activity
             android:name=".presentation.view.home.HomeActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
         </activity>
         <activity
             android:name=".presentation.view.mdir.WriteDiaryStep1Activity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
             android:name=".presentation.view.mdir.WriteDiaryStep2Activity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
             android:name=".presentation.view.odir.OdirDetailActivity"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -72,6 +79,7 @@
             android:exported="false"></activity>
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -87,10 +95,12 @@
         </activity>
         <activity
             android:name=".presentation.view.mdir.WriteDiaryForeignActivity"
+            android:screenOrientation="portrait"
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
         <activity
             android:name=".presentation.view.mdir.MdirDetailActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
     </application>
 
