@@ -29,7 +29,7 @@ class MyDiaryRetriever @Inject constructor(
             val diaries = response.data?.diaries ?: emptyList()
 
             diaries.map {
-                MyDiary(DateUtil.asStringOnlyTime(it.createdAt()), it.content)
+                MyDiary(it.diaryId, DateUtil.asStringOnlyTime(it.createdAt()), it.content)
             }
         }.await()
 }

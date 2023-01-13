@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.smeme.SmemeException
+import com.sopt.smeme.bridge.agent.mydiary.MockMyDiaryRetriever
 import com.sopt.smeme.bridge.agent.mydiary.MyDiaryRetriever
 import com.sopt.smeme.bridge.model.MyDiary
 import com.sopt.smeme.business.viewmodel.ViewModelFrame
@@ -17,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MyDiaryProvider @Inject constructor(
-    private val myDiaryRetriever: MyDiaryRetriever
+    private val myDiaryRetriever: MockMyDiaryRetriever
 ) : ViewModel(), ViewModelFrame {
 
     private val _dairies = MutableLiveData<List<MyDiary>>()

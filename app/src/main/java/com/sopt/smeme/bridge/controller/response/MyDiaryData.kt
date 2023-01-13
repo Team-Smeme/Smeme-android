@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MyDiaryData(
-    val diaries: List<Detail>
+    val diaries: List<Detail> = emptyList()
 ) {
     @Serializable
     data class Detail(
