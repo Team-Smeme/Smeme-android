@@ -54,6 +54,7 @@ object ApiConnectionModule {
         @ViewModelScoped
         fun provideDiaryWriteConnection(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit): DiaryWriteConnection =
             retrofit.create(DiaryWriteConnection::class.java)
+
         @Provides
         @ViewModelScoped
         fun providePapago(@ConnectCluster(Cluster.PAPAGO) retrofit: Retrofit): PapagoAPI =
@@ -66,13 +67,13 @@ object ApiConnectionModule {
         // open diary list
         @Provides
         @ViewModelScoped
-        fun provideOdirListConnection(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit) : OdirListConnection =
+        fun provideOdirListConnection(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit): OdirListConnection =
             retrofit.create(OdirListConnection::class.java)
 
         // open diary detail
         @Provides
         @ViewModelScoped
-        fun provideOdirDetailConnection(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit) : OdirDetailConnection =
+        fun provideOdirDetailConnection(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit): OdirDetailConnection =
             retrofit.create(OdirDetailConnection::class.java)
     }
 
@@ -83,5 +84,14 @@ object ApiConnectionModule {
         @ViewModelScoped
         fun provideRandomTopic(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit): TopicConnection =
             retrofit.create(TopicConnection::class.java)
+    }
+
+    @Module
+    @InstallIn(ViewModelComponent::class)
+    object Archive {
+        @Provides
+        @ViewModelScoped
+        fun provideArchiveConnection(@ConnectCluster(Cluster.ORIGIN) retrofit: Retrofit): ArchiveConnection =
+            retrofit.create(ArchiveConnection::class.java)
     }
 }

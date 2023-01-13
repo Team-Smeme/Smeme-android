@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:src="@drawable/ic_browser"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <ImageButton
         android:id="@+id/btn_copy_archive"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:src="@drawable/ic_copy"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <ImageButton
         android:id="@+id/btn_translate_archive"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:src="@drawable/ic_translate"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
     <ImageButton
         android:id="@+id/btn_delete_archive"
