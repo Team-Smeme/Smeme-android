@@ -21,6 +21,7 @@ import com.sopt.smeme.business.viewmodel.mydiary.Topic
 import com.sopt.smeme.business.viewmodel.mydiary.TopicProvider
 import com.sopt.smeme.databinding.ActivityWriteStep1Binding
 import com.sopt.smeme.presentation.Diary
+import com.sopt.smeme.presentation.view.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -182,6 +183,7 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
             }
         }
         binding.txtCancel.setOnClickListener {
+            startActivity(Intent(this,HomeActivity::class.java))
             finish()
         }
 

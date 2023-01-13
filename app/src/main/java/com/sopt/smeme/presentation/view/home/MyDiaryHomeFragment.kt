@@ -21,6 +21,7 @@ import com.sopt.smeme.presentation.view.mdir.MdirDetailActivity
 import com.sopt.smeme.presentation.view.mdir.WriteDiaryForeignActivity
 import com.sopt.smeme.presentation.view.mdir.WriteDiaryStep1Activity
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.components.ViewWithFragmentComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import retrofit2.HttpException
 import java.time.LocalDate
@@ -171,7 +172,7 @@ class MyDiaryHomeFragment @Inject constructor(
             startActivity(toStep1)
             onDestroy()
             onDestroyView()
-            (activity as HomeActivity).finish()
+            activity?.finish()
         }
     }
 
@@ -179,7 +180,7 @@ class MyDiaryHomeFragment @Inject constructor(
         binding.fabForeign.setOnClickListener {
             val toForeign = Intent(context, WriteDiaryForeignActivity::class.java)
             startActivity(toForeign)
-            (activity as HomeActivity).finish()
+            activity?.finish()
         }
     }
 
@@ -189,7 +190,8 @@ class MyDiaryHomeFragment @Inject constructor(
         if (adaptor.itemCount > 0) {
             binding.rvMyDiary.visibility = View.VISIBLE
             binding.txtNoDiary.visibility = View.GONE
-        } else {
+        }
+        else{
             binding.rvMyDiary.visibility = View.GONE
             binding.txtNoDiary.visibility = View.VISIBLE
         }
@@ -214,6 +216,7 @@ class MyDiaryHomeFragment @Inject constructor(
             putExtra("diaryId", id)
         }
         startActivity(intent)
+        activity?.finish()
     }
 
     override fun onDestroyView() {

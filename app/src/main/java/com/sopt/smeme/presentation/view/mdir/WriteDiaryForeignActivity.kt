@@ -165,6 +165,7 @@ class WriteDiaryForeignActivity : AppCompatActivity() {
 
     private fun toHome() {
         binding.btnBack.setOnClickListener {
+            startActivity(Intent(this,HomeActivity::class.java))
             finish()
         }
     }
