@@ -29,6 +29,7 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityWriteStep2Binding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val diary = intent.getSerializableExtra(DIARY) as Diary
 
         constructLayout()
@@ -50,21 +51,18 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
         binding.cbPublic.isChecked = diary.isPublic
         binding.cbRandom.isChecked = diary.isTopicSelected
 
+        if (diary.isTopicSelected) {
+            binding.txtRandom.setTextColor(Color.parseColor("#FE9870"))
+        } else {
+            binding.txtRandom.setTextColor(Color.parseColor("#A6A6A6"))
+        }
+
+        if (diary.isPublic) {
+            binding.txtPublic.setTextColor(Color.parseColor("#FE9870"))
+        } else {
+            binding.txtPublic.setTextColor(Color.parseColor("#A6A6A6"))
+        }
         with(binding) {
-            cbRandom.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    txtRandom.setTextColor(Color.parseColor("#FE9870"))
-                } else {
-                    txtRandom.setTextColor(Color.parseColor("#A6A6A6"))
-                }
-            }
-            cbPublic.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    txtPublic.setTextColor(Color.parseColor("#FE9870"))
-                } else {
-                    txtPublic.setTextColor(Color.parseColor("#A6A6A6"))
-                }
-            }
             btnBack.setOnClickListener {
                 finish()
             }
