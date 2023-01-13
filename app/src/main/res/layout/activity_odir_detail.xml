@@ -178,7 +178,7 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <ToggleButton
-            android:id="@+id/btn_like_mdir_detail"
+            android:id="@+id/btn_like_odir_detail"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="24dp"
@@ -197,9 +197,9 @@
             android:text="0"
             android:textAppearance="@style/TextAppearance.Body2"
             android:textColor="@color/grey_1000b"
-            app:layout_constraintBottom_toBottomOf="@id/btn_like_mdir_detail"
-            app:layout_constraintStart_toEndOf="@id/btn_like_mdir_detail"
-            app:layout_constraintTop_toTopOf="@id/btn_like_mdir_detail" />
+            app:layout_constraintBottom_toBottomOf="@id/btn_like_odir_detail"
+            app:layout_constraintStart_toEndOf="@id/btn_like_odir_detail"
+            app:layout_constraintTop_toTopOf="@id/btn_like_odir_detail" />
 
         <ToggleButton
             android:id="@+id/btn_hint_odir_detail"
