@@ -7,21 +7,28 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sopt.smeme.bridge.model.Archive
 import com.sopt.smeme.databinding.ItemArchiveExpressionBinding
 
-class ArchiveAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ArchiveAdapter(
+    private val removeItem: (Long) -> Unit = {},
+    context: Context
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
     private var archiveList: List<Archive> = emptyList()
 
     class ArchiveViewHolder(
+        private val removeItem: (Long) -> Unit = {},
         private val binding: ItemArchiveExpressionBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: Archive) {
             binding.tvItemArchive.text = data.paragraph
+            binding.btnDeleteArchive.setOnClickListener{
+                removeItem(data.id)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = ItemArchiveExpressionBinding.inflate(inflater, parent, false)
-        return ArchiveViewHolder(binding)
+        return ArchiveViewHolder(removeItem, binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
