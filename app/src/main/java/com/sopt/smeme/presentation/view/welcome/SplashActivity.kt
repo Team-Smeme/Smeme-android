@@ -20,7 +20,7 @@ class SplashActivity : ViewBoundActivity<ActivitySplashBinding>(R.layout.activit
     override fun listen() {
         splashCaller.isSignedUser.observe(this, EventObserver { isSigned ->
             lifecycleScope.launch {
-                delay(2000)
+                delay(1600)
                 moveToNext(isSigned)
                 finish()
             }

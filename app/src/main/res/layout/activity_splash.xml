@@ -11,15 +11,19 @@
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lt_temp"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="0dp"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/background"
+
+            android:padding="50dp"
 
             app:lottie_autoPlay="true"
-            app:lottie_rawRes="@raw/temp_lottie" />
+            app:lottie_rawRes="@raw/smeme_splash"
+            app:lottie_speed="0.8"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
