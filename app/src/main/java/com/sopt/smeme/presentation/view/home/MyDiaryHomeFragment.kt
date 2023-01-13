@@ -63,7 +63,6 @@ class MyDiaryHomeFragment @Inject constructor(
         observe(adapter)
         listen()
 
-        checkMyDiaryExist(adapter)
     }
 
     fun listen() {
@@ -117,6 +116,7 @@ class MyDiaryHomeFragment @Inject constructor(
     fun observe(myDiaryAdaptor: MyDiaryAdaptor) {
         myDiaryProvider.dairies.observe(viewLifecycleOwner) {
             myDiaryAdaptor.setDiaryList(it)
+            checkMyDiaryExist(myDiaryAdaptor)
         }
     }
 
@@ -185,6 +185,7 @@ class MyDiaryHomeFragment @Inject constructor(
 
 
     private fun checkMyDiaryExist(adaptor: MyDiaryAdaptor) {
+        val itemCount = adaptor.itemCount
         if (adaptor.itemCount > 0) {
             binding.rvMyDiary.visibility = View.VISIBLE
             binding.txtNoDiary.visibility = View.GONE
