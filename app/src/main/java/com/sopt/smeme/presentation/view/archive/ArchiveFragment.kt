@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import com.sopt.smeme.bridge.controller.response.ArchiveData
 import com.sopt.smeme.business.adaptor.ArchiveAdapter
+import com.sopt.smeme.business.adaptor.MyDiaryAdaptor
 import com.sopt.smeme.business.viewmodel.ArchiveReader
 import com.sopt.smeme.business.viewmodel.ArchiveRemover
 import com.sopt.smeme.databinding.FragmentArchiveBinding
@@ -69,6 +70,19 @@ class ArchiveFragment @Inject constructor(
                 Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
             }
         )
+
+
+    }
+
+    private fun checkMyDiaryExist(adaptor: ArchiveAdapter) {
+        if (adaptor.itemCount > 0) {
+            binding.rvExpressionArchive.visibility = View.VISIBLE
+            binding.tvEmptyArchive.visibility = View.GONE
+        }
+        else{
+            binding.rvExpressionArchive.visibility = View.GONE
+            binding.tvEmptyArchive.visibility = View.VISIBLE
+        }
     }
 
     private fun listen() {
@@ -85,6 +99,7 @@ class ArchiveFragment @Inject constructor(
     private fun observe(adapter: ArchiveAdapter) {
         archiveReader.archives.observe(viewLifecycleOwner) {
             adapter.setArchiveList(it.asArchive())
+            checkMyDiaryExist(adapter)
         }
     }
 

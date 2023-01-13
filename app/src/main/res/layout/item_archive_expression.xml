@@ -27,8 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="false"
-        android:src="@drawable/ic_browser"
-        android:visibility="invisible" />
+        android:src="@drawable/ic_browser" />
 
     <ImageButton
         android:id="@+id/btn_copy_archive"
@@ -36,8 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="false"
-        android:src="@drawable/ic_copy"
-        android:visibility="invisible" />
+        android:src="@drawable/ic_copy" />
 
     <ImageButton
         android:id="@+id/btn_translate_archive"
@@ -45,8 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="false"
-        android:src="@drawable/ic_translate"
-        android:visibility="invisible" />
+        android:src="@drawable/ic_archive_translate" />
 
     <ImageButton
         android:id="@+id/btn_delete_archive"
@@ -54,8 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="false"
-        android:src="@drawable/ic_delete"
-        android:visibility="visible" />
+        android:src="@drawable/ic_delete" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow_btn_archive"
