@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
+import com.sopt.smeme.R
 import com.sopt.smeme.business.adaptor.OdirListAdapter
 import com.sopt.smeme.business.viewmodel.opendiary.CategoryProvider
 import com.sopt.smeme.business.viewmodel.opendiary.OdirListProvider
@@ -18,6 +19,7 @@ import com.sopt.smeme.databinding.ChipCategoryBinding
 import com.sopt.smeme.databinding.FragmentOdirBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.selects.select
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -55,6 +57,7 @@ class OdirListFragment @Inject constructor(
     fun constructLayout() {
         // init chip selection to "All"
         binding.chipAllOdir.isChecked = true
+
         odirListProvider.requestGetList(
             onError = {
                 Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
