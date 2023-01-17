@@ -32,6 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="16dp"
+            app:itemRippleColor="@color/white"
             app:itemIconSize="52dp"
             app:itemIconTint="@drawable/menu_selector_color"
             app:itemTextColor="@drawable/menu_selector_color"
