@@ -149,6 +149,7 @@
                 android:layout_marginTop="32dp"
                 android:background="@null"
                 android:hint="최소 10자 이상의 외국어를 작성해주세요"
+                android:privateImeOptions="defaultInputmode==english"
                 android:textColorHint="@color/grey_400"
                 android:text="@={moonjigi.diary}"
                 android:inputType="textMultiLine|textNoSuggestions"
