@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--    다크모드 방지     -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorOnSecondary">@color/secondary</item>
@@ -9,6 +10,7 @@
         <item name="shapeAppearanceSmallComponent">@style/AppShapeAppearance.SmallComponent</item>
     </style>
 
+    <!--    플로팅 버튼 모양 커스텀     -->
     <style name="AppShapeAppearance.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
