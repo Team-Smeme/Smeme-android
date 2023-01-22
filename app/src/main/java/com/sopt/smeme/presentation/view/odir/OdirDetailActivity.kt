@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
 import com.google.android.material.snackbar.Snackbar
 import com.sopt.smeme.DateUtil
 import com.sopt.smeme.R
@@ -18,7 +16,6 @@ import com.sopt.smeme.business.viewmodel.opendiary.OdirScrapProvider
 import com.sopt.smeme.databinding.ActivityOdirDetailBinding
 import com.sopt.smeme.presentation.view.ViewBoundActivity
 import com.sopt.smeme.presentation.view.home.HomeActivity
-import com.sopt.smeme.presentation.view.home.MyDiaryHomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -58,13 +55,13 @@ class OdirDetailActivity :
         val diaryId = intent.getIntExtra("diaryId", -1)
 
         binding.btnBackOdirDetail.setOnClickListener {
-//            val intent = Intent(this, HomeActivity::class.java).apply {
-//                putExtra("bnvMenu", "둘러보기")
-//                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            }
 
-            startActivity(Intent(this,HomeActivity::class.java))
+            val toList = Intent(this, HomeActivity::class.java)
+            toList.putExtra("bnvMenu", "둘러보기")
+            toList.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(toList)
             finish()
+
         }
 
         binding.btnHintOdirDetail.setOnClickListener {
@@ -92,7 +89,6 @@ class OdirDetailActivity :
         }
 
         binding.btnLikeOdirDetail.setOnClickListener {
-            val btn = binding.btnLikeOdirDetail
             binding.tvLikeOdirDetail.text = (likeNum + 1).toString()
             odirLikeProvider.requestSendLike(
                 diaryId,
@@ -115,11 +111,10 @@ class OdirDetailActivity :
             } else {
                 binding.tvTagOdirDetail.text = it.category
             }
-            if(it.topic ==""){
+            if (it.topic == "") {
                 binding.tvQuestionOdirDetail.visibility = View.GONE
                 binding.tvQuestionIconOdirDetail.visibility = View.GONE
-            }
-            else{
+            } else {
                 binding.tvQuestionOdirDetail.text = "     " + it.topic
             }
             binding.tvLikeOdirDetail.text = it.likeCnt.toString()
@@ -191,4 +186,5 @@ class OdirDetailActivity :
 
         override fun onDestroyActionMode(mode: ActionMode) {}
     }
+
 }
