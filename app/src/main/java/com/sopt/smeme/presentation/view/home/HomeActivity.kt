@@ -2,7 +2,9 @@ package com.sopt.smeme.presentation.view.home
 
 import android.content.Context
 import android.graphics.Color
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.sopt.smeme.R
 import com.sopt.smeme.databinding.ActivityHomeBinding
 import com.sopt.smeme.presentation.view.ViewBoundActivity
@@ -16,13 +18,10 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
     override fun constructLayout() {
         val currentFragment = supportFragmentManager.findFragmentById(R.id.home_container)
         if (currentFragment == null && intent.getStringExtra("bnvMenu") != "둘러보기") {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.home_container, MyDiaryHomeFragment(this))
-                .commit()
+            replaceFragment(MyDiaryHomeFragment(this))
         } else if (intent.getStringExtra("bnvMenu") == "둘러보기") {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.home_container, OdirListFragment(this))
-                .commit()
+            replaceFragment(OdirListFragment(this))
+
         }
     }
 
@@ -89,5 +88,11 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
                 }
             }
         }
+    }
+
+    private fun replaceFragment(fragment: Fragment){
+       supportFragmentManager.beginTransaction()
+           .replace(R.id.home_container, fragment)
+           .commit()
     }
 }
