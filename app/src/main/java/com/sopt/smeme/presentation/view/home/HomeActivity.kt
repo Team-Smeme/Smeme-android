@@ -21,7 +21,8 @@ class HomeActivity : ViewBoundActivity<ActivityHomeBinding>(R.layout.activity_ho
             replaceFragment(MyDiaryHomeFragment(this))
         } else if (intent.getStringExtra("bnvMenu") == "둘러보기") {
             replaceFragment(OdirListFragment(this))
-
+            binding.bnvMain.selectedItemId = R.id.ic_explore
+            //TODO chip 색깔도 같이 바꾸기 finish하고 갱신이 더 좋은 방법인지..?
         }
     }
 

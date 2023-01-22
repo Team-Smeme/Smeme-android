@@ -8,9 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
+import com.sopt.smeme.bridge.controller.response.OdirListData
 import com.sopt.smeme.business.adaptor.OdirListAdapter
 import com.sopt.smeme.business.viewmodel.opendiary.CategoryProvider
 import com.sopt.smeme.business.viewmodel.opendiary.OdirListProvider
@@ -37,6 +40,7 @@ class OdirListFragment @Inject constructor(
         savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentOdirBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -45,11 +49,6 @@ class OdirListFragment @Inject constructor(
 
         constructLayout()
         listen()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     fun constructLayout() {
@@ -90,7 +89,7 @@ class OdirListFragment @Inject constructor(
         odirListProvider.diaries.observe(viewLifecycleOwner) {
             adapter.setOdirList(it.diaries)
         }
-        categoryProvider.categories.observe(viewLifecycleOwner) {
+        categoryProvider.categories.observe(viewLifecycleOwner) { it ->
             val categoryList = it.categories
             categoryList.forEach {
                 val chip = createChip(it.id, it.content)
@@ -113,4 +112,5 @@ class OdirListFragment @Inject constructor(
         }
         startActivity(intent)
     }
+
 }
