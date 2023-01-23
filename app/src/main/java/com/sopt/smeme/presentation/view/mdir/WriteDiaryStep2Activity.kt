@@ -116,6 +116,7 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
                 binding.btnComplete.setTextColor(Color.parseColor("#171716"))
             } else {
                 binding.btnComplete.setTextColor(Color.parseColor("#BBBBBB"))
+                binding.btnComplete.isEnabled = false
             }
         }
     }

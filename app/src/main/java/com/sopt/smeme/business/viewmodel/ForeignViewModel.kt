@@ -16,10 +16,6 @@ class ForeignViewModel : ViewModel() {
     //    val sourceDiary: MutableLiveData<String> = MutableLiveData()
     val content: LiveData<String> = Transformations.map(diary) { it }
 
-    fun updateText(newText: String) {
-        diary.value = newText
-    }
-
     private fun isValidDiaryFormat(diary: String): Boolean {
         if (diary.replace("[^a-zA-Z]".toRegex(), "").length >= 10) {
             return true
