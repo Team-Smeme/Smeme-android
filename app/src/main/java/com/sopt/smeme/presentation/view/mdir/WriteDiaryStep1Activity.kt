@@ -3,6 +3,7 @@ package com.sopt.smeme.presentation.view.mdir
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.text.BidiFormatter
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
@@ -64,7 +65,7 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
     }
 
     private fun setQuestionState(text: String) {
-        val randomTopic = "Q. ${text}"
+        val randomTopic = "Q. $text"
         val builder = SpannableStringBuilder(randomTopic)
         val fixFont = StyleSpan(R.style.TextAppearance_Body3)
         val colorPrimary = ForegroundColorSpan(Color.parseColor("#FE9870"))
@@ -108,8 +109,6 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
                     txtRandomTopic.visibility = View.GONE
                     btnRefresh.visibility = View.GONE
 
-                    toStep2.putExtra("randomCheck", isChecked)
-                    Timber.d("isRandomChecked $isChecked")
                 }
             }
 
@@ -137,12 +136,8 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
             cbPublic.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     txtPublic.setTextColor(Color.parseColor("#FE9870"))
-                    toStep2.putExtra("publicCheck", isChecked)
-                    Timber.d("isPublicChecked $isChecked")
                 } else {
                     txtPublic.setTextColor(Color.parseColor("#A6A6A6"))
-                    Timber.d("isPublicChecked $isChecked")
-                    toStep2.putExtra("publicCheck", isChecked)
                 }
             }
 
@@ -223,6 +218,7 @@ class WriteDiaryStep1Activity : AppCompatActivity() {
                 binding.btnNext.setTextColor(Color.parseColor("#171716"))
             } else {
                 binding.btnNext.setTextColor(Color.parseColor("#BBBBBB"))
+                binding.btnNext.isEnabled = false
             }
         })
     }
