@@ -15,22 +15,23 @@ class DiaryAgent @Inject constructor(
         targetCode: String,
         topic: Int,
         isPublic: Boolean,
-        onCompleted: () -> Unit,
+        onCompleted: (Long) -> Unit,
         onError: (Throwable) -> Unit
-    ){
+    ) {
         try {
             val response = diaryWriteConnection.postDiary(
                 DiaryWriteRequest(
                     content = content,
                     targetLang = targetCode,
                     topicId = topic,
-                    isPublic = isPublic)
+                    isPublic = isPublic
+                )
             )
 
-            if(response.isSuccessful()) {
+            if (response.isSuccessful()) {
                 val result = response.data ?: throw SmemeException(500, "서버로 부터 정상적인 값이 오지 않았습니다.")
-
-                onCompleted.invoke()
+                val diaryId = response.data.diaryId
+                onCompleted.invoke(diaryId)
             } else {
                 throw SmemeException(response.status, response.message)
             }
