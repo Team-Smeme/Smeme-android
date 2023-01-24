@@ -6,7 +6,7 @@ interface DiaryWriting {
         targetCode: String,
         topic: Int,
         isPublic: Boolean,
-        onCompleted: () -> Unit = {},
+        onCompleted: (Long) -> Unit = {},
         onError: (Throwable) -> Unit = {}
     )
 }

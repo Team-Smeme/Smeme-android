@@ -79,8 +79,7 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
                 languageCode = "en", // TODO
                 isPublic = binding.cbPublic.isChecked,
                 onCompleted = {
-                    startActivity(Intent(this, HomeActivity::class.java))
-                    finish()
+                    navigateToDetail(it)
                 },
                 onError = {
                     runOnUiThread {
@@ -93,6 +92,14 @@ class WriteDiaryStep2Activity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             finish()
         }
+    }
+
+    private fun navigateToDetail(id: Long) {
+        val intent = Intent(this, MdirDetailActivity::class.java).apply {
+            putExtra("diaryId", id)
+        }
+        startActivity(intent)
+        finish()
     }
 
 
