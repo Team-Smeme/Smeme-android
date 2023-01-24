@@ -53,7 +53,7 @@ class WriteDiaryForeignActivity : AppCompatActivity() {
     }
 
     private fun setQuestionState(text: String) {
-        val randomTopic = "Q. ${text}"
+        val randomTopic = "Q. $text"
         val builder = SpannableStringBuilder(randomTopic)
         val fixFont = StyleSpan(R.style.TextAppearance_Body3)
         val colorPrimary = ForegroundColorSpan(Color.parseColor("#FE9870"))
@@ -98,11 +98,7 @@ class WriteDiaryForeignActivity : AppCompatActivity() {
             }
 
             txtRandom.setOnClickListener {
-                if (cbRandom.isChecked) {
-                    cbRandom.isChecked = false
-                } else {
-                    cbRandom.isChecked = true
-                }
+                cbRandom.isChecked = !cbRandom.isChecked
             }
 
             txtPublic.setOnClickListener {
@@ -125,6 +121,7 @@ class WriteDiaryForeignActivity : AppCompatActivity() {
                 binding.btnComplete.setTextColor(Color.parseColor("#171716"))
             } else {
                 binding.btnComplete.setTextColor(Color.parseColor("#BBBBBB"))
+                binding.btnComplete.isEnabled = false
             }
         })
     }
@@ -151,8 +148,7 @@ class WriteDiaryForeignActivity : AppCompatActivity() {
                 languageCode = "en", // TODO
                 isPublic = binding.cbPublic.isChecked,
                 onCompleted = {
-                    startActivity(Intent(this, HomeActivity::class.java))
-                    finish()
+                    navigateToDetail(it)
                 },
                 onError = {
                     runOnUiThread {
@@ -161,6 +157,14 @@ class WriteDiaryForeignActivity : AppCompatActivity() {
                 }
             )
         }
+    }
+
+    private fun navigateToDetail(id: Long) {
+        val intent = Intent(this, MdirDetailActivity::class.java).apply {
+            putExtra("diaryId", id)
+        }
+        startActivity(intent)
+        finish()
     }
 
     private fun toHome() {

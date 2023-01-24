@@ -22,7 +22,7 @@ class DiaryRegister @Inject constructor(
         content: String,
         languageCode: String,
         isPublic: Boolean,
-        onCompleted: () -> Unit = {},
+        onCompleted: (Long) -> Unit = {},
         onError: (Throwable) -> Unit = {}
     ) {
         viewModelScope.async {
