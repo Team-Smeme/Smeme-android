@@ -33,6 +33,8 @@ class OdirListFragment @Inject constructor(
     private val odirListProvider: OdirListProvider by viewModels()
     private val categoryProvider: CategoryProvider by viewModels()
 
+    private lateinit var selectedChip: Chip
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,7 +58,11 @@ class OdirListFragment @Inject constructor(
 
     fun constructLayout() {
         // init chip selection to "All"
-        binding.chipAllOdir.isChecked = true
+        selectedChip = binding.chipAllOdir
+        selectedChip.apply {
+            this.isChecked = true
+            this.setTextAppearance(R.style.TextAppearance_Subtitle2)
+        }
 
         odirListProvider.requestGetList(
             onError = {
@@ -76,7 +82,11 @@ class OdirListFragment @Inject constructor(
 
     fun listen() {
         binding.chipsCategoryOdir.setOnCheckedStateChangeListener { group, checkedIds ->
-            val selectedChip: Chip = group.findViewById(group.checkedChipId)
+            selectedChip.setTextAppearance(R.style.TextAppearance_Body1)
+            selectedChip = group.findViewById<Chip?>(group.checkedChipId).apply {
+                this.setTextAppearance(R.style.TextAppearance_Subtitle2)
+            }
+
             odirListProvider.requestGetList(
                 selectedChip.tag?.toString(),
                 onError = {
