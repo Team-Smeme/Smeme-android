@@ -1,5 +1,6 @@
 package com.sopt.smeme.presentation.view.odir
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -7,9 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
@@ -35,6 +37,11 @@ class OdirListFragment @Inject constructor(
 
     private val odirListProvider: OdirListProvider by viewModels()
     private val categoryProvider: CategoryProvider by viewModels()
+    private lateinit var adapter: OdirListAdapter
+
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+
+    private var diaryIndex = -1
 
     private lateinit var selectedChip: Chip
 
@@ -55,6 +62,7 @@ class OdirListFragment @Inject constructor(
         listen()
     }
 
+
     fun constructLayout() {
         // init chip selection to "All"
         selectedChip = binding.chipAllOdir
@@ -68,7 +76,8 @@ class OdirListFragment @Inject constructor(
                 Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
             }
         )
-        val adapter = OdirListAdapter(::navigateToDetail, requireContext())
+
+        adapter = OdirListAdapter(::navigateToDetail, requireContext(), ::updatePosition)
         binding.rvDiaryOdir.adapter = adapter
         observe(adapter)
 
@@ -77,6 +86,14 @@ class OdirListFragment @Inject constructor(
                 Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
             }
         )
+
+        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                adapter.plusLikeCount(diaryIndex)
+            }
+            adapter.resetOdirList(diaryIndex)
+        }
     }
 
     fun listen() {
@@ -123,7 +140,12 @@ class OdirListFragment @Inject constructor(
         val intent = Intent(requireContext(), OdirDetailActivity::class.java).apply {
             putExtra("diaryId", id)
         }
-        startActivity(intent)
+        resultLauncher.launch(intent)
     }
+
+    private fun updatePosition(position: Int) {
+        diaryIndex = position
+    }
+
 
 }
