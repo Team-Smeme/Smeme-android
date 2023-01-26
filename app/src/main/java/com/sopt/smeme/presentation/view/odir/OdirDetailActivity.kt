@@ -1,6 +1,7 @@
 package com.sopt.smeme.presentation.view.odir
 
 import android.R.id
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
@@ -55,13 +56,7 @@ class OdirDetailActivity :
         val diaryId = intent.getIntExtra("diaryId", -1)
 
         binding.btnBackOdirDetail.setOnClickListener {
-
-            val toList = Intent(this, HomeActivity::class.java)
-            toList.putExtra("bnvMenu", "둘러보기")
-            toList.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(toList)
             finish()
-
         }
 
         binding.btnHintOdirDetail.setOnClickListener {
@@ -89,6 +84,7 @@ class OdirDetailActivity :
         }
 
         binding.btnLikeOdirDetail.setOnClickListener {
+
             binding.tvLikeOdirDetail.text = (likeNum + 1).toString()
             odirLikeProvider.requestSendLike(
                 diaryId,
@@ -96,6 +92,13 @@ class OdirDetailActivity :
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
                 }
             )
+
+            val toOdirList = Intent(this, HomeActivity::class.java).apply {
+                putExtra("isLikeClicked", odirLikeProvider.likeResult.value?.hasLike)
+            }
+
+            setResult(Activity.RESULT_OK, toOdirList)
+
         }
     }
 
