@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import com.sopt.smeme.bridge.controller.response.OdirListData
+import com.sopt.smeme.R
 import com.sopt.smeme.business.adaptor.OdirListAdapter
 import com.sopt.smeme.business.viewmodel.opendiary.CategoryProvider
 import com.sopt.smeme.business.viewmodel.opendiary.OdirListProvider
@@ -21,6 +22,7 @@ import com.sopt.smeme.databinding.ChipCategoryBinding
 import com.sopt.smeme.databinding.FragmentOdirBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.selects.select
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -33,6 +35,8 @@ class OdirListFragment @Inject constructor(
 
     private val odirListProvider: OdirListProvider by viewModels()
     private val categoryProvider: CategoryProvider by viewModels()
+
+    private lateinit var selectedChip: Chip
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +57,12 @@ class OdirListFragment @Inject constructor(
 
     fun constructLayout() {
         // init chip selection to "All"
-        binding.chipAllOdir.isChecked = true
+        selectedChip = binding.chipAllOdir
+        selectedChip.apply {
+            this.isChecked = true
+            this.setTextAppearance(R.style.TextAppearance_Subtitle2)
+        }
+
         odirListProvider.requestGetList(
             onError = {
                 Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
@@ -72,7 +81,11 @@ class OdirListFragment @Inject constructor(
 
     fun listen() {
         binding.chipsCategoryOdir.setOnCheckedStateChangeListener { group, checkedIds ->
-            val selectedChip: Chip = group.findViewById(group.checkedChipId)
+            selectedChip.setTextAppearance(R.style.TextAppearance_Body1)
+            selectedChip = group.findViewById<Chip?>(group.checkedChipId).apply {
+                this.setTextAppearance(R.style.TextAppearance_Subtitle2)
+            }
+
             odirListProvider.requestGetList(
                 selectedChip.tag?.toString(),
                 onError = {
