@@ -5,22 +5,24 @@ import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.smeme.bridge.controller.response.OdirListData
 import com.sopt.smeme.databinding.ItemOdirBinding
 
 class OdirListAdapter(
-    private val navigateToDetail: (Int) -> Unit = {},
+    private val navigateToDetail: (Int) -> Unit,
     context: Context,
+    private val updatePosition: (Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val inflater by lazy { LayoutInflater.from(context) }
     private var odirList: List<OdirListData.Detail> = emptyList()
 
     class OdirListViewHolder(
-        private val navigateToDetail: (Int) -> Unit = {},
+        private val navigateToDetail: (Int) -> Unit,
         private val binding: ItemOdirBinding,
+        private val updatePosition: (Int) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
+
         fun onBind(data: OdirListData.Detail) {
             if (data.isSeen) {
                 binding.tvDiaryOdir.setTextColor(Color.parseColor("#d2d2d2"))
@@ -32,8 +34,12 @@ class OdirListAdapter(
             binding.tvNameOdir.text = data.username
             binding.clItemOdir.setOnClickListener {
                 navigateToDetail(data.diaryId)
+                updatePosition(adapterPosition)
+                data.isSeen = true
             }
+
         }
+
         private fun endWithDots(text: String): String {
             return if (text.length > 145) {
                 text.substring(0 until 145).trimEnd() + " ..."
@@ -45,11 +51,12 @@ class OdirListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = ItemOdirBinding.inflate(inflater, parent, false)
-        return OdirListViewHolder(navigateToDetail, binding)
+        return OdirListViewHolder(navigateToDetail, binding, updatePosition)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is OdirListViewHolder) holder.onBind(odirList[position])
+
     }
 
     override fun getItemCount() = odirList.size
@@ -59,4 +66,13 @@ class OdirListAdapter(
         this.odirList = list.toList()
         notifyDataSetChanged()
     }
+
+    fun resetOdirList(index: Int) {
+        notifyItemChanged(index)
+    }
+
+    fun plusLikeCount(position: Int) {
+        odirList[position].likeCnt += 1
+    }
+
 }

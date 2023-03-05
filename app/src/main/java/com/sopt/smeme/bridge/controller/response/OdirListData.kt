@@ -11,7 +11,7 @@ data class OdirListData(
     data class Detail(
         val diaryId: Int,
         val content: String,
-        val likeCnt: Int,
+        var likeCnt: Int,
         val userId: Int,
         val username: String,
         var isSeen: Boolean,
